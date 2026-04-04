@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_deep_black">
+
+    <!-- DO NOT TOUCH (your request) -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnBackContainer"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                app:cardBackgroundColor="@color/bg_dark_elevated"
+                app:cardCornerRadius="12dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/white_10"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_back"
+                    app:tint="#00D2D3" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/tvToolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Studio_V4 Info"
+                android:textColor="#00D2D3"
+                android:fontFamily="monospace"
+                android:textSize="13sp"
+                android:textAllCaps="true"
+                android:letterSpacing="0.1"
+                app:layout_constraintStart_toEndOf="@id/btnBackContainer"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- CONTENT BODY -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:background="@color/bg_deep_black"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingBottom="52dp">
+
+            <!-- LOGO CARD -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="36dp"
+                app:cardCornerRadius="26dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#4D00D2D3"
+                app:cardBackgroundColor="@color/bg_dark_elevated">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="2dp"
+                    android:src="@drawable/app_logo"
+                    android:scaleType="fitCenter"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- APP TITLE -->
+            <TextView
+                android:text="Studio V4"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:fontFamily="sans-serif-black"
+                android:layout_marginTop="20dp"
+                android:letterSpacing="0.06"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!-- VERSION TAG -->
+            <TextView
+                android:id="@+id/tvVersion"
+                android:text="Stable Production Release"
+                android:fontFamily="monospace"
+                android:textColor="#00D2D3"
+                android:background="@color/white_05"
+                android:paddingHorizontal="18dp"
+                android:paddingVertical="5dp"
+                android:textSize="10sp"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <!-- ENGINE INFO -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:padding="20dp"
+                android:alignmentMode="alignMargins"
+                android:rowOrderPreserved="false"
+                android:useDefaultMargins="true"
+                android:layout_marginTop="8dp"
+                android:clipToPadding="false">
+
+                <!-- TEMPLATE ITEM -->
+                <!-- ENGINE STYLE -->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:paddingVertical="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="• ENGINE STYLE"
+                        android:textColor="#00D2D3"
+                        android:textSize="11sp"
+                        android:fontFamily="sans-serif-black"
+                        android:letterSpacing="0.1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="High Fidelity"
+                        android:textColor="@color/white_50"
+                        android:textSize="12sp"
+                        android:fontFamily="monospace"
+                        android:layout_marginTop="6dp"/>
+                </LinearLayout>
+
+                <!-- PIPELINE -->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:paddingVertical="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="• PIPELINE"
+                        android:textColor="#00D2D3"
+                        android:textSize="11sp"
+                        android:fontFamily="sans-serif-black"
+                        android:letterSpacing="0.1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Frame-Accurate Sync"
+                        android:textColor="@color/white_50"
+                        android:textSize="12sp"
+                        android:fontFamily="monospace"
+                        android:layout_marginTop="6dp"/>
+                </LinearLayout>
+
+                <!-- RENDER TARGET -->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:paddingVertical="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="• RENDER TARGET"
+                        android:textColor="#00D2D3"
+                        android:textSize="11sp"
+                        android:fontFamily="sans-serif-black"
+                        android:letterSpacing="0.1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4K UHD Cinematic"
+                        android:textColor="@color/white_50"
+                        android:textSize="12sp"
+                        android:fontFamily="monospace"
+                        android:layout_marginTop="6dp"/>
+                </LinearLayout>
+
+                <!-- STATUS -->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:paddingVertical="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="• STATUS"
+                        android:textColor="#00D2D3"
+                        android:textSize="11sp"
+                        android:fontFamily="sans-serif-black"
+                        android:letterSpacing="0.1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Secure &amp; Authorized"
+                        android:textColor="@color/white_50"
+                        android:textSize="12sp"
+                        android:fontFamily="monospace"
+                        android:layout_marginTop="6dp"/>
+                </LinearLayout>
+
+            </GridLayout>
+
+
+
+            <!-- FEATURE GRID -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:alignmentMode="alignMargins"
+                android:rowOrderPreserved="false"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:useDefaultMargins="true">
+
+                <!-- CARD TEMPLATE -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/StealthFeatureCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1">
+
+                    <LinearLayout style="@style/StealthFeatureContainer">
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_magic"
+                            android:layout_marginBottom="10dp"
+                            app:tint="#00D2D3"/>
+
+                        <TextView style="@style/StealthFeatureTitle"
+                            android:text="Neural Core" />
+
+                        <TextView style="@style/StealthFeatureDesc"
+                            android:text="AI Tracking Support"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- CARD 2 -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/StealthFeatureCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1">
+
+                    <LinearLayout style="@style/StealthFeatureContainer">
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_video_camera"
+                            android:layout_marginBottom="10dp"
+                            app:tint="#00D2D3"/>
+
+                        <TextView style="@style/StealthFeatureTitle"
+                            android:text="Media Buffer" />
+
+                        <TextView style="@style/StealthFeatureDesc"
+                            android:text="Infinite Scrubbing"/>
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- CARD 3 -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/StealthFeatureCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1">
+
+                    <LinearLayout style="@style/StealthFeatureContainer">
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_music"
+                            android:layout_marginBottom="10dp"
+                            app:tint="#00D2D3"/>
+
+                        <TextView style="@style/StealthFeatureTitle"
+                            android:text="Creative DSP"/>
+
+                        <TextView style="@style/StealthFeatureDesc"
+                            android:text="High Bitrate Audio"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- CARD 4 -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/StealthFeatureCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1">
+
+                    <LinearLayout style="@style/StealthFeatureContainer">
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_hub"
+                            android:layout_marginBottom="10dp"
+                            app:tint="#00D2D3"/>
+
+                        <TextView style="@style/StealthFeatureTitle"
+                            android:text="Academy Hub"/>
+
+                        <TextView style="@style/StealthFeatureDesc"
+                            android:text="Sync Preferences"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </GridLayout>
+            <!-- ACTIONS CARD -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                app:cardBackgroundColor="@color/white_05"
+                app:cardCornerRadius="16dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/white_10">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnRate"
+                        style="@style/StealthActionRow"
+                        android:text="  Rate on Play Store"
+                        android:textColor="@color/white_70"
+                        app:icon="@android:drawable/btn_star"
+                        app:iconTint="#00D2D3"/>
+
+                    <View style="@style/StealthDivider" android:layout_marginHorizontal="16dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnShare"
+                        style="@style/StealthActionRow"
+                        android:text="  Recommend to Friends"
+                        android:textColor="@color/white_70"
+                        app:icon="@android:drawable/ic_menu_share"
+                        app:iconTint="#00D2D3"/>
+
+                    <View style="@style/StealthDivider" android:layout_marginHorizontal="16dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnLicenses"
+                        style="@style/StealthActionRow"
+                        android:text="  Legal &amp; Privacy"
+                        android:textColor="@color/white_70"
+                        app:icon="@drawable/ic_info"
+                        app:iconTint="#00D2D3"/>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- FOOTER -->
+            <TextView
+                android:text="© 2026 Cinematic Studio Engine V4"
+                android:textColor="@color/white_20"
+                android:textSize="9sp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.1"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dialog_background">#0D0D0D</color>
+    <color name="dialog_stroke">#1AFFFFFF</color>
+    <color name="glass_panel_color">#E60D0D0D</color>
+    <color name="color_cyan_accent">#00D2D3</color>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Support & Info (not checkable) → white -->
+    <item android:state_checkable="false" android:color="@android:color/white"/>
+
+    <!-- Main items (checkable) → teal -->
+    <item android:color="#00D2D3"/>
+
+</selector>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background bar -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="?attr/colorSurfaceVariant"/>
+        </shape>
+    </item>
+
+    <!-- Center dot -->
+    <item android:gravity="center">
+        <shape android:shape="oval">
+            <size android:width="4dp" android:height="4dp"/>
+            <solid android:color="#A0FFFFFF"/>
+        </shape>
+    </item>
+
+    <!-- Left dot (shift 8dp left) -->
+    <item android:gravity="center" android:left="15dp">
+        <shape android:shape="oval">
+            <size android:width="4dp" android:height="4dp"/>
+            <solid android:color="#A0FFFFFF"/>
+        </shape>
+    </item>
+
+    <!-- Right dot (shift 8dp right) -->
+    <item android:gravity="center" android:right="15dp">
+        <shape android:shape="oval">
+            <size android:width="4dp" android:height="4dp"/>
+            <solid android:color="#A0FFFFFF"/>
+        </shape>
+    </item>
+
+</layer-list>

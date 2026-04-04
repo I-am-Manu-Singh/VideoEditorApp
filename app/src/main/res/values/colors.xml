@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="white_20">#33FFFFFF</color>
+    <color name="white_10">#1AFFFFFF</color>
+
+    <color name="stealth_cyan">#00D2D3</color>
+
+    <color name="bg_deep_black">#000000</color>
+    <color name="bg_dark_surface">#050505</color>
+    <color name="bg_dark_elevated">#0D0D0D</color>
+
+    <color name="bg_light_surface">#FFFFFF</color>
+    <color name="bg_light_elevated">#F8F9FA</color>
+    <color name="bg_light_divider">#E0E0E0</color>
+    <color name="text_high_emphasis_light">#1A1A1A</color>
+    <color name="text_medium_emphasis_light">#4A4A4A</color>
+
+    <color name="dialog_background">#CC0D0D0D</color>
+    <color name="dialog_stroke">#1AFFFFFF</color>
+    <color name="glass_panel_color">#1AFFFFFF</color>
+    <color name="color_cyan_accent">#00D2D3</color>
+
+    <color name="status_error">#FF5252</color>
+    <color name="status_success">#00D2D3</color>
+    <color name="white_70">#B3FFFFFF</color>
+    <color name="white_50">#80FFFFFF</color>
+    <color name="white_30">#4DFFFFFF</color>
+    <color name="white_05">#0DFFFFFF</color>
+
+    <color name="text_primary">#FFFFFF</color>
+    <color name="background_primary">#000000</color>
+
+    <color name="brand_gradient_start">#6C5CE7</color>
+    <color name="brand_gradient_end">#00D2D3</color>
+
+    <color name="brand_primary">#00D2D3</color>
+    <color name="brand_accent">#00D2D3</color>
+
+
+    <color name="text_high_emphasis">#FFFFFF</color>
+    <color name="text_medium_emphasis">#80FFFFFF</color>
+    <color name="red_400">#FF5252</color>
+    <color name="white_60">#99FFFFFF</color>
+
+    <color name="brand_secondary">#00D2D3</color>
+</resources>

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_deep_black">
+
+    <!-- TOP BAR -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnBackContainer"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                app:cardBackgroundColor="@color/bg_dark_elevated"
+                app:cardCornerRadius="12dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/white_10"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_back"
+                    app:tint="#00D2D3" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/tvToolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Help &amp; Support"
+                android:textColor="#00D2D3"
+                android:fontFamily="monospace"
+                android:textSize="13sp"
+                android:textAllCaps="true"
+                android:letterSpacing="0.1"
+                app:layout_constraintStart_toEndOf="@id/btnBackContainer"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <!-- CONTENT SCROLL -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/bg_deep_black"
+        android:overScrollMode="never"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingBottom="60dp">
+
+            <!-- Section Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="System Assistance"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"
+                android:fontFamily="sans-serif-black"
+                android:letterSpacing="0.03" />
+
+            <!-- Quick Guide Label -->
+            <TextView
+                style="@style/StealthLabel"
+                android:text="QUICK_GUIDE"
+                android:textSize="13sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- FEATURE GRID -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:layout_gravity="center"
+                android:alignmentMode="alignBounds"
+                android:rowOrderPreserved="false"
+                android:useDefaultMargins="true">
+
+                <!-- CARD TEMPLATE -->
+                <!-- Card 1 -->
+                <com.google.android.material.card.MaterialCardView style="@style/StealthFeatureCard">
+                    <LinearLayout style="@style/StealthFeatureContainer">
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:src="@drawable/ic_content_cut"
+                            app:tint="#00D2D3"
+                            android:layout_marginBottom="14dp"/>
+
+                        <TextView style="@style/StealthFeatureTitle"
+                            android:text="TRIMMING" />
+
+                        <TextView style="@style/StealthFeatureDesc"
+                            android:text="PRECISION CUTS" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card 2 -->
+                <com.google.android.material.card.MaterialCardView style="@style/StealthFeatureCard">
+                    <LinearLayout style="@style/StealthFeatureContainer">
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:src="@drawable/ic_speed"
+                            app:tint="#00D2D3"
+                            android:layout_marginBottom="14dp"/>
+                        <TextView style="@style/StealthFeatureTitle" android:text="SPEED" />
+                        <TextView style="@style/StealthFeatureDesc" android:text="TIME WARP" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card 3 -->
+                <com.google.android.material.card.MaterialCardView style="@style/StealthFeatureCard">
+                    <LinearLayout style="@style/StealthFeatureContainer">
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:src="@drawable/ic_movie_filter"
+                            app:tint="#00D2D3"
+                            android:layout_marginBottom="14dp"/>
+                        <TextView style="@style/StealthFeatureTitle" android:text="FILTER FX" />
+                        <TextView style="@style/StealthFeatureDesc" android:text="LUTS ENGINE" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card 4 -->
+                <com.google.android.material.card.MaterialCardView style="@style/StealthFeatureCard">
+                    <LinearLayout style="@style/StealthFeatureContainer">
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:src="@drawable/ic_cloud_download"
+                            app:tint="#00D2D3"
+                            android:layout_marginBottom="14dp"/>
+                        <TextView style="@style/StealthFeatureTitle" android:text="ASSET HUB" />
+                        <TextView style="@style/StealthFeatureDesc" android:text="CLOUD FETCH" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <!-- Card 5 -->
+                <com.google.android.material.card.MaterialCardView style="@style/StealthFeatureCard">
+                    <LinearLayout style="@style/StealthFeatureContainer">
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:src="@drawable/ic_audio_label"
+                            app:tint="#00D2D3"
+                            android:layout_marginBottom="14dp"/>
+
+                        <TextView style="@style/StealthFeatureTitle"
+                            android:text="AUDIO FX" />
+
+                        <TextView style="@style/StealthFeatureDesc"
+                            android:text="DSP ENGINE" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card 6 -->
+                <com.google.android.material.card.MaterialCardView style="@style/StealthFeatureCard">
+                    <LinearLayout style="@style/StealthFeatureContainer">
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:src="@drawable/ic_layers"
+                            app:tint="#00D2D3"
+                            android:layout_marginBottom="14dp"/>
+
+                        <TextView style="@style/StealthFeatureTitle"
+                            android:text="MULTI-LAYERS" />
+
+                        <TextView style="@style/StealthFeatureDesc"
+                            android:text="STACK CLIPS" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card 7 -->
+                <com.google.android.material.card.MaterialCardView style="@style/StealthFeatureCard">
+                    <LinearLayout style="@style/StealthFeatureContainer">
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:src="@drawable/ic_color_lens"
+                            app:tint="#00D2D3"
+                            android:layout_marginBottom="14dp"/>
+
+                        <TextView style="@style/StealthFeatureTitle"
+                            android:text="COLOR LAB" />
+
+                        <TextView style="@style/StealthFeatureDesc"
+                            android:text="GRADING SUITE" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card 8 -->
+                <com.google.android.material.card.MaterialCardView style="@style/StealthFeatureCard">
+                    <LinearLayout style="@style/StealthFeatureContainer">
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:src="@drawable/ic_help"
+                            app:tint="#00D2D3"
+                            android:layout_marginBottom="14dp"/>
+
+                        <TextView style="@style/StealthFeatureTitle"
+                            android:text="SECURITY" />
+
+                        <TextView style="@style/StealthFeatureDesc"
+                            android:text="SAFE EXPORT" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </GridLayout>
+
+            <!-- CONTACT SECTION -->
+            <TextView
+                style="@style/StealthLabel"
+                android:text="CONTACT US"
+                android:textSize="13sp"
+                android:layout_marginBottom="18dp"/>
+
+            <!-- CONTACT CARD -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/white_05"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/white_10"
+                android:layout_marginBottom="48dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="6dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- EMAIL SUPPORT -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnContactEmail"
+                        style="@style/StealthActionRow"
+                        android:text="  Priority Email"
+                        android:textColor="@color/white_70"
+                        app:icon="@android:drawable/stat_sys_headset"
+                        app:iconTint="#00D2D3"/>
+
+                    <View style="@style/StealthDivider"/>
+
+                    <!-- FAQ -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFaq"
+                        style="@style/StealthActionRow"
+                        android:text="  FAQs"
+                        android:textColor="@color/white_70"
+                        app:icon="@drawable/ic_info"
+                        app:iconTint="#00D2D3"/>
+
+                    <View style="@style/StealthDivider"/>
+
+                    <!-- REPORT -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnReportIssue"
+                        style="@style/StealthActionRow"
+                        android:text="  Report Bug"
+                        android:textColor="#FF5252"
+                        app:icon="@android:drawable/ic_dialog_alert"
+                        app:iconTint="#FF5252"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- FOOTER TAG -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ENGINE_V4 // ENTERPRISE_SUPPORT_ACTIVE"
+                android:gravity="center"
+                android:textColor="@color/white_20"
+                android:textSize="9sp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.1"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

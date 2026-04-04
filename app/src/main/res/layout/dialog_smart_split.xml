@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="#0A0A0A"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#1AFFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="28dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <View
+                android:layout_width="3dp"
+                android:layout_height="16dp"
+                android:background="#00D2D3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.1"
+                android:text="SMART_SPLIT // LINKED_AUDIO"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textAllCaps="true" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="LINKED_MEDIA_DETECTED. SELECT_SEGMENTATION_MODE:"
+            android:textColor="#33FFFFFF"
+            android:textSize="8sp"
+            android:layout_marginBottom="24dp"
+            android:letterSpacing="0.05" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_tag_glass"
+            android:padding="2dp">
+
+            <LinearLayout
+                android:id="@+id/btnSplitBoth"
+                style="@style/StealthActionRow">
+                <ImageView style="@style/StealthActionIcon" android:src="@drawable/ic_link" />
+                <LinearLayout style="@style/StealthActionTextContainer">
+                    <TextView style="@style/StealthActionTitle" android:text="SPLIT_LINKED" />
+                    <TextView style="@style/StealthActionSub" android:text="KEEP_SYNC (A+V)" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View style="@style/StealthDivider" />
+
+            <LinearLayout
+                android:id="@+id/btnSplitVideo"
+                style="@style/StealthActionRow">
+                <ImageView style="@style/StealthActionIcon" android:src="@drawable/ic_video_label" />
+                <LinearLayout style="@style/StealthActionTextContainer">
+                    <TextView style="@style/StealthActionTitle" android:text="SPLIT_VIDEO_ONLY" />
+                    <TextView style="@style/StealthActionSub" android:text="AUDIO_REMAINS_INTACT" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View style="@style/StealthDivider" />
+
+            <LinearLayout
+                android:id="@+id/btnSplitAudio"
+                style="@style/StealthActionRow">
+                <ImageView style="@style/StealthActionIcon" android:src="@drawable/ic_audio_label" />
+                <LinearLayout style="@style/StealthActionTextContainer">
+                    <TextView style="@style/StealthActionTitle" android:text="SPLIT_AUDIO_ONLY" />
+                    <TextView style="@style/StealthActionSub" android:text="VIDEO_REMAINS_INTACT" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancel"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="24dp"
+            android:fontFamily="monospace"
+            android:text="DISCARD_PROCESS"
+            android:textColor="#80FFFFFF"
+            android:textSize="11sp"
+            android:letterSpacing="0.1" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

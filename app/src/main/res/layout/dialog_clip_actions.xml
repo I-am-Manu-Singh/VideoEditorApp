@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="#0A0A0A"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#1AFFFFFF">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="28dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="28dp">
+
+                <View
+                    android:layout_width="3dp"
+                    android:layout_height="24dp"
+                    android:background="#00D2D3" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvClipTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Clip Options"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif-black"
+                        android:textAllCaps="true"
+                        android:letterSpacing="0.05"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/tvClipDuration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Duration: 00:05.400"
+                        android:textSize="10sp"
+                        android:fontFamily="monospace"
+                        android:textColor="#00D2D3"
+                        android:alpha="0.8"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/btnClose"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_close"
+                    app:tint="#4DFFFFFF"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Split &amp; Segment"
+                android:textColor="#33FFFFFF"
+                android:textSize="8sp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.1"
+                android:textAllCaps="true"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_tag_glass"
+                android:padding="2dp">
+
+                <LinearLayout
+                    android:id="@+id/actionSplitLinked"
+                    style="@style/StealthActionRow">
+                    <ImageView style="@style/StealthActionIcon" android:src="@drawable/ic_content_cut" />
+                    <TextView style="@style/StealthActionText" android:text="Split at Playhead (Linked)" />
+                </LinearLayout>
+
+                <View style="@style/StealthDivider" />
+
+                <LinearLayout
+                    android:id="@+id/actionSplitVideo"
+                    style="@style/StealthActionRow">
+                    <ImageView style="@style/StealthActionIcon" android:src="@drawable/ic_video_label" android:alpha="0.4" />
+                    <TextView style="@style/StealthActionText" android:text="Split Video Only" />
+                </LinearLayout>
+
+                <View style="@style/StealthDivider" />
+
+                <LinearLayout
+                    android:id="@+id/actionSplitAudio"
+                    style="@style/StealthActionRow">
+                    <ImageView style="@style/StealthActionIcon" android:src="@drawable/ic_music_note" android:alpha="0.4" />
+                    <TextView style="@style/StealthActionText" android:text="Split Audio Only" />
+                </LinearLayout>
+
+                <View style="@style/StealthDivider" android:id="@+id/dividerUnlink" />
+
+                <LinearLayout
+                    android:id="@+id/actionUnlink"
+                    style="@style/StealthActionRow">
+                    <ImageView style="@style/StealthActionIcon" android:src="@drawable/ic_link_off" />
+                    <TextView style="@style/StealthActionText" android:text="Unlink Video and Audio" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/actionLink"
+                    style="@style/StealthActionRow"
+                    android:visibility="gone">
+                    <ImageView style="@style/StealthActionIcon" android:src="@drawable/ic_link" />
+                    <TextView style="@style/StealthActionText" android:text="Link Video and Audio" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Trim &amp; Boundaries"
+                android:textColor="#33FFFFFF"
+                android:textSize="8sp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.1"
+                android:textAllCaps="true"
+                android:layout_marginTop="28dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_tag_glass"
+                android:padding="2dp">
+
+                <LinearLayout
+                    android:id="@+id/actionTrimStart"
+                    style="@style/StealthActionRow">
+                    <ImageView style="@style/StealthActionIcon" android:src="@drawable/ic_first_page" />
+                    <TextView style="@style/StealthActionText" android:text="Trim to Start (0s)" />
+                </LinearLayout>
+
+                <View style="@style/StealthDivider" />
+
+                <LinearLayout
+                    android:id="@+id/actionTrimEnd"
+                    style="@style/StealthActionRow">
+                    <ImageView style="@style/StealthActionIcon" android:src="@drawable/ic_last_page" />
+                    <TextView style="@style/StealthActionText" android:text="Trim to End" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDeleteClip"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginTop="36dp"
+                android:text="Remove From Timeline"
+                android:textColor="#FF5252"
+                android:textSize="11sp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.05"
+                app:strokeColor="#33FF5252"
+                app:strokeWidth="1dp"
+                app:cornerRadius="12dp"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                app:icon="@drawable/ic_delete"
+                app:iconTint="#FF5252"
+                app:iconGravity="textStart"
+                android:backgroundTint="#1AFF5252" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</com.google.android.material.card.MaterialCardView>

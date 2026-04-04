@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="24dp"
+    app:cardBackgroundColor="#0A0A0A"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#1AFFFFFF">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:id="@+id/dialogHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:layout_width="3dp"
+                    android:layout_height="18dp"
+                    android:background="#00D2D3" />
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="Export Configuration"
+                    android:textSize="13sp"
+                    android:letterSpacing="0.1"
+                    android:textAllCaps="true"
+                    android:fontFamily="monospace"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvResolutionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="TARGET RESOLUTION"
+                android:textColor="#80FFFFFF"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dialogHeader"/>
+
+            <HorizontalScrollView
+                android:id="@+id/cgResolutionScroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvResolutionLabel">
+
+                <LinearLayout
+                    android:id="@+id/cgResolution"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="12dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipResOriginal"
+                        android:checkable="true"
+                        style="@style/Widget.Material3.ChipGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Original"
+                        app:chipBackgroundColor="@color/chip_state_list"
+                        android:textColor="@color/chip_text_state_list"
+                        app:chipStrokeWidth="0dp"/>
+
+                    <TextView
+                        android:id="@+id/tvRecOriginal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recommended"
+                        android:textColor="#80FFFFFF"
+                        android:textSize="10sp"
+                        android:visibility="gone"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="12dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipRes480"
+                        android:checkable="true"
+                        style="@style/Widget.Material3.ChipGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="480P"
+                        app:chipBackgroundColor="@color/chip_state_list"
+                        android:textColor="@color/chip_text_state_list"
+                        app:chipStrokeWidth="0dp"/>
+
+                    <TextView
+                        android:id="@+id/tvRec480"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recommended"
+                        android:textColor="#80FFFFFF"
+                        android:textSize="10sp"
+                        android:visibility="gone"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="12dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipRes720"
+                        android:checkable="true"
+                        style="@style/Widget.Material3.ChipGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="720P"
+                        app:chipBackgroundColor="@color/chip_state_list"
+                        android:textColor="@color/chip_text_state_list"
+                        app:chipStrokeWidth="0dp"/>
+
+                    <TextView
+                        android:id="@+id/tvRec720"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recommended"
+                        android:textColor="#80FFFFFF"
+                        android:textSize="10sp"
+                        android:visibility="gone"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="12dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipRes1080"
+                        android:checkable="true"
+                        style="@style/Widget.Material3.ChipGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1080P"
+                        app:chipBackgroundColor="@color/chip_state_list"
+                        android:textColor="@color/chip_text_state_list"
+                        app:chipStrokeWidth="0dp"/>
+
+                    <TextView
+                        android:id="@+id/tvRec1080"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recommended"
+                        android:textColor="#80FFFFFF"
+                        android:textSize="10sp"
+                        android:visibility="gone"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="12dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipRes2K"
+                        android:checkable="true"
+                        style="@style/Widget.Material3.ChipGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2K"
+                        app:chipBackgroundColor="@color/chip_state_list"
+                        android:textColor="@color/chip_text_state_list"
+                        app:chipStrokeWidth="0dp"/>
+
+                    <TextView
+                        android:id="@+id/tvRec2K"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recommended"
+                        android:textColor="#80FFFFFF"
+                        android:textSize="10sp"
+                        android:visibility="gone"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="12dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipRes4K"
+                        android:checkable="true"
+                        style="@style/Widget.Material3.ChipGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4K"
+                        app:chipBackgroundColor="@color/chip_state_list"
+                        android:textColor="@color/chip_text_state_list"
+                        app:chipStrokeWidth="0dp"/>
+
+                    <TextView
+                        android:id="@+id/tvRec4K"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recommended"
+                        android:textColor="#80FFFFFF"
+                        android:textSize="10sp"
+                        android:visibility="gone"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/tvAspectLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="ASPECT RATIO"
+                android:textColor="#80FFFFFF"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cgResolutionScroll" />
+
+            <HorizontalScrollView
+                android:id="@+id/cgAspectScroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:scrollbars="none"
+                android:overScrollMode="never"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAspectLabel">
+
+                <LinearLayout
+                    android:id="@+id/cgAspect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="12dp">
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAspectOriginal"
+                        android:checkable="true"
+                        style="@style/Widget.Material3.ChipGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Original"
+                        app:chipBackgroundColor="@color/chip_state_list"
+                        android:textColor="@color/chip_text_state_list"
+                        app:chipStrokeWidth="0dp" />
+                    <TextView
+                        android:id="@+id/tvRecAspOriginal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recommended"
+                        android:textColor="#80FFFFFF"
+                        android:textSize="10sp"
+                        android:visibility="gone"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="12dp">
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAspectReel"
+                        android:checkable="true"
+                        style="@style/Widget.Material3.ChipGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reel"
+                        app:chipBackgroundColor="@color/chip_state_list"
+                        android:textColor="@color/chip_text_state_list"
+                        app:chipStrokeWidth="0dp" />
+                    <TextView
+                        android:id="@+id/tvRecAspReel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recommended"
+                        android:textColor="#80FFFFFF"
+                        android:textSize="10sp"
+                        android:visibility="gone"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="12dp">
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAspectPortrait"
+                        android:checkable="true"
+                        style="@style/Widget.Material3.ChipGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="9:16"
+                        app:chipBackgroundColor="@color/chip_state_list"
+                        android:textColor="@color/chip_text_state_list"
+                        app:chipStrokeWidth="0dp" />
+                    <TextView
+                        android:id="@+id/tvRecAspPortrait"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recommended"
+                        android:textColor="#80FFFFFF"
+                        android:textSize="10sp"
+                        android:visibility="gone"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="12dp">
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAspectLandscape"
+                        android:checkable="true"
+                        style="@style/Widget.Material3.ChipGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Youtube"
+                        app:chipBackgroundColor="@color/chip_state_list"
+                        android:textColor="@color/chip_text_state_list"
+                        app:chipStrokeWidth="0dp" />
+                    <TextView
+                        android:id="@+id/tvRecAspLandscape"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recommended"
+                        android:textColor="#80FFFFFF"
+                        android:textSize="10sp"
+                        android:visibility="gone"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="12dp">
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAspectSquare"
+                        android:checkable="true"
+                        style="@style/Widget.Material3.ChipGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Post"
+                        app:chipBackgroundColor="@color/chip_state_list"
+                        android:textColor="@color/chip_text_state_list"
+                        app:chipStrokeWidth="0dp" />
+                    <TextView
+                        android:id="@+id/tvRecAspSquare"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recommended"
+                        android:textColor="#80FFFFFF"
+                        android:textSize="10sp"
+                        android:visibility="gone"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAspectCinematic"
+                        android:checkable="true"
+                        style="@style/Widget.Material3.ChipGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="21:9"
+                        app:chipBackgroundColor="@color/chip_state_list"
+                        android:textColor="@color/chip_text_state_list"
+                        app:chipStrokeWidth="0dp" />
+                    <TextView
+                        android:id="@+id/tvRecAspCinematic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recommended"
+                        android:textColor="#80FFFFFF"
+                        android:textSize="10sp"
+                        android:visibility="gone"
+                        android:paddingTop="2dp"/>
+                </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/tvQualityLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="RENDER QUALITY"
+                android:textColor="#80FFFFFF"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cgAspectScroll" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cgQuality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:singleSelection="true"
+                app:selectionRequired="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvQualityLabel">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipQualityLow"
+                    android:checkable="true"
+                     style="@style/Widget.Material3.ChipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Low"
+                    app:chipBackgroundColor="@color/chip_state_list"
+                    android:textColor="@color/chip_text_state_list"
+                    app:chipStrokeWidth="0dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipQualityMed"
+                    android:checkable="true"
+                     style="@style/Widget.Material3.ChipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Medium"
+                    app:chipBackgroundColor="@color/chip_state_list"
+                    android:textColor="@color/chip_text_state_list"
+                    app:chipStrokeWidth="0dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipQualityHigh"
+                    android:checkable="true"
+                     style="@style/Widget.Material3.ChipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="High"
+                    app:chipBackgroundColor="@color/chip_state_list"
+                    android:textColor="@color/chip_text_state_list"
+                    app:chipStrokeWidth="0dp" />
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                android:id="@+id/tvCodecLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="VIDEO CODEC"
+                android:textColor="#80FFFFFF"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cgQuality" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cgCodec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:singleSelection="true"
+                app:selectionRequired="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCodecLabel">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCodecH264"
+                    android:checkable="true"
+                     style="@style/Widget.Material3.ChipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="H.264"
+                    app:chipBackgroundColor="@color/chip_state_list"
+                    android:textColor="@color/chip_text_state_list"
+                    app:chipStrokeWidth="0dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCodecH265"
+                    android:checkable="true"
+                     style="@style/Widget.Material3.ChipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="H.265 (HEVC)"
+                    app:chipBackgroundColor="@color/chip_state_list"
+                    android:textColor="@color/chip_text_state_list"
+                    app:chipStrokeWidth="0dp" />
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                android:id="@+id/tvAudioQualityLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="AUDIO QUALITY"
+                android:textColor="#80FFFFFF"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cgCodec" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cgAudioQuality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:singleSelection="true"
+                app:selectionRequired="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAudioQualityLabel">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAudioLow"
+                    android:checkable="true"
+                     style="@style/Widget.Material3.ChipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="128Kbps"
+                    app:chipBackgroundColor="@color/chip_state_list"
+                    android:textColor="@color/chip_text_state_list"
+                    app:chipStrokeWidth="0dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAudioMed"
+                    android:checkable="true"
+                     style="@style/Widget.Material3.ChipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="192Kbps"
+                    app:chipBackgroundColor="@color/chip_state_list"
+                    android:textColor="@color/chip_text_state_list"
+                    app:chipStrokeWidth="0dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAudioHigh"
+                    android:checkable="true"
+                     style="@style/Widget.Material3.ChipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="320Kbps"
+                    app:chipBackgroundColor="@color/chip_state_list"
+                    android:textColor="@color/chip_text_state_list"
+                    app:chipStrokeWidth="0dp" />
+            </com.google.android.material.chip.ChipGroup>
+            <TextView
+                android:id="@+id/tvWatermarkLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="BRANDING &amp; WATERMARK"
+                android:textColor="#80FFFFFF"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cgAudioQuality" />
+
+            <LinearLayout
+                android:id="@+id/containerWatermark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvWatermarkLabel">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnChooseWatermark"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:text="Add Logo"
+                    android:textSize="10sp"
+                    android:textColor="#00D2D3"
+                    android:fontFamily="monospace"
+                    app:strokeColor="#1A00D2D3"
+                    app:cornerRadius="8dp"
+                    android:backgroundTint="#0D00D2D3" />
+
+                <TextView
+                    android:id="@+id/tvWatermarkStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="No Overlay Active"
+                    android:textColor="#4DFFFFFF"
+                    android:textSize="9sp"
+                    android:fontFamily="monospace"
+                    android:letterSpacing="0.05"/>
+
+                <ImageView
+                    android:id="@+id/btnClearWatermark"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_close"
+                    android:visibility="gone"
+                    app:tint="#4DFFFFFF"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvExportSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Status: Ready for Output"
+                android:textColor="#80FFFFFF"
+                android:textSize="9sp"
+                android:gravity="center"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.1"
+                app:layout_constraintTop_toBottomOf="@id/containerWatermark"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancel"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Apply"
+                android:textColor="#66FFFFFF"
+                android:textSize="11sp"
+                android:fontFamily="monospace"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/btnExportConfirm"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnExportConfirm"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:text="Start Export"
+                android:textColor="#121212"
+                android:fontFamily="sans-serif-black"
+                android:backgroundTint="#00D2D3"
+                android:layout_marginTop="16dp"
+                android:letterSpacing="0.05"
+                app:cornerRadius="16dp"
+                app:layout_constraintTop_toBottomOf="@id/tvExportSummary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</com.google.android.material.card.MaterialCardView>

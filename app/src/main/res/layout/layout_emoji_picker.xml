@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="24dp"
+    app:cardBackgroundColor="#0A0A0A"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#1AFFFFFF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="24dp">
+
+        <!-- Handle -->
+        <View
+            android:id="@+id/sheetHandle"
+            android:layout_width="32dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="12dp"
+            android:background="#33FFFFFF"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Left bar -->
+        <View
+            android:id="@+id/headerIndicator"
+            android:layout_width="3dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:background="#00D2D3"
+            app:layout_constraintTop_toBottomOf="@id/sheetHandle"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvDialogTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Emoji Picker"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textAllCaps="true"
+            android:fontFamily="monospace"
+            android:letterSpacing="0.1"
+            app:layout_constraintStart_toEndOf="@id/headerIndicator"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/headerIndicator"
+            app:layout_constraintBottom_toBottomOf="@id/headerIndicator" />
+
+        <!-- Category Row -->
+        <HorizontalScrollView
+            android:id="@+id/hsvCategories"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white_05"
+            android:scrollbars="none"
+            android:paddingVertical="12dp"
+            app:layout_constraintTop_toBottomOf="@id/headerIndicator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:id="@+id/emojiCategoryContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical" />
+        </HorizontalScrollView>
+
+        <!-- Search Bar BELOW categories -->
+        <EditText
+            android:id="@+id/etGifSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="Search dynamic content..."
+            android:textColorHint="#80FFFFFF"
+            android:textColor="#FFFFFF"
+            android:padding="12dp"
+            android:background="@drawable/bg_search_bar"
+            android:drawableStart="@drawable/ic_search"
+            android:drawableTint="#00D2D3"
+            android:drawablePadding="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/hsvCategories"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Divider BELOW Search Bar -->
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/white_10"
+            app:layout_constraintTop_toBottomOf="@id/etGifSearch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Emoji Grid -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvEmojiGrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingHorizontal="8dp"
+            android:paddingTop="12dp"
+            android:clipToPadding="false"
+            android:scrollbarThumbVertical="@drawable/bg_tag_glass"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

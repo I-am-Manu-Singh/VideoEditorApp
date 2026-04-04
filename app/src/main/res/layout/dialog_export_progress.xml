@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="24dp"
+    app:cardBackgroundColor="#0A0A0A"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#1AFFFFFF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="28dp">
+
+        <LinearLayout
+            android:id="@+id/headerGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:layout_width="3dp"
+                android:layout_height="16dp"
+                android:background="#00D2D3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.1"
+                android:text="Render Progress"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:textAllCaps="true" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/progressContainer"
+            android:layout_width="0dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="36dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerGroup">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.05"
+                android:background="#FFFFFF" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:max="100"
+                android:progress="30"
+                android:progressDrawable="@drawable/bg_progress_stealth_cyan" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="monospace"
+            android:text="30.00%"
+            android:textColor="#00D2D3"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressContainer" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="BUFFER_STATUS: ACTIVE"
+            android:textColor="#FFFFFF"
+            android:textSize="8sp"
+            android:alpha="0.4"
+            android:letterSpacing="0.1"
+            app:layout_constraintBottom_toBottomOf="@id/tvProgress"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="6dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancelExport"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="monospace"
+            android:text="CANCEL EXPORT"
+            android:textColor="#FF5252"
+            android:textSize="11sp"
+            android:letterSpacing="0.05"
+            app:cornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvProgress"
+            app:strokeColor="#33FF5252"
+            android:backgroundTint="#1AFF5252" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Outer Glow -->
+    <item>
+        <shape android:shape="oval">
+            <size android:width="140dp" android:height="140dp" />
+            <gradient
+                android:type="radial"
+                android:gradientRadius="70dp"
+                android:startColor="#3300D2D3"
+                android:endColor="@android:color/transparent"/>
+        </shape>
+    </item>
+
+    <!-- Inner faint halo -->
+    <item>
+        <shape android:shape="oval">
+            <size android:width="90dp" android:height="90dp" />
+            <gradient
+                android:type="radial"
+                android:gradientRadius="45dp"
+                android:startColor="#2200D2D3"
+                android:endColor="@android:color/transparent"/>
+        </shape>
+    </item>
+
+</layer-list>

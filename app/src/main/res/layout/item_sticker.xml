@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardBackgroundColor="@color/white_05"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/white_10">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:padding="6dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|start"
+            android:fontFamily="monospace"
+            android:text="AST_OBJ"
+            android:textColor="#00D2D3"
+            android:textSize="7sp"
+            android:alpha="0.4"
+            android:letterSpacing="0.1"/>
+
+        <TextView
+            android:id="@+id/tvEmoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:textColor="#FFFFFF"
+            android:gravity="center" />
+
+        <ImageView
+            android:id="@+id/imgSticker"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:scaleType="fitCenter"
+            android:alpha="0.9" />
+
+        <View
+            android:id="@+id/selectionHighlight"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_tag_glass"
+            android:backgroundTint="#2600D2D3"
+            android:visibility="gone"/>
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:layout_gravity="bottom|end"
+            android:background="#1A00D2D3" />
+
+    </FrameLayout>
+</com.google.android.material.card.MaterialCardView>

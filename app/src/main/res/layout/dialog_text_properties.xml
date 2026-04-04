@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardBackgroundColor="#0D0D0D"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#1AFFFFFF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp">
+
+        <LinearLayout
+            android:id="@+id/headerGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="18dp"
+                android:background="#00D2D3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.1"
+                android:text="LAYER_TYPE // TYPOGRAPHY_FX"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lblContent"
+            style="@style/StealthLabel"
+            android:text="VAR // CONTENT_BUFFER"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerGroup" />
+
+        <EditText
+            android:id="@+id/etTextContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#1AFFFFFF"
+            android:fontFamily="monospace"
+            android:hint="INPUT_STRING..."
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:padding="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#4DFFFFFF"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblContent" />
+
+        <TextView
+            android:id="@+id/lblColor"
+            style="@style/StealthLabel"
+            android:text="VAR // CHROMA_VALUE"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etTextContent" />
+
+        <HorizontalScrollView
+            android:id="@+id/scrollPalette"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblColor">
+            <LinearLayout
+                android:id="@+id/colorPalette"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp"/>
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/lblSize"
+            style="@style/StealthLabel"
+            android:text="TRANSFORM // FONT_SCALE"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scrollPalette" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderFontSize"
+            style="@style/StealthSlider"
+            android:valueFrom="10"
+            android:valueTo="100"
+            app:thumbColor="#00D2D3"
+            app:trackColorActive="#00D2D3"
+            android:value="24"
+            app:layout_constraintTop_toBottomOf="@id/lblSize" />
+
+        <TextView
+            android:id="@+id/lblShadow"
+            style="@style/StealthLabel"
+            android:text="FX // SHADOW_BLUR_DEPTH"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sliderFontSize" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderShadow"
+            style="@style/StealthSlider"
+            android:valueFrom="0"
+            app:thumbColor="#00D2D3"
+            app:trackColorActive="#00D2D3"
+            android:valueTo="20"
+            android:value="5"
+            app:layout_constraintTop_toBottomOf="@id/lblShadow" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
