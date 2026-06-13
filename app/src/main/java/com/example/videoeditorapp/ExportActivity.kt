@@ -102,22 +102,7 @@ class ExportActivity : AppCompatActivity() {
             androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED
         )
     }
-    private fun applyStatusBar() {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        window.statusBarColor = ContextCompat.getColor(this, R.color.background_primary)
-
-        val isDarkMode =
-                (resources.configuration.uiMode and
-                        android.content.res.Configuration.UI_MODE_NIGHT_MASK) ==
-                        android.content.res.Configuration.UI_MODE_NIGHT_YES
-
-        WindowInsetsControllerCompat(window, window.decorView).apply {
-            // Light theme → dark icons
-            // Dark theme → light icons
-            isAppearanceLightStatusBars = !isDarkMode
-        }
-    }
 
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -266,75 +251,56 @@ class ExportActivity : AppCompatActivity() {
 
 
     private fun setupClickListeners(file: File) {
-       binding.btnDel.setOnClickListener {
-
-      AppDialog.showDelete(
-          context = this,
-          title = "Delete Video",
-          message = "Are you sure you want to delete this exported video?\n\nThis action cannot be undone.",
-          iconRes = R.drawable.ic_delete,
-          onDelete = {
-              try {
-                  if (com.example.videoeditorapp.utils.StorageManager.deleteFile(this, file)) {
-                      FavoriteManager.removeExportFavorite(this, file.absolutePath)
-                      Toast.makeText(
-                          this,
-                          "Video deleted",
-                          Toast.LENGTH_SHORT
-                      ).show()
-                      finish()
-                  } else {
-                      AppDialog.showInfo(
-                          context = this,
-                          title = "Delete Failed",
-                          message = "Failed to delete file."
-                      )
-                  }
-              } catch (e: Exception) {
-                  AppDialog.showInfo(
-                      context = this,
-                      title = "Delete Failed",
-                      message = e.message ?: "Delete failed."
-                  )
-              }
-          }
-      )
-  }
+        binding.actionDelete?.tvLabel?.text = "DELETE"
+        binding.actionDelete?.ivIcon?.setImageResource(R.drawable.ic_delete)
+        binding.actionDelete?.ivIcon?.imageTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#FF5252"))
+        binding.actionDelete?.root?.setOnClickListener {
+            AppDialog.showDelete(
+                context = this,
+                title = "Delete Video",
+                message = "Are you sure you want to delete this exported video?\n\nThis action cannot be undone.",
+                iconRes = R.drawable.ic_delete,
+                onDelete = {
+                    try {
+                        if (com.example.videoeditorapp.utils.StorageManager.deleteFile(this, file)) {
+                            FavoriteManager.removeExportFavorite(this, file.absolutePath)
+                            Toast.makeText(
+                                this,
+                                "Video deleted",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            finish()
+                        } else {
+                            AppDialog.showInfo(
+                                context = this,
+                                title = "Delete Failed",
+                                message = "Failed to delete file."
+                            )
+                        }
+                    } catch (e: Exception) {
+                        AppDialog.showInfo(
+                            context = this,
+                            title = "Delete Failed",
+                            message = e.message ?: "Delete failed."
+                        )
+                    }
+                }
+            )
+        }
     }
 
     private fun bindActions(file: File) {
-
-    binding.btnOpenExternal.setOnClickListener {
-        val uri = FileProvider.getUriForFile(this, "${packageName}.fileprovider", file)
-
-        startActivity(
+        binding.actionGallery?.tvLabel?.text = "GALLERY"
+        binding.actionGallery?.ivIcon?.setImageResource(R.drawable.ic_play)
+        binding.actionGallery?.root?.setOnClickListener {
+            val uri = FileProvider.getUriForFile(this, "${packageName}.fileprovider", file)
+            startActivity(
                 Intent(Intent.ACTION_VIEW).apply {
                     setDataAndType(uri, "video/*")
                     addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 }
-        )
-    }
-
-    binding.btnShare.setOnClickListener {
-        val uri = FileProvider.getUriForFile(this, "${packageName}.fileprovider", file)
-
-        startActivity(
-                Intent(Intent.ACTION_SEND).apply {
-                    type = "video/*"
-                    putExtra(Intent.EXTRA_STREAM, uri)
-                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                }
-        )
-    }
-//
-//    binding.btnBackHome.setOnClickListener {
-//        startActivity(
-//                Intent(this, MainActivity::class.java).apply {
-//                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-//                }
-//        )
-//        finish()
-//    }
+            )
+        }
     }
 
     private fun bindDetails(file: File, projectName: String) {
@@ -406,8 +372,7 @@ class ExportActivity : AppCompatActivity() {
         // Hide success/completed UI elements
         binding.cardSuccessBadge?.visibility = View.GONE
         binding.cardTechSpecs?.visibility = View.GONE
-        binding.layoutQuickActions?.visibility = View.GONE
-        binding.shareContainer?.visibility = View.GONE
+        binding.cardUnifiedActions?.visibility = View.GONE
         binding.previewContainer?.visibility = View.VISIBLE
         binding.playerViewPreview?.visibility = View.GONE
         binding.imgPlayOverlay?.visibility = View.GONE
@@ -444,8 +409,7 @@ class ExportActivity : AppCompatActivity() {
         // Show success/completed UI elements
         binding.cardSuccessBadge?.visibility = View.VISIBLE
         binding.cardTechSpecs?.visibility = View.VISIBLE
-        binding.layoutQuickActions?.visibility = View.VISIBLE
-        binding.shareContainer?.visibility = View.VISIBLE
+        binding.cardUnifiedActions?.visibility = View.VISIBLE
         binding.playerViewPreview?.visibility = View.VISIBLE
         binding.playerControls?.visibility = View.VISIBLE
         

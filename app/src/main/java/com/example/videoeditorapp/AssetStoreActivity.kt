@@ -1,6 +1,7 @@
 package com.example.videoeditorapp
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -163,6 +164,8 @@ class AssetStoreActivity : AppCompatActivity() {
             matchesCategory && matchesQuery
         }
         adapter.submitList(filtered)
+        binding.emptyStateContainer?.visibility = if (filtered.isEmpty()) View.VISIBLE else View.GONE
+        binding.rvAssets.visibility = if (filtered.isEmpty()) View.GONE else View.VISIBLE
     }
 
     private fun downloadAsset(asset: AssetItem) {

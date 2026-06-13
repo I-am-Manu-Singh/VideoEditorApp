@@ -31,6 +31,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+private val seekHandler = Handler(Looper.getMainLooper())
+
 @UnstableApi
 fun TimelineTemplateEditorActivity.setupTimeline() {
     binding.editorPreview.timelineView.setProject(project)
@@ -41,18 +43,20 @@ fun TimelineTemplateEditorActivity.setupTimeline() {
 
     binding.editorPreview.timelineView.onInteractionEnd = {
         exoPlayer?.setSeekParameters(androidx.media3.exoplayer.SeekParameters.EXACT)
+        seekHandler.removeCallbacksAndMessages(null)
         seekPlayerWithTimelineMap(currentTimeMs, activeTimelineMap, forceSeek = true)
     }
 
     binding.editorPreview.timelineView.onScrollListener = { timeMs ->
         val player = exoPlayer
         val isCurrentlyPlaying = player != null && player.isPlaying
-        if (!isSeeking && !isCurrentlyPlaying) {
-            isSeeking = true
+        if (!isCurrentlyPlaying) {
             currentTimeMs = timeMs
             binding.editorPreview.tvTimeCode.text = ViewUtils.formatTime(timeMs)
-            updatePreviewForTime(timeMs)
-            isSeeking = false
+            seekHandler.removeCallbacksAndMessages(null)
+            seekHandler.postDelayed({
+                updatePreviewForTime(timeMs)
+            }, 16L)
         }
     }
 
@@ -85,6 +89,10 @@ fun TimelineTemplateEditorActivity.setupTimeline() {
     }
 
     binding.editorPreview.timelineView.onToolChanged = { updateToolUI() }
+
+    binding.editorPreview.timelineView.onTransitionHandleClicked = { clip ->
+        showTransitionPickerDialog(clip)
+    }
 
     binding.editorPreview.timelineView.onTimelineChanged = {
         updateUIDuration()

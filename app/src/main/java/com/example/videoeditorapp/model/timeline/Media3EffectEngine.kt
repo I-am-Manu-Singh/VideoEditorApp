@@ -2,6 +2,7 @@ package com.example.videoeditorapp.model.timeline
 
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.effect.*
+import androidx.media3.effect.StaticOverlaySettings
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
@@ -249,11 +250,15 @@ object Media3EffectEngine {
         // 3. Process Overlays (Images, Stickers, Text)
         overlays.forEach { overlay ->
             try {
+                val overlaySettings = StaticOverlaySettings.Builder()
+                    .setAlphaScale(overlay.overlayOpacity)
+                    .build()
+
                 val overlayTexture: TextureOverlay = when (overlay.type) {
-                    ClipType.TEXT -> createTextOverlay(overlay)
+                    ClipType.TEXT -> createTextOverlay(overlay, overlaySettings)
                     ClipType.IMAGE, ClipType.STICKER -> {
                         val bitmap = bitmapCache[overlay.filePath] ?: BitmapFactory.decodeFile(overlay.filePath)?.also { bitmapCache[overlay.filePath] = it }
-                        if (bitmap != null) BitmapOverlay.createStaticBitmapOverlay(bitmap) else return@forEach
+                        if (bitmap != null) BitmapOverlay.createStaticBitmapOverlay(bitmap, overlaySettings) else return@forEach
                     }
                     else -> return@forEach
                 }
@@ -282,12 +287,14 @@ object Media3EffectEngine {
         return effects
     }
 
-    private fun createTextOverlay(overlay: TimelineClip): TextureOverlay {
+    private fun createTextOverlay(overlay: TimelineClip, settings: StaticOverlaySettings): TextureOverlay {
         val text = overlay.textSettings["text"] ?: overlay.textSettings["TEXT"] ?: ""
         val fontSize = (overlay.textSettings["size"] ?: "48").toFloat()
+        val colorHex = overlay.textSettings["COLOR"] ?: overlay.textSettings["color"] ?: "#FFFFFF"
+        val resolvedColor = try { Color.parseColor(colorHex) } catch (e: Exception) { Color.WHITE }
         
         val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.WHITE
+            color = resolvedColor
             textSize = fontSize
             textAlign = Paint.Align.CENTER
             style = Paint.Style.FILL
@@ -308,9 +315,9 @@ object Media3EffectEngine {
         canvas.drawText(text, (textWidth / 2f) + 20, -fontMetrics.top + 20, paint)
         
         paint.style = Paint.Style.FILL
-        paint.color = Color.WHITE
+        paint.color = resolvedColor
         canvas.drawText(text, (textWidth / 2f) + 20, -fontMetrics.top + 20, paint)
         
-        return BitmapOverlay.createStaticBitmapOverlay(bitmap)
+        return BitmapOverlay.createStaticBitmapOverlay(bitmap, settings)
     }
 }

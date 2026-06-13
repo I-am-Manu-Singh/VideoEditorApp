@@ -84,8 +84,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         private fun createNewProject() {
-            // Mock new project
-            val newProject = TimelineProject(name = "Untitled Project")
+            val name = com.example.videoeditorapp.utils.NamingUtils.generateNewProjectName(this)
+            val newProject = TimelineProject(name = name)
             com.example.videoeditorapp.utils.ProjectManager.saveProject(this, newProject)
             startActivity(Intent(this, TimelineTemplateEditorActivity::class.java).apply {
                 putExtra("PROJECT_ID", newProject.id)

@@ -58,6 +58,7 @@
             android:name=".ExportActivity" android:theme="@style/Theme.VideoEditorApp"
             android:launchMode="singleTop" />
 
+
         <activity android:name=".MyProjectsActivity"
             android:label="My Projects"
             android:theme="@style/Theme.VideoEditorApp"/>

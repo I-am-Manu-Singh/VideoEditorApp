@@ -95,8 +95,10 @@ class TimelineTemplateEditorActivity : AppCompatActivity() {
                 val intervalStr = prefs.getString("auto_save", "1m") ?: "1m"
 
                 if (intervalStr != "off") {
-                    saveProject()
-                    Log.d("TimelineEditor", "Auto-saved project")
+                    if (::project.isInitialized && project.tracks.sumOf { it.clips.size } > 0) {
+                        saveProject()
+                        Log.d("TimelineEditor", "Auto-saved project")
+                    }
                 }
 
                 val intervalMs =
@@ -392,7 +394,14 @@ class TimelineTemplateEditorActivity : AppCompatActivity() {
         super.onPause()
         exoPlayer?.pause()
         captureThumbnail()
-        saveProject()
+        if (::project.isInitialized) {
+            val totalClips = project.tracks.sumOf { it.clips.size }
+            if (totalClips == 0) {
+                com.example.videoeditorapp.utils.ProjectManager.deleteProject(this, project.id)
+            } else {
+                saveProject()
+            }
+        }
     }
 
     internal fun captureThumbnail() {
@@ -402,7 +411,7 @@ class TimelineTemplateEditorActivity : AppCompatActivity() {
                     it.type == ClipType.VIDEO || it.type == ClipType.IMAGE
                 }
             if (firstClip != null) {
-                java.util.concurrent.Executors.newSingleThreadExecutor().execute {
+                lifecycleScope.launch(Dispatchers.IO) {
                     try {
                         val mmr = android.media.MediaMetadataRetriever()
                         mmr.setDataSource(firstClip.filePath)

@@ -47,6 +47,8 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
                 textAlign = Paint.Align.CENTER
             }
 
+    private val overlayAlphaPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+
     private val bitmapCache = LruCache<String, Bitmap>(20) // Simple cache for overlay images
     private val handleSize = 25f
     private var activeMode = Mode.NONE
@@ -98,15 +100,15 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
             canvas.save()
             canvas.rotate(clip.overlayRotation, rect.centerX(), rect.centerY())
 
-            // Apply Opacity
-            // (Not fully implemented in clip model yet? Assuming paint alpha if we had it, fallback
-            // for now)
+            // Apply Opacity to drawing operations
+            val alphaVal = (clip.overlayOpacity * 255).toInt().coerceIn(0, 255)
+            overlayAlphaPaint.alpha = alphaVal
 
             when (clip.type) {
                 ClipType.IMAGE, ClipType.STICKER, ClipType.GIF -> {
                     val bitmap = getBitmap(clip.filePath)
                     if (bitmap != null) {
-                        canvas.drawBitmap(bitmap, null, rect, null)
+                        canvas.drawBitmap(bitmap, null, rect, overlayAlphaPaint)
                     } else {
                         // Placeholder for missing assets
                         canvas.drawRect(rect, handleStrokePaint)
@@ -119,13 +121,18 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
                     drawEmojiOverlay(canvas, clip, rect)
                 }
                 ClipType.VIDEO -> {
-                    // Draw a placeholder for Video PIP
-                    boxPaint.style = Paint.Style.FILL
-                    boxPaint.alpha = 100
-                    canvas.drawRect(rect, boxPaint)
-                    boxPaint.style = Paint.Style.STROKE
-                    boxPaint.alpha = 255
-                    canvas.drawText("VIDEO PIP", rect.centerX(), rect.centerY(), handleStrokePaint)
+                    val bitmap = getVideoFrame(clip.filePath)
+                    if (bitmap != null) {
+                        canvas.drawBitmap(bitmap, null, rect, overlayAlphaPaint)
+                    } else {
+                        // Draw a placeholder for Video PIP
+                        boxPaint.style = Paint.Style.FILL
+                        boxPaint.alpha = 100
+                        canvas.drawRect(rect, boxPaint)
+                        boxPaint.style = Paint.Style.STROKE
+                        boxPaint.alpha = 255
+                        canvas.drawText("VIDEO PIP", rect.centerX(), rect.centerY(), handleStrokePaint)
+                    }
                 }
                 else -> {}
             }
@@ -175,11 +182,13 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         textPaint.style = Paint.Style.STROKE
         textPaint.strokeWidth = 10f
         textPaint.color = Color.BLACK
+        textPaint.alpha = (clip.overlayOpacity * 255).toInt().coerceIn(0, 255)
         canvas.drawText(text, rect.centerX(), baseline, textPaint)
 
         // Draw Fill
         textPaint.style = Paint.Style.FILL
         textPaint.color = Color.parseColor(colorHex)
+        textPaint.alpha = (clip.overlayOpacity * 255).toInt().coerceIn(0, 255)
         canvas.drawText(text, rect.centerX(), baseline, textPaint)
         
         textPaint.clearShadowLayer() // Clean up for next draw
@@ -189,6 +198,8 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         val emoji = clip.textSettings["emoji"] ?: "🎥"
         textPaint.textSize = rect.height() * 0.8f
         textPaint.style = Paint.Style.FILL
+        textPaint.color = Color.BLACK
+        textPaint.alpha = (clip.overlayOpacity * 255).toInt().coerceIn(0, 255)
         val fontMetrics = textPaint.fontMetrics
         val baseline = rect.centerY() - (fontMetrics.ascent + fontMetrics.descent) / 2
         canvas.drawText(emoji, rect.centerX(), baseline, textPaint)
@@ -208,6 +219,25 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
                 }
                 bitmap
             } else null
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    private fun getVideoFrame(path: String): Bitmap? {
+        val cached = bitmapCache.get(path)
+        if (cached != null) return cached
+
+        return try {
+            val resolvedPath = com.example.videoeditorapp.utils.AssetUtils.getCachedAssetPath(context, path) ?: path
+            val retriever = android.media.MediaMetadataRetriever()
+            retriever.setDataSource(resolvedPath)
+            val bitmap = retriever.getFrameAtTime(0L, android.media.MediaMetadataRetriever.OPTION_CLOSEST_SYNC)
+            retriever.release()
+            if (bitmap != null) {
+                bitmapCache.put(path, bitmap)
+            }
+            bitmap
         } catch (e: Exception) {
             null
         }

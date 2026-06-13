@@ -165,7 +165,7 @@ fun TimelineTemplateEditorActivity.splitClipAtPlayhead(
 ) {
     val splitTime = currentTimeMs
 
-    if (splitTime <= targetClip.startTimeMs + 50 || splitTime >= targetClip.endTimeMs - 50) {
+    if (splitTime <= targetClip.startTimeMs + 1 || splitTime >= targetClip.endTimeMs - 1) {
         Toast.makeText(this, "Playhead must be inside clip to split", Toast.LENGTH_SHORT).show()
         return
     }
@@ -425,7 +425,7 @@ fun TimelineTemplateEditorActivity.showTextPropertiesDialog(existingClip: Timeli
                 "RIGHT" -> R.drawable.ic_align_right
                 else -> R.drawable.ic_align_center
             },
-            "Align: ${currentAlign.lowercase().capitalize()}",
+            "Align: ${currentAlign.lowercase().replaceFirstChar { it.uppercase() }}",
             type = com.example.videoeditorapp.ui.editor.OptionType.ACTION
         )
 
@@ -505,7 +505,7 @@ fun TimelineTemplateEditorActivity.showTextPropertiesDialog(existingClip: Timeli
                         else -> "LEFT"
                     }
                 clip.textSettings["ALIGN"] = next
-                option.label = "Align: ${next.lowercase().capitalize()}"
+                option.label = "Align: ${next.lowercase().replaceFirstChar { it.uppercase() }}"
                 option.iconRes =
                     when (next) {
                         "LEFT" -> R.drawable.ic_align_left
@@ -1685,4 +1685,150 @@ fun TimelineTemplateEditorActivity.pasteClipFromClipboard() {
 
     rebuildPlayerFromTimeline(currentTimeMs)
     binding.editorPreview.timelineView.invalidate()
+}
+
+@UnstableApi
+fun TimelineTemplateEditorActivity.showTransitionPickerDialog(clip: TimelineClip) {
+    val container = LinearLayout(this).apply {
+        orientation = LinearLayout.VERTICAL
+        setPadding(48, 32, 48, 32)
+        background = android.graphics.drawable.GradientDrawable().apply {
+            setColor(Color.parseColor("#1F1F1F"))
+            cornerRadius = 32f
+        }
+    }
+
+    val title = TextView(this).apply {
+        text = "TRANSITION SETTINGS"
+        textSize = 16f
+        typeface = android.graphics.Typeface.DEFAULT_BOLD
+        setTextColor(Color.WHITE)
+        gravity = android.view.Gravity.CENTER_HORIZONTAL
+        setPadding(0, 0, 0, 24)
+    }
+    container.addView(title)
+
+    val currentType = clip.metadata["TRANSITION_TYPE"] ?: "NONE"
+    val currentDuration = clip.metadata["TRANSITION_DURATION"]?.toFloatOrNull() ?: 1000f
+
+    val types = listOf("NONE", "CROSSFADE", "FADE_BLACK", "SLIDE_LEFT", "SLIDE_RIGHT")
+    val buttons = mutableListOf<com.google.android.material.button.MaterialButton>()
+    
+    var selectedType = currentType
+
+    val buttonsContainer = LinearLayout(this).apply {
+        orientation = LinearLayout.VERTICAL
+        setPadding(0, 0, 0, 24)
+    }
+
+    var dialogRef: androidx.appcompat.app.AlertDialog? = null
+
+    types.forEach { type ->
+        val btn = com.google.android.material.button.MaterialButton(this, null, com.google.android.material.R.attr.materialButtonOutlinedStyle).apply {
+            text = type.replace("_", " ")
+            textSize = 12f
+            cornerRadius = 12
+            strokeWidth = 2
+            setPadding(16, 12, 16, 12)
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                bottomMargin = 8
+            }
+            
+            fun updateStyle() {
+                if (selectedType == type) {
+                    strokeColor = ColorStateList.valueOf(Color.parseColor("#00D2D3"))
+                    setTextColor(Color.parseColor("#00D2D3"))
+                    setBackgroundColor(Color.parseColor("#1A00D2D3"))
+                } else {
+                    strokeColor = ColorStateList.valueOf(Color.parseColor("#33FFFFFF"))
+                    setTextColor(Color.WHITE)
+                    setBackgroundColor(Color.TRANSPARENT)
+                }
+            }
+            updateStyle()
+        }
+        buttons.add(btn)
+        buttonsContainer.addView(btn)
+    }
+    
+    // Wire up refresh callback
+    buttons.forEach { b ->
+        val type = b.text.toString().replace(" ", "_")
+        b.setOnClickListener {
+            selectedType = type
+            buttons.forEach { button ->
+                val bType = button.text.toString().replace(" ", "_")
+                if (selectedType == bType) {
+                    button.strokeColor = ColorStateList.valueOf(Color.parseColor("#00D2D3"))
+                    button.setTextColor(Color.parseColor("#00D2D3"))
+                    button.setBackgroundColor(Color.parseColor("#1A00D2D3"))
+                } else {
+                    button.strokeColor = ColorStateList.valueOf(Color.parseColor("#33FFFFFF"))
+                    button.setTextColor(Color.WHITE)
+                    button.setBackgroundColor(Color.TRANSPARENT)
+                }
+            }
+        }
+    }
+    container.addView(buttonsContainer)
+
+    // Duration Label
+    val durationLabel = TextView(this).apply {
+        text = "Duration: ${String.format("%.1fs", currentDuration / 1000f)}"
+        textSize = 13f
+        setTextColor(Color.WHITE)
+        setPadding(0, 0, 0, 8)
+    }
+    container.addView(durationLabel)
+
+    // Duration Seekbar
+    val seek = android.widget.SeekBar(this).apply {
+        max = 20
+        progress = (currentDuration / 100).toInt().coerceIn(1, 20)
+        setOnSeekBarChangeListener(object : android.widget.SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(p0: android.widget.SeekBar?, p1: Int, p2: Boolean) {
+                val sec = p1.coerceAtLeast(1) / 10f
+                durationLabel.text = "Duration: ${String.format("%.1fs", sec)}"
+            }
+            override fun onStartTrackingTouch(p0: android.widget.SeekBar?) {}
+            override fun onStopTrackingTouch(p0: android.widget.SeekBar?) {}
+        })
+        layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            bottomMargin = 24
+        }
+    }
+    container.addView(seek)
+
+    val applyBtn = com.google.android.material.button.MaterialButton(this).apply {
+        text = "APPLY TRANSITION"
+        setBackgroundColor(Color.parseColor("#00D2D3"))
+        setTextColor(Color.BLACK)
+        cornerRadius = 16
+        setPadding(16, 16, 16, 16)
+        
+        setOnClickListener {
+            saveHistory()
+            if (selectedType == "NONE") {
+                clip.metadata.remove("TRANSITION_TYPE")
+                clip.metadata.remove("TRANSITION_DURATION")
+            } else {
+                clip.metadata["TRANSITION_TYPE"] = selectedType
+                val durMs = (seek.progress.coerceAtLeast(1) * 100).toLong()
+                clip.metadata["TRANSITION_DURATION"] = durMs.toString()
+            }
+            rebuildPlayerFromTimeline(currentTimeMs)
+            binding.editorPreview.timelineView.invalidate()
+            Toast.makeText(context, "Transition Updated", Toast.LENGTH_SHORT).show()
+            dialogRef?.dismiss()
+        }
+    }
+    container.addView(applyBtn)
+
+    dialogRef = AppDialog.showCustomView(this, container)
 }

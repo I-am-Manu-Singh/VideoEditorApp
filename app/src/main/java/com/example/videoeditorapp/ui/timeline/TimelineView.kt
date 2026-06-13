@@ -231,6 +231,33 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         }
 
     private val reusableBadgeRect = RectF()
+
+    data class EllipsizeKey(val clipId: String, val widthPx: Int)
+    data class TransitionZone(val nextClip: TimelineClip, val rect: RectF)
+    private val transitionZones = mutableListOf<TransitionZone>()
+    var onTransitionHandleClicked: ((TimelineClip) -> Unit)? = null
+    private val ellipsizeCache = HashMap<EllipsizeKey, String>()
+    private val timeFormatCache = HashMap<Long, String>()
+
+    private fun getCachedEllipsizedTitle(clipId: String, text: String, paint: android.text.TextPaint, width: Float): String {
+        if (ellipsizeCache.size > 1000) {
+            ellipsizeCache.clear()
+        }
+        val roundedWidth = width.toInt()
+        val key = EllipsizeKey(clipId, roundedWidth)
+        return ellipsizeCache.getOrPut(key) {
+            TextUtils.ellipsize(text, paint, width, TextUtils.TruncateAt.END).toString()
+        }
+    }
+
+    private fun getCachedTime(timeMs: Long): String {
+        if (timeFormatCache.size > 1000) {
+            timeFormatCache.clear()
+        }
+        return timeFormatCache.getOrPut(timeMs) {
+            com.example.videoeditorapp.utils.ViewUtils.formatTime(timeMs)
+        }
+    }
     private val unlinkedClipPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE
         strokeWidth = 3f
@@ -300,6 +327,8 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     private var scrollYOffset = 0f 
     private var maxScrollY = 0f
     private val reusableRowRect = RectF()
+    private val reusableThumbRect = RectF()
+    private val reusableSrcRect = Rect()
     private var lastTouchX = 0f
     private var animatedClipId: String? = null
     private var animationStartTime: Long = 0
@@ -473,6 +502,8 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     // ---------- PUBLIC API ----------
     fun setProject(project: TimelineProject) {
         this.project = project
+        ellipsizeCache.clear()
+        timeFormatCache.clear()
         loadWaveformsForProject()
         invalidate()
     }
@@ -677,7 +708,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
             val paint = rulerPaint
 
             canvas.drawText(
-                    com.example.videoeditorapp.utils.ViewUtils.formatTime(sec * 1000L),
+                    getCachedTime(sec * 1000L),
                     baseX,
                     rulerHeight - 6f,
                     paint
@@ -831,6 +862,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        transitionZones.clear()
         val selectedClipId = selectedClip?.id
 
         val animatedScale =
@@ -878,10 +910,10 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
             val trackTopMargin = if (isLinkedWithPrev) 0f else 8f
             val trackBottomMargin = if (isLinkedWithNext) 0f else 8f
 
-            val rowRect = RectF(HEADER_WIDTH, currentY + trackTopMargin, width.toFloat(), currentY + effectiveTrackHeight - trackBottomMargin)
+            reusableRowRect.set(HEADER_WIDTH, currentY + trackTopMargin, width.toFloat(), currentY + effectiveTrackHeight - trackBottomMargin)
 
             reusableTrackPath.reset()
-            reusableTrackPath.addRect(rowRect, Path.Direction.CW)
+            reusableTrackPath.addRect(reusableRowRect, Path.Direction.CW)
 
             canvas.drawPath(reusableTrackPath, trackShadowPaint)
             canvas.drawPath(reusableTrackPath, improvedBgPaint)
@@ -1049,12 +1081,12 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
                     ) {
 
                         val displayText =
-                            TextUtils.ellipsize(
+                            getCachedEllipsizedTitle(
+                                clip.id,
                                 rawName,
                                 textPaint,
-                                availableWidth,
-                                TextUtils.TruncateAt.END
-                            ).toString()
+                                availableWidth
+                            )
                         drawText(
                             displayText,
                             textX,
@@ -1070,6 +1102,61 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
                     canvas.restore()
                 }
             }
+            
+            // Draw transition handles for adjacent touching clips
+            val sortedClips = track.clips.sortedBy { it.startTimeMs }
+            for (i in 0 until sortedClips.size - 1) {
+                val clip1 = sortedClips[i]
+                val clip2 = sortedClips[i + 1]
+                if (Math.abs(clip2.startTimeMs - clip1.endTimeMs) <= 10L) {
+                    val junctionX = HEADER_WIDTH + (clip2.startTimeMs / 1000f) * pixelsPerSecond - scrollXOffset
+                    if (junctionX > HEADER_WIDTH && junctionX < width) {
+                        val centerY = currentY + effectiveTrackHeight / 2f
+                        val radius = com.example.videoeditorapp.utils.ViewUtils.dpToPx(context, 14).toFloat()
+                        
+                        val handleRect = RectF(
+                            junctionX - radius,
+                            centerY - radius,
+                            junctionX + radius,
+                            centerY + radius
+                        )
+                        
+                        transitionZones.add(TransitionZone(clip2, RectF(handleRect)))
+                        
+                        val hasTransition = clip2.metadata.containsKey("TRANSITION_TYPE")
+                        
+                        clipPaint.style = Paint.Style.FILL
+                        clipPaint.color = Color.parseColor("#E61C1C1C")
+                        canvas.drawCircle(junctionX, centerY, radius, clipPaint)
+                        
+                        clipPaint.style = Paint.Style.STROKE
+                        clipPaint.strokeWidth = com.example.videoeditorapp.utils.ViewUtils.dpToPx(context, 1).toFloat()
+                        clipPaint.color = if (hasTransition) themeAccentColor else Color.parseColor("#40FFFFFF")
+                        canvas.drawCircle(junctionX, centerY, radius, clipPaint)
+                        
+                        clipPaint.style = Paint.Style.STROKE
+                        clipPaint.strokeWidth = com.example.videoeditorapp.utils.ViewUtils.dpToPx(context, 2).toFloat()
+                        if (hasTransition) {
+                            clipPaint.color = themeAccentColor
+                            val inner = radius * 0.4f
+                            val path = Path().apply {
+                                moveTo(junctionX - inner, centerY - inner)
+                                lineTo(junctionX + inner, centerY - inner)
+                                lineTo(junctionX - inner, centerY + inner)
+                                lineTo(junctionX + inner, centerY + inner)
+                                close()
+                            }
+                            canvas.drawPath(path, clipPaint)
+                        } else {
+                            clipPaint.color = Color.WHITE
+                            val inner = radius * 0.35f
+                            canvas.drawLine(junctionX - inner, centerY, junctionX + inner, centerY, clipPaint)
+                            canvas.drawLine(junctionX, centerY - inner, junctionX, centerY + inner, clipPaint)
+                        }
+                    }
+                }
+            }
+
             currentY += effectiveTrackHeight + (if (isLinkedWithNext) 0f else trackSpacing)
         }
         canvas.restore()
@@ -1177,42 +1264,63 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
                         rect.height(),
                         rect.width() * 0.35f
                     )
-                val thumbRect = RectF(
+                reusableThumbRect.set(
                     rect.left,
                     rect.top,
                     (rect.left + thumbWidth).coerceAtMost(rect.right),
                     rect.bottom
                 )
-                clipRect(thumbRect)
-                val srcRect = android.graphics.Rect(0, 0, bitmap.width, bitmap.height)
-                drawBitmap(bitmap, srcRect, thumbRect, null)
-                drawRect(thumbRect, thumbnailOverlayPaint)
+                clipRect(reusableThumbRect)
+                reusableSrcRect.set(0, 0, bitmap.width, bitmap.height)
+                drawBitmap(bitmap, reusableSrcRect, reusableThumbRect, null)
+                drawRect(reusableThumbRect, thumbnailOverlayPaint)
             }
         }
     }
+
+    private val loadingThumbnails = java.util.Collections.synchronizedSet(mutableSetOf<String>())
 
     private fun getThumbnail(clip: TimelineClip): Bitmap? {
         val cacheKey = "${clip.filePath}_${clip.sourceStartTimeMs}"
         thumbnailCache[cacheKey]?.let { return it }
 
-        try {
-            if (clip.type == ClipType.IMAGE || clip.type == ClipType.STICKER) {
-                val opts = BitmapFactory.Options().apply { inSampleSize = 4 }
-                val bitmap = BitmapFactory.decodeFile(clip.filePath, opts)
-                if (bitmap != null) {
-                    thumbnailCache[cacheKey] = bitmap
-                    return bitmap
+        if (loadingThumbnails.contains(cacheKey)) {
+            return null
+        }
+
+        loadingThumbnails.add(cacheKey)
+        viewScope.launch(Dispatchers.IO) {
+            try {
+                if (clip.type == ClipType.IMAGE || clip.type == ClipType.STICKER) {
+                    val opts = BitmapFactory.Options().apply { inSampleSize = 4 }
+                    val bitmap = BitmapFactory.decodeFile(clip.filePath, opts)
+                    if (bitmap != null) {
+                        kotlinx.coroutines.withContext(Dispatchers.Main) {
+                            thumbnailCache[cacheKey] = bitmap
+                            loadingThumbnails.remove(cacheKey)
+                            invalidate()
+                        }
+                    }
+                } else if (clip.type == ClipType.VIDEO) {
+                    val retriever = android.media.MediaMetadataRetriever()
+                    retriever.setDataSource(clip.filePath)
+                    val bitmap = retriever.getFrameAtTime(clip.sourceStartTimeMs * 1000L)
+                    retriever.release()
+                    if (bitmap != null) {
+                        val scaled = Bitmap.createScaledBitmap(bitmap, 120, 120, true)
+                        kotlinx.coroutines.withContext(Dispatchers.Main) {
+                            thumbnailCache[cacheKey] = scaled
+                            loadingThumbnails.remove(cacheKey)
+                            invalidate()
+                        }
+                    }
                 }
-            } else if (clip.type == ClipType.VIDEO) {
-                thumbnailRetriever.setDataSource(clip.filePath)
-                val bitmap = thumbnailRetriever.getFrameAtTime(clip.sourceStartTimeMs * 1000L)
-                if (bitmap != null) {
-                    val scaled = Bitmap.createScaledBitmap(bitmap, 120, 120, true)
-                    thumbnailCache[cacheKey] = scaled
-                    return scaled
+            } catch (e: Exception) {
+                kotlinx.coroutines.withContext(Dispatchers.Main) {
+                    loadingThumbnails.remove(cacheKey)
                 }
             }
-        } catch (e: Exception) {}
+        }
         return null
     }
 
@@ -1345,7 +1453,18 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         val clip = selectedClip ?: return
         val proj = project ?: return
         for (track in proj.tracks) {
-            if (track.clips.remove(clip)) {
+            if (track.clips.contains(clip)) {
+                val deletedStart = clip.startTimeMs
+                val deletedDuration = clip.durationMs
+                track.clips.remove(clip)
+                
+                // RIPPLE EDIT: Shift subsequent clips left to fill the gap
+                track.clips.forEach { c ->
+                    if (c.startTimeMs >= deletedStart + deletedDuration) {
+                        c.startTimeMs -= deletedDuration
+                    }
+                }
+                
                 selectedClip = null
                 onClipSelected?.invoke(null)
                 notifyDataChanged()
@@ -1354,12 +1473,52 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         }
     }
 
+    private fun resolveTrackCollisions() {
+        val proj = project ?: return
+        val tracksCopy = ArrayList(proj.tracks)
+        for (track in tracksCopy) {
+            val clipsCopy = ArrayList(track.clips).sortedBy { it.startTimeMs }
+            for (clip in clipsCopy) {
+                val hasOverlap = track.clips.filter { it != clip }.any { other ->
+                    clip.startTimeMs < other.endTimeMs && clip.endTimeMs > other.startTimeMs
+                }
+                if (hasOverlap) {
+                    val targetTrack = findOrCreateNonOverlappingTrack(track.type, clip)
+                    track.clips.remove(clip)
+                    targetTrack.clips.add(clip)
+                    targetTrack.clips.sortBy { it.startTimeMs }
+                }
+            }
+        }
+        proj.tracks.removeAll { it.clips.isEmpty() }
+    }
+
+    private fun findOrCreateNonOverlappingTrack(type: TrackType, clip: TimelineClip): TimelineTrack {
+        val proj = project!!
+        for (t in proj.tracks) {
+            if (t.type == type) {
+                val overlaps = t.clips.any { other ->
+                    clip.startTimeMs < other.endTimeMs && clip.endTimeMs > other.startTimeMs
+                }
+                if (!overlaps) return t
+            }
+        }
+        val newTrack = TimelineTrack(id = java.util.UUID.randomUUID().toString(), type = type)
+        proj.tracks.add(newTrack)
+        return newTrack
+    }
+
     fun selectClipDirectly(clip: TimelineClip?) {
         selectedClip = clip
         invalidate()
     }
 
-    internal fun notifyDataChanged() { onTimelineChanged?.invoke(currentTimeMs) }
+    internal fun notifyDataChanged() {
+        ellipsizeCache.clear()
+        timeFormatCache.clear()
+        resolveTrackCollisions()
+        onTimelineChanged?.invoke(currentTimeMs)
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -1394,6 +1553,13 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
                  )
                  return true
              }
+
+                // Intercept transition handle clicks
+                val clickedZone = transitionZones.find { it.rect.contains(x, y) }
+                if (clickedZone != null) {
+                    onTransitionHandleClicked?.invoke(clickedZone.nextClip)
+                    return true
+                }
 
                 isScrubbingRuler = y <= rulerHeight && x >= HEADER_WIDTH
                 if (!isScrubbingRuler && x >= HEADER_WIDTH) {

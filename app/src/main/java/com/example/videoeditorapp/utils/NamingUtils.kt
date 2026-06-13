@@ -11,20 +11,20 @@ import java.util.Locale
 object NamingUtils {
 
     /**
-     * Generates a new project name like "My Movie 1", "My Movie 2".
+     * Generates a new project name like "Proj_A3D9".
      * Checks existing projects to avoid duplicates.
      */
     fun generateNewProjectName(context: Context): String {
+        val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         val existingProjects = ProjectManager.listProjects(context)
         val existingNames = existingProjects.map { it.name.lowercase() }
         
-        var counter = 1
         while (true) {
-            val candidate = "My Movie $counter"
+            val suffix = (1..4).map { chars.random() }.joinToString("")
+            val candidate = "Proj_$suffix"
             if (!existingNames.contains(candidate.lowercase())) {
                 return candidate
             }
-            counter++
         }
     }
 

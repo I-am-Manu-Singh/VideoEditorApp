@@ -48,14 +48,14 @@ class EditorDialogHelper(
 
     fun showFiltersPicker(clip: TimelineClip, onFilterSelected: (String, Float) -> Unit) {
         val options = listOf("VINTAGE", "CYRPUNK", "MONO", "DREAM").map { type ->
-            EditorOption(type, R.drawable.ic_filter, type.lowercase().capitalize(), clip.effects.find { it.type == type }?.intensity ?: 0f)
+            EditorOption(type, R.drawable.ic_filter, type.lowercase().replaceFirstChar { it.uppercase() }, clip.effects.find { it.type == type }?.intensity ?: 0f)
         }
         showUnifiedEditor("Cinematic Filters", options) { id, value -> onFilterSelected(id, value) }
     }
 
     fun showEffectsPicker(clip: TimelineClip, onEffectSelected: (String, Float) -> Unit) {
         val options = listOf("BLUR", "GLITCH", "PIXELATE", "SHAKE").map { type ->
-            EditorOption(type, R.drawable.ic_magic, type.lowercase().capitalize(), clip.effects.find { it.type == type }?.intensity ?: 0f)
+            EditorOption(type, R.drawable.ic_magic, type.lowercase().replaceFirstChar { it.uppercase() }, clip.effects.find { it.type == type }?.intensity ?: 0f)
         }
         showUnifiedEditor("Special Effects", options) { id, value -> onEffectSelected(id, value) }
     }

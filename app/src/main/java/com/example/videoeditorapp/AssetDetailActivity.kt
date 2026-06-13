@@ -1,6 +1,7 @@
 package com.example.videoeditorapp
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -24,7 +25,11 @@ class AssetDetailActivity : AppCompatActivity() {
 
         setupEditorEdgeToEdge(binding.appBarLayout, null)
 
-        asset = intent.getParcelableExtra("ASSET")
+        asset = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra("ASSET", AssetItem::class.java)
+        } else {
+            @Suppress("DEPRECATION") intent.getParcelableExtra("ASSET")
+        }
         if (asset == null) {
             finish()
             return
