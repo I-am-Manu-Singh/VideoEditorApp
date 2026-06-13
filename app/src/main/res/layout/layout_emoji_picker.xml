@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="450dp"
     android:layout_margin="24dp"
-    app:cardBackgroundColor="#0A0A0A"
+    app:cardBackgroundColor="@color/dialog_background"
     app:cardCornerRadius="24dp"
     app:cardElevation="0dp"
     app:strokeWidth="1dp"
-    app:strokeColor="#1AFFFFFF">
+    app:strokeColor="@color/white_10">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:layout_width="32dp"
             android:layout_height="4dp"
             android:layout_marginTop="12dp"
-            android:background="#33FFFFFF"
+            android:background="@color/white_20"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -34,7 +34,7 @@
             android:layout_height="16dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="20dp"
-            android:background="#00D2D3"
+            android:background="@color/brand_accent"
             app:layout_constraintTop_toBottomOf="@id/sheetHandle"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:text="Emoji Picker"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="13sp"
             android:textAllCaps="true"
             android:fontFamily="monospace"
@@ -83,12 +83,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:hint="Search dynamic content..."
-            android:textColorHint="#80FFFFFF"
-            android:textColor="#FFFFFF"
+            android:textColorHint="@color/white_50"
+            android:textColor="@color/text_primary"
             android:padding="12dp"
             android:background="@drawable/bg_search_bar"
             android:drawableStart="@drawable/ic_search"
-            android:drawableTint="#00D2D3"
+            android:drawableTint="@color/brand_accent"
             android:drawablePadding="8dp"
             android:fontFamily="sans-serif-medium"
             android:textSize="14sp"

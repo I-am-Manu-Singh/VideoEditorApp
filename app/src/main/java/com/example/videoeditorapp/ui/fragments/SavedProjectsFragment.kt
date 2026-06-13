@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels // Ensure you have fragment-ktx dependency
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.videoeditorapp.R
@@ -16,17 +16,16 @@ import com.example.videoeditorapp.model.FavoriteManager
 import com.example.videoeditorapp.model.timeline.TimelineProject
 import com.example.videoeditorapp.ui.TimelineProjectsAdapter
 import com.example.videoeditorapp.utils.ProjectManager
-import com.example.videoeditorapp.utils.SearchViewModel // Your ViewModel
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.example.videoeditorapp.utils.SearchViewModel 
+import com.example.videoeditorapp.utils.AppDialog
 
 class SavedProjectsFragment : Fragment() {
 
-        // 🍏 THE FIX: Connect to the SearchBox in the Activity via Shared ViewModel
         private val searchViewModel: SearchViewModel by activityViewModels()
 
         private lateinit var recyclerView: RecyclerView
         private lateinit var adapter: TimelineProjectsAdapter
-        private lateinit var emptyView: TextView // Must be TextView to use .text
+        private lateinit var emptyView: TextView
         private lateinit var emptyViewContainer: View
         private var onlyFavorites: Boolean = false
         private var allProjects: List<TimelineProject> = emptyList()
@@ -82,31 +81,32 @@ class SavedProjectsFragment : Fragment() {
                                         startActivity(intent)
                                 },
                                 onDeleteClick = { project ->
-                                        val dialogBinding = com.example.videoeditorapp.databinding.DialogBaseBinding.inflate(layoutInflater)
+                                        AppDialog.showDelete(
+                                            context = requireContext(),
+                                            title = "Delete Project",
+                                            message = "Delete project '${project.name}'?\n\nThis action cannot be undone.",
+                                            onDelete = {
+                                                val deleted =
+                                                    ProjectManager.deleteProject(
+                                                        requireContext(),
+                                                        project.id
+                                                    )
 
-                                        dialogBinding.tvTitle.text = "Delete Project"
-                                        dialogBinding.tvMessage.text = "Delete project '${project.name}'?"
+                                                android.util.Log.d(
+                                                    "PROJECT_DELETE",
+                                                    "${project.name} -> $deleted"
+                                                )
 
-                                        dialogBinding.btnPrimary.text = "Delete"
-                                        dialogBinding.btnSecondary.text = "Cancel"
+                                                if (deleted) {
+                                                    FavoriteManager.removeTimelineProjectFavorite(
+                                                        requireContext(),
+                                                        project.id
+                                                    )
+                                                }
 
-                                        val dialog = MaterialAlertDialogBuilder(requireContext())
-                                            .setView(dialogBinding.root)
-                                            .create()
-
-                                        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
-                                        dialogBinding.btnPrimary.setOnClickListener {
-                                            dialog.dismiss()
-                                            ProjectManager.deleteProject(requireContext(), project.id)
-                                            refreshList()
-                                        }
-
-                                        dialogBinding.btnSecondary.setOnClickListener {
-                                            dialog.dismiss()
-                                        }
-
-                                        dialog.show()
+                                                refreshList()
+                                            }
+                                        )
                                 },
                                 onFavoriteClick = { project ->
                                         FavoriteManager.toggleTimelineProjectFavorite(
@@ -174,52 +174,49 @@ class SavedProjectsFragment : Fragment() {
         }
 
         private fun updateSelectionUI(count: Int) {
-                // If we want a global delete button, we'd need to talk to the Activity.
-                // For now, let's just show a Toast or a temporary delete button.
-                // Better: Let's use a snackbar with a Delete action.
+                searchViewModel.selectedCount.postValue(count)
                 if (count > 0) {
                         val view = view ?: return
                         com.google.android.material.snackbar.Snackbar.make(
-                                        view,
-                                        "$count projects selected",
-                                        com.google.android.material.snackbar.Snackbar
-                                                .LENGTH_INDEFINITE
-                                )
-                                .setAction("Delete") { deleteSelectedProjects() }
-                                .show()
+                                         view,
+                                         "$count projects selected",
+                                         com.google.android.material.snackbar.Snackbar
+                                                 .LENGTH_INDEFINITE
+                                 )
+                                 .setAction("Delete") { deleteSelectedProjects() }
+                                 .show()
                 }
         }
 
-        private fun deleteSelectedProjects() {
-                val selected = adapter.getSelectedProjects()
-                val dlg = com.example.videoeditorapp.databinding.DialogBaseBinding.inflate(layoutInflater)
+       private fun deleteSelectedProjects() {
 
-                dlg.tvTitle.text = "Delete Multiple Projects"
-                dlg.tvMessage.text = "Are you sure you want to delete ${selected.size} projects?"
-
-                dlg.btnPrimary.text = "Delete"
-                dlg.btnSecondary.text = "Cancel"
-
-                val dialog = com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
-                        .setView(dlg.root)
-                        .create()
-
-                dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
-                dlg.btnPrimary.setOnClickListener {
-                        selected.forEach {
-                                ProjectManager.deleteProject(requireContext(), it.id)
-                        }
-                        adapter.clearSelection()
-                        refreshList()
-                        dialog.dismiss()
-                }
-
-                dlg.btnSecondary.setOnClickListener {
-                        adapter.clearSelection()
-                        dialog.dismiss()
-                }
-
-                dialog.show()
+    val selected = adapter.getSelectedProjects()
+    if (selected.isEmpty()) return
+AppDialog.showDelete(
+    context = requireContext(),
+    title = "Delete Multiple Projects",
+    message = "Are you sure you want to delete ${selected.size} projects?",
+    onDelete = {
+        selected.forEach { project ->
+            val deleted =
+                ProjectManager.deleteProject(
+                    requireContext(),
+                    project.id
+                )
+            android.util.Log.d(
+                "PROJECT_DELETE",
+                "${project.name} -> $deleted"
+            )
+            if (deleted) {
+                FavoriteManager.removeTimelineProjectFavorite(
+                    requireContext(),
+                    project.id
+                )
+            }
         }
+        adapter.clearSelection()
+        refreshList()
+    }
+)
+}
 }

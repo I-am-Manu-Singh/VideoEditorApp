@@ -114,7 +114,7 @@ class IntroActivity : AppCompatActivity() {
     private fun completeIntro() {
         val prefs = getSharedPreferences("VideoEditorPrefs", Context.MODE_PRIVATE)
         prefs.edit().putBoolean("FIRST_RUN", false).apply()
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
 }

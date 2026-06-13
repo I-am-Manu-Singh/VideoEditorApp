@@ -4,11 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="#0A0A0A"
+    app:cardBackgroundColor="@color/dialog_background"
     app:cardCornerRadius="24dp"
     app:cardElevation="0dp"
     app:strokeWidth="1dp"
-    app:strokeColor="#1AFFFFFF">
+    app:strokeColor="@color/white_10">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 <View
                     android:layout_width="3dp"
                     android:layout_height="24dp"
-                    android:background="#00D2D3" />
+                    android:background="@color/brand_accent" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -48,7 +48,7 @@
                         android:fontFamily="sans-serif-black"
                         android:textAllCaps="true"
                         android:letterSpacing="0.05"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="@color/text_primary" />
 
                     <TextView
                         android:id="@+id/tvClipDuration"
@@ -57,7 +57,7 @@
                         android:text="Duration: 00:05.400"
                         android:textSize="10sp"
                         android:fontFamily="monospace"
-                        android:textColor="#00D2D3"
+                        android:textColor="@color/brand_accent"
                         android:alpha="0.8"
                         android:layout_marginTop="2dp"/>
                 </LinearLayout>
@@ -67,7 +67,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_close"
-                    app:tint="#4DFFFFFF"
+                    app:tint="@color/white_30"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:focusable="true" />
@@ -77,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Split &amp; Segment"
-                android:textColor="#33FFFFFF"
+                android:textColor="@color/white_20"
                 android:textSize="8sp"
                 android:fontFamily="monospace"
                 android:letterSpacing="0.1"
@@ -138,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Trim &amp; Boundaries"
-                android:textColor="#33FFFFFF"
+                android:textColor="@color/white_20"
                 android:textSize="8sp"
                 android:fontFamily="monospace"
                 android:letterSpacing="0.1"

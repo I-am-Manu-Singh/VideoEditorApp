@@ -76,6 +76,14 @@ class ExportService : Service() {
             Log.e("ExportService", "Error starting foreground service: ${e.message}")
         }
 
+        // Send initial broadcast
+        sendBroadcast(Intent("ACTION_EXPORT_PROGRESS").apply {
+            setPackage(packageName)
+            putExtra("PROGRESS", 0)
+            putExtra("LOG", "Initializing FFmpeg encoder engine...")
+            putExtra("FINISHED", false)
+        })
+
         val callback: (com.antonkarpenko.ffmpegkit.Session) -> Unit = { session ->
             val success = ReturnCode.isSuccess(session.returnCode)
             Log.d(
@@ -85,6 +93,13 @@ class ExportService : Service() {
 
             ExportState.isRunning = false
             ExportState.progress = 100
+
+            sendBroadcast(Intent("ACTION_EXPORT_PROGRESS").apply {
+                setPackage(packageName)
+                putExtra("PROGRESS", 100)
+                putExtra("LOG", if (success) "Export successful!" else "Export failed!")
+                putExtra("FINISHED", true)
+            })
 
             if (success) {
                 Log.i("ExportService", "Export SUCCESSFUL: $outputPath")
@@ -117,6 +132,15 @@ class ExportService : Service() {
 
                     val elapsedMs = System.currentTimeMillis() - exportStartTime
                     val statusText = calculateETA(percent, elapsedMs)
+
+                    sendBroadcast(Intent("ACTION_EXPORT_PROGRESS").apply {
+                        setPackage(packageName)
+                        putExtra("PROGRESS", percent)
+                        putExtra("LOG", "Exporting frame statistics... time=${stats.time}ms size=${stats.size} bytes.")
+                        putExtra("STATUS", statusText)
+                        putExtra("TIME_MS", stats.time)
+                        putExtra("FINISHED", false)
+                    })
 
                     getSystemService(NotificationManager::class.java)
                             .notify(
@@ -170,6 +194,13 @@ class ExportService : Service() {
                                             else -> Log.DEBUG
                                         }
                                 Log.println(level, "FFmpegRaw", entry.message)
+                                
+                                sendBroadcast(Intent("ACTION_EXPORT_PROGRESS").apply {
+                                    setPackage(packageName)
+                                    putExtra("PROGRESS", ExportState.progress)
+                                    putExtra("LOG", entry.message)
+                                    putExtra("FINISHED", false)
+                                })
                             },
                             progressCallback
                     )

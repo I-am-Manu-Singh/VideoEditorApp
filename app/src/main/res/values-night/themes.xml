@@ -40,11 +40,5 @@
         <item name="materialAlertDialogTheme">@style/Theme.VideoEditorApp.Dialog</item>
     </style>
 
-    <style name="NavIconStealth">
-        <item name="android:layout_width">20dp</item>
-        <item name="android:layout_height">20dp</item>
-        <item name="android:tint">#FFFFFF</item>
-        <item name="android:alpha">0.7</item>
-    </style>
 
 </resources>

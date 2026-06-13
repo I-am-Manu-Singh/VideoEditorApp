@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="24dp"
-    app:cardBackgroundColor="#0A0A0A"
+    app:cardBackgroundColor="@color/dialog_background"
     app:cardCornerRadius="24dp"
     app:cardElevation="0dp"
     app:strokeWidth="1dp"
-    app:strokeColor="#1AFFFFFF">
+    app:strokeColor="@color/white_10">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                 <View
                     android:layout_width="3dp"
                     android:layout_height="18dp"
-                    android:background="#00D2D3" />
+                    android:background="@color/brand_accent" />
 
                 <TextView
                     android:id="@+id/tvTitle"
@@ -47,7 +47,7 @@
                     android:letterSpacing="0.1"
                     android:textAllCaps="true"
                     android:fontFamily="monospace"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="@color/text_primary" />
             </LinearLayout>
 
             <TextView
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="TARGET RESOLUTION"
-                android:textColor="#80FFFFFF"
+                android:textColor="@color/white_50"
                 android:textSize="10sp"
                 android:textStyle="bold"
                 android:fontFamily="monospace"
@@ -103,7 +103,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recommended"
-                        android:textColor="#80FFFFFF"
+                        android:textColor="@color/white_50"
                         android:textSize="10sp"
                         android:visibility="gone"
                         android:paddingTop="2dp"/>
@@ -132,7 +132,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recommended"
-                        android:textColor="#80FFFFFF"
+                        android:textColor="@color/white_50"
                         android:textSize="10sp"
                         android:visibility="gone"
                         android:paddingTop="2dp"/>
@@ -161,7 +161,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recommended"
-                        android:textColor="#80FFFFFF"
+                        android:textColor="@color/white_50"
                         android:textSize="10sp"
                         android:visibility="gone"
                         android:paddingTop="2dp"/>
@@ -190,7 +190,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recommended"
-                        android:textColor="#80FFFFFF"
+                        android:textColor="@color/white_50"
                         android:textSize="10sp"
                         android:visibility="gone"
                         android:paddingTop="2dp"/>
@@ -219,7 +219,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recommended"
-                        android:textColor="#80FFFFFF"
+                        android:textColor="@color/white_50"
                         android:textSize="10sp"
                         android:visibility="gone"
                         android:paddingTop="2dp"/>
@@ -248,7 +248,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recommended"
-                        android:textColor="#80FFFFFF"
+                        android:textColor="@color/white_50"
                         android:textSize="10sp"
                         android:visibility="gone"
                         android:paddingTop="2dp"/>
@@ -262,7 +262,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="ASPECT RATIO"
-                android:textColor="#80FFFFFF"
+                android:textColor="@color/white_50"
                 android:textSize="10sp"
                 android:textStyle="bold"
                 android:fontFamily="monospace"
@@ -307,7 +307,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recommended"
-                        android:textColor="#80FFFFFF"
+                        android:textColor="@color/white_50"
                         android:textSize="10sp"
                         android:visibility="gone"
                         android:paddingTop="2dp"/>
@@ -334,7 +334,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recommended"
-                        android:textColor="#80FFFFFF"
+                        android:textColor="@color/white_50"
                         android:textSize="10sp"
                         android:visibility="gone"
                         android:paddingTop="2dp"/>
@@ -361,7 +361,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recommended"
-                        android:textColor="#80FFFFFF"
+                        android:textColor="@color/white_50"
                         android:textSize="10sp"
                         android:visibility="gone"
                         android:paddingTop="2dp"/>
@@ -388,7 +388,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recommended"
-                        android:textColor="#80FFFFFF"
+                        android:textColor="@color/white_50"
                         android:textSize="10sp"
                         android:visibility="gone"
                         android:paddingTop="2dp"/>
@@ -415,7 +415,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recommended"
-                        android:textColor="#80FFFFFF"
+                        android:textColor="@color/white_50"
                         android:textSize="10sp"
                         android:visibility="gone"
                         android:paddingTop="2dp"/>
@@ -441,7 +441,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recommended"
-                        android:textColor="#80FFFFFF"
+                        android:textColor="@color/white_50"
                         android:textSize="10sp"
                         android:visibility="gone"
                         android:paddingTop="2dp"/>
@@ -455,7 +455,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="RENDER QUALITY"
-                android:textColor="#80FFFFFF"
+                android:textColor="@color/white_50"
                 android:textSize="10sp"
                 android:textStyle="bold"
                 android:fontFamily="monospace"
@@ -513,7 +513,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="VIDEO CODEC"
-                android:textColor="#80FFFFFF"
+                android:textColor="@color/white_50"
                 android:textSize="10sp"
                 android:textStyle="bold"
                 android:fontFamily="monospace"
@@ -560,7 +560,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="AUDIO QUALITY"
-                android:textColor="#80FFFFFF"
+                android:textColor="@color/white_50"
                 android:textSize="10sp"
                 android:textStyle="bold"
                 android:fontFamily="monospace"
@@ -617,7 +617,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="BRANDING &amp; WATERMARK"
-                android:textColor="#80FFFFFF"
+                android:textColor="@color/white_50"
                 android:textSize="10sp"
                 android:textStyle="bold"
                 android:fontFamily="monospace"
@@ -642,11 +642,11 @@
                     android:layout_height="44dp"
                     android:text="Add Logo"
                     android:textSize="10sp"
-                    android:textColor="#00D2D3"
+                    android:textColor="@color/brand_accent"
                     android:fontFamily="monospace"
-                    app:strokeColor="#1A00D2D3"
+                    app:strokeColor="@color/brand_accent_10"
                     app:cornerRadius="8dp"
-                    android:backgroundTint="#0D00D2D3" />
+                    android:backgroundTint="@color/brand_accent_05" />
 
                 <TextView
                     android:id="@+id/tvWatermarkStatus"
@@ -655,7 +655,7 @@
                     android:layout_weight="1"
                     android:layout_marginStart="16dp"
                     android:text="No Overlay Active"
-                    android:textColor="#4DFFFFFF"
+                    android:textColor="@color/white_30"
                     android:textSize="9sp"
                     android:fontFamily="monospace"
                     android:letterSpacing="0.05"/>
@@ -666,7 +666,7 @@
                     android:layout_height="20dp"
                     android:src="@drawable/ic_close"
                     android:visibility="gone"
-                    app:tint="#4DFFFFFF"
+                    app:tint="@color/white_30"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:focusable="true" />
@@ -678,7 +678,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Status: Ready for Output"
-                android:textColor="#80FFFFFF"
+                android:textColor="@color/white_50"
                 android:textSize="9sp"
                 android:gravity="center"
                 android:fontFamily="monospace"
@@ -705,7 +705,7 @@
                 android:text="Start Export"
                 android:textColor="#121212"
                 android:fontFamily="sans-serif-black"
-                android:backgroundTint="#00D2D3"
+                android:backgroundTint="@color/brand_accent"
                 android:layout_marginTop="16dp"
                 android:letterSpacing="0.05"
                 app:cornerRadius="16dp"

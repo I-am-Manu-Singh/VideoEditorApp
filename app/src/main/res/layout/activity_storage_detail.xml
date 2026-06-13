@@ -36,7 +36,7 @@
                     android:layout_height="match_parent"
                     android:padding="10dp"
                     android:src="@drawable/ic_back"
-                    app:tint="#00D2D3" />
+                    app:tint="@color/brand_accent" />
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Imported Media"
-                android:textColor="#00D2D3"
+                android:textColor="@color/brand_accent"
                 android:fontFamily="sans-serif-black"
                 android:textSize="13sp"
                 android:textAllCaps="true"
@@ -68,7 +68,7 @@
         app:cardCornerRadius="12dp"
         app:cardElevation="8dp"
         app:strokeWidth="1dp"
-        app:strokeColor="#00D2D3"
+        app:strokeColor="@color/brand_accent"
         app:layout_constraintTop_toBottomOf="@id/appBarLayout">
         
         <LinearLayout
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="0 ITEMS SELECTED"
-                android:textColor="#00D2D3"
+                android:textColor="@color/brand_accent"
                 android:fontFamily="monospace"
                 android:textSize="11sp"
                 android:textStyle="bold"/>
@@ -145,7 +145,7 @@
                 android:background="@android:color/transparent"
                 android:hint="Search files..."
                 android:paddingHorizontal="12dp"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textColorHint="@color/white_30"
                 android:textSize="13sp"
                 android:maxLines="1"
@@ -185,7 +185,7 @@
                     android:text="ALL"
                     android:checked="true"
                     app:chipBackgroundColor="@color/white_05"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_primary"
                     app:chipStrokeWidth="0dp"
                     android:textSize="10sp"/>
 
@@ -196,7 +196,7 @@
                     android:layout_height="wrap_content"
                     android:text="VIDEOS"
                     app:chipBackgroundColor="@color/white_05"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_primary"
                     app:chipStrokeWidth="0dp"
                     android:textSize="10sp"/>
 
@@ -207,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:text="AUDIOS"
                     app:chipBackgroundColor="@color/white_05"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_primary"
                     app:chipStrokeWidth="0dp"
                     android:textSize="10sp"/>
                 

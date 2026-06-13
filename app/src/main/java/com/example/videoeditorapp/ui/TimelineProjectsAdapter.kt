@@ -69,6 +69,7 @@ class TimelineProjectsAdapter(
         private val tvDuration: TextView = itemView.findViewById(R.id.tvDuration)
         private val ivIcon: ImageView = itemView.findViewById(R.id.ivProjectIcon)
         private val btnFavorite: ImageButton = itemView.findViewById(R.id.btnFavoriteProject)
+        private val btnDelete: ImageButton = itemView.findViewById(R.id.btnDeleteProject)
 
         fun bind(project: TimelineProject) {
             tvProjectName.text = project.name
@@ -92,24 +93,28 @@ class TimelineProjectsAdapter(
                             }
                     )
 
-            // Icon based on Template ID
-            ivIcon.setImageResource(
-                    when (project.templateId) {
-                        "CINEMATIC", "CINEMATIC_FRAME", "CINEMATIC_TITLE" ->
-                                R.drawable.ic_movie_filter
-                        "NEWS" -> R.drawable.ic_newspaper
-                        "CAMERA" -> R.drawable.ic_camera_alt
-                        "GLITCH_TEXT" -> R.drawable.ic_movie_filter // Or appropriate
-                        else -> R.drawable.ic_video_camera
-                    }
-            )
+            // Icon based on Template ID / Thumbnail
+            project.thumbnailPath?.let { path ->
+                val file = java.io.File(path)
+                if (file.exists()) {
+                    val bitmap = android.graphics.BitmapFactory.decodeFile(path)
+                    ivIcon.setImageBitmap(bitmap)
+                    ivIcon.scaleType = ImageView.ScaleType.CENTER_CROP
+                    ivIcon.imageTintList = null
+                    ivIcon.colorFilter = null
+                    ivIcon.setPadding(0, 0, 0, 0)
+                } else {
+                    setDefaultIcon(ivIcon, project)
+                }
+            } ?: run {
+                setDefaultIcon(ivIcon, project)
+            }
 
             val isFav = FavoriteManager.isTimelineProjectFavorite(itemView.context, project.id)
             btnFavorite.setImageResource(
                     if (isFav) R.drawable.ic_heart else R.drawable.ic_heart_outline
             )
 
-            // Fix: Use theme-aware color for unselected favorite
             val defaultColor = resolveColor(itemView.context, android.R.attr.textColorPrimary)
             btnFavorite.imageTintList =
                     android.content.res.ColorStateList.valueOf(
@@ -119,10 +124,18 @@ class TimelineProjectsAdapter(
 
             val isSelected = selectedIds.contains(project.id)
             (itemView as? com.google.android.material.card.MaterialCardView)?.apply {
-                isChecked = isSelected
-                isCheckable = isSelectionMode
+                isCheckable = false 
+                strokeColor = if (isSelected) 
+                    android.graphics.Color.parseColor("#00D2D3") 
+                    else android.graphics.Color.parseColor("#1AFFFFFF")
+                strokeWidth = if (isSelected) 4 else 2
+                cardElevation = if (isSelected) 12f else 0f
+                setCardBackgroundColor(if (isSelected) 
+                    android.graphics.Color.parseColor("#3300D2D3") 
+                    else android.graphics.Color.parseColor("#0DFFFFFF"))
             }
 
+            // Click Logic
             itemView.setOnClickListener {
                 if (isSelectionMode) {
                     toggleSelection(project)
@@ -133,10 +146,11 @@ class TimelineProjectsAdapter(
             itemView.setOnLongClickListener {
                 if (!isSelectionMode) {
                     setSelectionMode(true)
-                    toggleSelection(project)
                 }
+                toggleSelection(project)
                 true
             }
+
             btnFavorite.setOnClickListener {
                 if (isSelectionMode) {
                     toggleSelection(project)
@@ -144,6 +158,18 @@ class TimelineProjectsAdapter(
                     onFavoriteClick(project)
                 }
             }
+
+            btnDelete.setOnClickListener {
+                if (isSelectionMode) {
+                    toggleSelection(project)
+                } else {
+                    onDeleteClick(project)
+                }
+            }
+            
+            // Allow delete icon to be visible only when NOT in selection mode?
+            // Or always visible. Let's keep always visible but red.
+            btnDelete.visibility = if (isSelectionMode) View.INVISIBLE else View.VISIBLE
         }
 
         private fun toggleSelection(project: TimelineProject) {
@@ -157,6 +183,12 @@ class TimelineProjectsAdapter(
             }
             notifyItemChanged(pos)
             onSelectionChanged(selectedIds.size)
+            
+            // If nothing is selected, exit selection mode automatically
+            if (selectedIds.isEmpty()) {
+                isSelectionMode = false
+                notifyDataSetChanged()
+            }
         }
 
         private fun resolveColor(context: android.content.Context, attr: Int): Int {
@@ -167,6 +199,26 @@ class TimelineProjectsAdapter(
             } else {
                 typedValue.data
             }
+        }
+
+        private fun setDefaultIcon(ivIcon: ImageView, project: TimelineProject) {
+            ivIcon.scaleType = ImageView.ScaleType.FIT_CENTER
+            val padding = (10 * itemView.resources.displayMetrics.density).toInt()
+            ivIcon.setPadding(padding, padding, padding, padding)
+            ivIcon.setImageResource(
+                    when (project.templateId) {
+                        "CINEMATIC", "CINEMATIC_FRAME", "CINEMATIC_TITLE" ->
+                                R.drawable.ic_movie_filter
+                        "NEWS" -> R.drawable.ic_newspaper
+                        "CAMERA" -> R.drawable.ic_camera_alt
+                        "GLITCH_TEXT" -> R.drawable.ic_movie_filter
+                        else -> R.drawable.ic_video_camera
+                    }
+            )
+            ivIcon.imageTintList = androidx.core.content.ContextCompat.getColorStateList(
+                itemView.context,
+                R.color.brand_accent
+            )
         }
     }
 }

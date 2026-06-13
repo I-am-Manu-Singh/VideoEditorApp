@@ -35,7 +35,7 @@
                     android:id="@+id/imgThumb"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:alpha="0.8"
+                    android:alpha="1.0"
                     android:scaleType="centerCrop"
                     android:src="@drawable/temp_video" />
 
@@ -52,7 +52,7 @@
                     android:layout_margin="8dp"
                     android:src="@drawable/ic_premium"
                     android:visibility="gone"
-                    app:tint="#00D2D3" />
+                    app:tint="@color/brand_accent" />
 
                 <ProgressBar
                     android:id="@+id/downloadProgress"
@@ -60,7 +60,7 @@
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:layout_gravity="center"
-                    android:indeterminateTint="#00D2D3"
+                    android:indeterminateTint="@color/brand_accent"
                     android:visibility="gone" />
             </FrameLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -73,7 +73,7 @@
             android:fontFamily="monospace"
             android:letterSpacing="0.2"
             android:text="Visual Effects"
-            android:textColor="#00D2D3"
+            android:textColor="@color/brand_accent"
             android:textSize="8sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/thumbContainer" />
@@ -88,7 +88,7 @@
             android:maxLines="1"
             android:text="Particle Burst"
             android:textAllCaps="true"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="12sp"
             app:layout_constraintEnd_toStartOf="@id/btnDownload"
             app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +105,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/thumbContainer"
-            app:tint="#00D2D3" />
+            app:tint="@color/brand_accent" />
 
         <ImageView
             android:id="@+id/downloadCheck"
@@ -118,7 +118,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/thumbContainer"
-            app:tint="#00D2D3" />
+            app:tint="@color/brand_accent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -37,7 +37,7 @@
                     android:layout_height="match_parent"
                     android:padding="10dp"
                     android:src="@drawable/ic_back"
-                    app:tint="#00D2D3" />
+                    app:tint="@color/brand_accent" />
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Premium Upgrade"
-                android:textColor="#00D2D3"
+                android:textColor="@color/brand_accent"
                 android:fontFamily="monospace"
                 android:textSize="13sp"
                 android:textAllCaps="true"
@@ -78,7 +78,7 @@
                 android:gravity="center"
                 android:layout_height="wrap_content"
                 android:text="License Center"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="26sp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="12dp"
@@ -117,7 +117,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="monospace"
                             android:text="Standard"
-                            android:textColor="#80FFFFFF"
+                            android:textColor="@color/white_50"
                             android:textSize="9sp" />
 
                         <TextView
@@ -125,16 +125,16 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-black"
                             android:text="Essentials"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/text_medium_emphasis"
                             android:textSize="18sp" />
                     </LinearLayout>
 
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:cardBackgroundColor="#1A00D2D3"
+                        app:cardBackgroundColor="@color/brand_accent_10"
                         app:cardCornerRadius="6dp"
-                        app:strokeColor="#4D00D2D3">
+                        app:strokeColor="@color/brand_accent_30">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -148,7 +148,7 @@
                                 android:layout_width="10dp"
                                 android:layout_height="10dp"
                                 android:src="@drawable/ic_magic"
-                                app:tint="#00D2D3" />
+                                app:tint="@color/brand_accent" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -157,7 +157,7 @@
                                 android:fontFamily="monospace"
                                 android:letterSpacing="0.1"
                                 android:text="Active Version"
-                                android:textColor="#00D2D3"
+                                android:textColor="@color/brand_accent"
                                 android:textSize="9sp" />
                         </LinearLayout>
 
@@ -209,7 +209,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Recommended"
-                                android:textColor="#00D2D3"
+                                android:textColor="@color/brand_accent"
                                 android:textSize="10sp"
                                 android:fontFamily="monospace"/>
 
@@ -217,7 +217,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Master License"
-                                android:textColor="@color/card_pro_text"
+                                android:textColor="@color/text_medium_emphasis"
                                 android:textSize="22sp"
                                 android:fontFamily="sans-serif-black"/>
                         </LinearLayout>
@@ -236,9 +236,9 @@
                             <com.google.android.material.card.MaterialCardView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:cardBackgroundColor="#1A00D2D3"
+                                app:cardBackgroundColor="@color/brand_accent_10"
                                 app:cardCornerRadius="6dp"
-                                app:strokeColor="#4D00D2D3">
+                                app:strokeColor="@color/brand_accent_30">
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
@@ -255,7 +255,7 @@
                                         android:fontFamily="monospace"
                                         android:letterSpacing="0.1"
                                         android:text="Activate Now"
-                                        android:textColor="#00D2D3"
+                                        android:textColor="@color/brand_accent"
                                         android:textSize="9sp" />
                                 </LinearLayout>
 
@@ -316,7 +316,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Studio Suite"
-                                android:textColor="@color/card_studio_text"
+                                android:textColor="@color/text_medium_emphasis"
                                 android:textSize="22sp"
                                 android:fontFamily="sans-serif-black"/>
                         </LinearLayout>
@@ -381,7 +381,7 @@
                 android:gravity="center"
                 android:layout_height="wrap_content"
                 android:text="Restore your License"
-                android:textColor="#00D2D3"
+                android:textColor="@color/brand_accent"
                 android:textSize="11sp"
                 android:letterSpacing="0.05"
                 android:fontFamily="monospace"/>

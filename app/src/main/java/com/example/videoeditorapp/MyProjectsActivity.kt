@@ -61,6 +61,14 @@ class MyProjectsActivity : AppCompatActivity() {
 
         // Select first tab programmatically to trigger styling if needed, or rely on Default
         binding.tabLayout.getTabAt(0)?.select()
+
+        searchViewModel.selectedCount.observe(this) { count ->
+            if (count > 0) {
+                binding.tvToolbarTitle.text = "$count ITEMS SELECTED"
+            } else {
+                binding.tvToolbarTitle.text = "PROJECT MANAGER"
+            }
+        }
     }
 
     private fun setupLandscapeRail() {

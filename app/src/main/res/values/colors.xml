@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Absolute Values -->
     <color name="white">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
-    <color name="white_20">#33FFFFFF</color>
-    <color name="white_10">#1AFFFFFF</color>
+    
+    <color name="stealth_cyan">#007A7C</color>
+    <color name="color_cyan_accent">#007A7C</color>
+    <color name="brand_primary">#007A7C</color>
+    <color name="brand_accent">#007A7C</color>
+    <color name="brand_accent_05">#0D007A7C</color>
+    <color name="brand_accent_10">#1A007A7C</color>
+    <color name="brand_accent_15">#26007A7C</color>
+    <color name="brand_accent_20">#33007A7C</color>
+    <color name="brand_accent_25">#40007A7C</color>
+    <color name="brand_accent_30">#4D007A7C</color>
+    <color name="brand_secondary">#007A7C</color>
 
-    <color name="stealth_cyan">#00D2D3</color>
-
-    <color name="bg_deep_black">#000000</color>
-    <color name="bg_dark_surface">#050505</color>
-    <color name="bg_dark_elevated">#0D0D0D</color>
+    <!-- Semantic Layout Backgrounds (Light Mode Defaults) -->
+    <color name="bg_deep_black">#FFFFFF</color>
+    <color name="bg_dark_surface">#F8F9FA</color>
+    <color name="bg_dark_elevated">#F1F3F5</color>
+    <color name="background_primary">#FFFFFF</color>
 
     <color name="bg_light_surface">#FFFFFF</color>
     <color name="bg_light_elevated">#F8F9FA</color>
@@ -17,32 +28,34 @@
     <color name="text_high_emphasis_light">#1A1A1A</color>
     <color name="text_medium_emphasis_light">#4A4A4A</color>
 
-    <color name="dialog_background">#CC0D0D0D</color>
-    <color name="dialog_stroke">#1AFFFFFF</color>
-    <color name="glass_panel_color">#1AFFFFFF</color>
-    <color name="color_cyan_accent">#00D2D3</color>
+    <!-- Dialogs & Panels (Light Mode Defaults) -->
+    <color name="dialog_background">#E6F8F9FA</color>
+    <color name="dialog_stroke">#1A000000</color>
+    <color name="glass_panel_color">#1A000000</color>
 
+    <!-- Semantic Text Colors (Light Mode Defaults) -->
+    <color name="text_high_emphasis">#1A1A1A</color>
+    <color name="text_medium_emphasis">#801A1A1A</color>
+    <color name="text_primary">#1A1A1A</color>
+
+    <!-- Status & Alerts -->
     <color name="status_error">#FF5252</color>
-    <color name="status_success">#00D2D3</color>
-    <color name="white_70">#B3FFFFFF</color>
-    <color name="white_50">#80FFFFFF</color>
-    <color name="white_30">#4DFFFFFF</color>
-    <color name="white_05">#0DFFFFFF</color>
-
-    <color name="text_primary">#FFFFFF</color>
-    <color name="background_primary">#000000</color>
-
-    <color name="brand_gradient_start">#6C5CE7</color>
-    <color name="brand_gradient_end">#00D2D3</color>
-
-    <color name="brand_primary">#00D2D3</color>
-    <color name="brand_accent">#00D2D3</color>
-
-
-    <color name="text_high_emphasis">#FFFFFF</color>
-    <color name="text_medium_emphasis">#80FFFFFF</color>
+    <color name="status_success">#007A7C</color>
     <color name="red_400">#FF5252</color>
-    <color name="white_60">#99FFFFFF</color>
 
-    <color name="brand_secondary">#00D2D3</color>
+    <!-- Inverted Transparency Overlays (Light Mode Defaults) -->
+    <color name="white_70">#B3000000</color>
+    <color name="white_60">#99000000</color>
+    <color name="white_50">#80000000</color>
+    <color name="white_30">#4D000000</color>
+    <color name="white_20">#33000000</color>
+    <color name="white_10">#1A000000</color>
+    <color name="white_05">#0D000000</color>
+
+    <!-- Gradients & Badges -->
+    <color name="brand_gradient_start">#6C5CE7</color>
+    <color name="brand_gradient_end">#007A7C</color>
+    <color name="merchant_gold">#FFD700</color>
+    <color name="merchant_glow">#4DFFD700</color>
+    <color name="color_on_accent">#FFFFFF</color>
 </resources>

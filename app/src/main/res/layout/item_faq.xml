@@ -27,7 +27,7 @@
             <View
                 android:layout_width="6dp"
                 android:layout_height="6dp"
-                android:background="#00D2D3"
+                android:background="@color/brand_accent"
                 android:layout_marginEnd="12dp"/>
 
             <TextView
@@ -38,7 +38,7 @@
                 android:letterSpacing="0.02"
                 android:text="HOW DO I EXPORT IN 4K?"
                 android:textAllCaps="true"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="14sp" />
         </LinearLayout>
 

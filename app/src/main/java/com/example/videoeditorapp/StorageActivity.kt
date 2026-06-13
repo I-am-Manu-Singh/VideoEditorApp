@@ -1,6 +1,7 @@
 package com.example.videoeditorapp
 
 import android.os.Bundle
+import com.example.videoeditorapp.utils.AppDialog
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -165,29 +166,20 @@ class StorageActivity : AppCompatActivity() {
         itemBinding.root.alpha = if (size > 0) 1.0f else 0.6f
     }
 
-    private fun showClearDialog(title: String, message: String, onConfirm: () -> Unit) {
-        val dlg = com.example.videoeditorapp.databinding.DialogBaseBinding.inflate(layoutInflater)
-
-        dlg.tvTitle.text = title
-        dlg.tvMessage.text = message
-
-        dlg.btnPrimary.text = "Clear"
-        dlg.btnSecondary.text = "Cancel"
-
-        // Hide Icon or set generic
-        dlg.ivDialogIcon.visibility = View.GONE
-
-        val dialog = androidx.appcompat.app.AlertDialog.Builder(this).setView(dlg.root).create()
-
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
-        dlg.btnPrimary.setOnClickListener {
-            onConfirm()
-            dialog.dismiss()
-        }
-
-        dlg.btnSecondary.setOnClickListener { dialog.dismiss() }
-
-        dialog.show()
+private fun showClearDialog(
+    title: String,
+    message: String,
+    onConfirm: () -> Unit
+) {
+    AppDialog.showConfirm(
+        context = this,
+        title = title,
+        message = message,
+        iconRes = R.drawable.ic_info,
+        positiveText = "Clear",
+        negativeText = "Cancel"
+    ) {
+        onConfirm()
     }
+}
 }

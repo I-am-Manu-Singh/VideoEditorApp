@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_deep_black">
+<FrameLayout
+    android:id="@+id/profileHero"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.5"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sevastack_splash_premium" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_hero_gradient_final" />
+
+   
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/avatarCard"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            app:cardCornerRadius="55dp"
+            app:cardElevation="12dp"
+            app:strokeColor="@color/brand_accent"
+            app:strokeWidth="4dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="24dp"
+                android:src="@drawable/ic_person"
+                app:tint="@color/brand_accent" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tvCreatorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="CREATOR_ONE"
+            android:textAllCaps="true"
+            android:textColor="@color/text_primary"
+            android:textSize="28sp"
+            android:fontFamily="sans-serif-black" />
+
+        <TextView
+            android:id="@+id/tvCreatorTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Senior Video Editor • 1.2M Reach"
+            android:textColor="@color/white_50"
+            android:textSize="12sp"
+            android:fontFamily="monospace" />
+
+    </LinearLayout>
+
+</FrameLayout>
+<com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/appBarLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    app:elevation="0dp"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btnBackContainer"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            app:cardBackgroundColor="@color/bg_dark_surface"
+            app:cardCornerRadius="12dp"
+            app:strokeColor="@color/white_10"
+            app:strokeWidth="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:src="@drawable/ic_back"
+                app:tint="@color/brand_accent" />
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.appbar.AppBarLayout>
+  <androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:translationY="-48dp"
+    android:clipToPadding="false"
+    android:overScrollMode="never"
+    app:layout_constraintTop_toBottomOf="@id/profileHero"
+    app:layout_constraintBottom_toBottomOf="parent">
+
+      <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet_cinematic"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="32dp"
+    android:paddingBottom="40dp">
+        <TextView
+    android:layout_width="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:layout_height="wrap_content"
+    android:fontFamily="sans-serif-black"
+    android:letterSpacing="0.1"
+    android:text="Creator Statistics"
+    android:textAllCaps="true"
+    android:textColor="@color/brand_accent"
+    android:textSize="11sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    app:cardBackgroundColor="@color/white_05"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/white_10"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="24"
+                            android:textColor="@color/brand_accent"
+                            android:textSize="20sp"
+                            android:fontFamily="sans-serif-black"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="PROJECTS"
+                            android:textColor="#66FFFFFF"
+                            android:textSize="8sp"
+                            android:fontFamily="monospace"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    app:cardBackgroundColor="@color/white_05"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/white_10"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="15.2h"
+                            android:textColor="@color/brand_accent"
+                            android:textSize="20sp"
+                            android:fontFamily="sans-serif-black"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="RUNTIME"
+                            android:textColor="#66FFFFFF"
+                            android:textSize="8sp"
+                            android:fontFamily="monospace"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ACCOUNT_SETTINGS"
+                style="@style/StealthLabel"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="16dp"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/white_05"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/white_10"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:paddingHorizontal="16dp"
+                        android:background="?attr/selectableItemBackground">
+                        <ImageView
+                            android:id="@+id/icUser"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_person"
+                            app:tint="@color/white_50"
+                            android:layout_centerVertical="true"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Edit Personal Details"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:layout_toEndOf="@id/icUser"
+                            android:layout_marginStart="16dp"
+                            android:layout_centerVertical="true"/>
+                    </RelativeLayout>
+                    
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/white_10"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:paddingHorizontal="16dp"
+                        android:background="?attr/selectableItemBackground">
+                        <ImageView
+                            android:id="@+id/icSec"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_lock"
+                            app:tint="@color/white_50"
+                            android:layout_centerVertical="true"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Security &amp; Privacy"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:layout_toEndOf="@id/icSec"
+                            android:layout_marginStart="16dp"
+                            android:layout_centerVertical="true"/>
+                    </RelativeLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+<com.google.android.material.button.MaterialButton
+    android:id="@+id/btnUpgrade"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:layout_marginTop="32dp"
+    android:backgroundTint="@color/brand_accent"
+    android:fontFamily="sans-serif-black"
+    android:insetTop="0dp"
+    android:insetBottom="0dp"
+    android:letterSpacing="0.05"
+    android:text="Upgrade To Studio Pro"
+    android:textColor="@color/bg_deep_black"
+    android:textSize="14sp"
+    app:cornerRadius="8dp"
+    app:icon="@drawable/ic_crown"
+    app:iconTint="@color/bg_deep_black"/>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="32dp"
+    android:fontFamily="monospace"
+    android:gravity="center"
+    android:letterSpacing="0.1"
+    android:text="Studio Pro • Creator Dashboard"
+    android:textColor="@color/white_20"
+    android:textSize="9sp" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

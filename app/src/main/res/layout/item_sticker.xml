@@ -21,7 +21,7 @@
             android:layout_gravity="top|start"
             android:fontFamily="monospace"
             android:text="AST_OBJ"
-            android:textColor="#00D2D3"
+            android:textColor="@color/brand_accent"
             android:textSize="7sp"
             android:alpha="0.4"
             android:letterSpacing="0.1"/>
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="30sp"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:gravity="center" />
 
         <ImageView
@@ -49,14 +49,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_tag_glass"
-            android:backgroundTint="#2600D2D3"
+            android:backgroundTint="@color/brand_accent_15"
             android:visibility="gone"/>
 
         <View
             android:layout_width="4dp"
             android:layout_height="4dp"
             android:layout_gravity="bottom|end"
-            android:background="#1A00D2D3" />
+            android:background="@color/brand_accent_10" />
 
     </FrameLayout>
 </com.google.android.material.card.MaterialCardView>

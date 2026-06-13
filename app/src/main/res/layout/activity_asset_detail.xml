@@ -38,7 +38,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
-                app:cardBackgroundColor="#CC0D0D0D"
+                app:cardBackgroundColor="@color/bg_dark_surface"
                 app:cardCornerRadius="12dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/white_10"
@@ -51,7 +51,7 @@
                     android:layout_height="match_parent"
                     android:padding="10dp"
                     android:src="@drawable/ic_back"
-                    app:tint="#00D2D3" />
+                    app:tint="@color/brand_accent" />
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -100,7 +100,7 @@
                     android:fontFamily="sans-serif-black"
                     android:letterSpacing="0.1"
                     android:text="Studio Overlays"
-                    android:textColor="#00D2D3"
+                    android:textColor="@color/brand_accent"
                     android:textSize="11sp"
                     android:textAllCaps="true" />
 
@@ -117,7 +117,7 @@
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="4dp"
                     android:text="Ultra HD • RAW"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary"
                     android:textSize="9sp"
                     android:fontFamily="monospace" />
             </LinearLayout>
@@ -129,7 +129,7 @@
                 android:fontFamily="sans-serif-black"
                 android:text="Cinematic Particles"
                 android:textAllCaps="true"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="28sp" />
 
             <TextView
@@ -170,7 +170,7 @@
                             android:fontFamily="monospace"
                             android:letterSpacing="0.05"
                             android:text="FORMAT"
-                            android:textColor="#80FFFFFF"
+                            android:textColor="@color/white_50"
                             android:textSize="9sp" />
                         <TextView
                             android:id="@+id/tvAssetType"
@@ -178,7 +178,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="Video Overlay"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/text_primary"
                             android:textSize="13sp"
                             android:fontFamily="sans-serif-black" />
                     </LinearLayout>
@@ -194,7 +194,7 @@
                             android:fontFamily="monospace"
                             android:letterSpacing="0.05"
                             android:text="ASSET SIZE"
-                            android:textColor="#80FFFFFF"
+                            android:textColor="@color/white_50"
                             android:textSize="9sp" />
                         <TextView
                             android:id="@+id/tvAssetSize"
@@ -202,7 +202,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="12.4 MB"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/text_primary"
                             android:textSize="13sp"
                             android:fontFamily="sans-serif-black" />
                     </LinearLayout>
@@ -213,7 +213,7 @@
                 android:id="@+id/btnDownloadUse"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                android:backgroundTint="#00D2D3"
+                android:backgroundTint="@color/brand_accent"
                 android:fontFamily="sans-serif-black"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"

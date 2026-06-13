@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">Studio V4</string>
+    <string name="duration_format">\u0020/\u0020%1$s</string>
+
+    <string name="studio_v4">STUDIO_V4</string>
+    <string name="creative_suite">PROFESSIONAL CREATIVE SUITE</string>
+    <string name="hero_headline">UNLEASH\nTHE PRO\nIN YOU.</string>
+    <string name="nav_favorites">FAVORITES</string>
+    <string name="nav_projects">PROJECTS</string>
+    <string name="recent_projects">Recent Projects</string>
+    <string name="no_active_sequences">No Active Sequences</string>
+    <string name="learning_center">Learning Center</string>
+    <string name="trending_assets">Trending Assets</string>
+    <string name="btn_create">CREATE</string>
+    <string name="label_workspace">WORKSPACE</string>
+    <string name="nav_create_project">Create Project</string>
+    <string name="nav_project_manager">Project Manager</string>
+    <string name="label_archive">ARCHIVE</string>
+    <string name="nav_assets_hub">Assets Hub</string>
+    <string name="nav_documentation">Documentation</string>
+    <string name="nav_help_support">Help &amp; Support</string>
+    <string name="label_partner_portal">PARTNER_PORTAL</string>
+    <string name="nav_merchant_workbench">Merchant Workbench</string>
+    <string name="label_utilities">UTILITIES</string>
+    <string name="nav_studio_info">STUDIO_V4 INFO</string>
+    <string name="nav_system_settings">System Settings</string>
+    <string name="nav_premium_upgrade">Premium Upgrade</string>
+    <string name="merchant_verified">MERCHANT_VERIFIED</string>
+    <string name="pro_active">PRO_ACTIVE</string>
+    <string name="masterclass_04">MASTERCLASS // 04</string>
+    <string name="color_grading_mastery">COLOR GRADING MASTERY</string>
+    <string name="temp_duration">12:45</string>
 </resources>

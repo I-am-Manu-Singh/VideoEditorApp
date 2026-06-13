@@ -11,8 +11,8 @@ import com.example.videoeditorapp.R
 data class HighlightItem(val id: String, val title: String, val tag: String, val imageRes: Int)
 
 class HighlightAdapter(
-        private val items: List<HighlightItem>,
-        private val onClick: (HighlightItem) -> Unit
+    private val items: List<HighlightItem>,
+    private val onClick: (HighlightItem) -> Unit
 ) : RecyclerView.Adapter<HighlightAdapter.HighlightViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HighlightViewHolder {

@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    app:cardBackgroundColor="#0D0D0D"
+    app:cardBackgroundColor="@color/dialog_background"
     app:cardCornerRadius="16dp"
     app:cardElevation="0dp"
     app:strokeWidth="1dp"
-    app:strokeColor="#1AFFFFFF">
+    app:strokeColor="@color/white_10">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
             <View
                 android:layout_width="4dp"
                 android:layout_height="18dp"
-                android:background="#00D2D3" />
+                android:background="@color/brand_accent" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
                 android:fontFamily="monospace"
                 android:letterSpacing="0.1"
                 android:text="LAYER_TYPE // TYPOGRAPHY_FX"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -57,14 +57,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="#1AFFFFFF"
+            android:background="@color/white_10"
             android:fontFamily="monospace"
             android:hint="INPUT_STRING..."
             android:inputType="textMultiLine"
             android:minLines="2"
             android:padding="12dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#4DFFFFFF"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/white_30"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -106,8 +106,8 @@
             style="@style/StealthSlider"
             android:valueFrom="10"
             android:valueTo="100"
-            app:thumbColor="#00D2D3"
-            app:trackColorActive="#00D2D3"
+            app:thumbColor="@color/brand_accent"
+            app:trackColorActive="@color/brand_accent"
             android:value="24"
             app:layout_constraintTop_toBottomOf="@id/lblSize" />
 
@@ -122,8 +122,8 @@
             android:id="@+id/sliderShadow"
             style="@style/StealthSlider"
             android:valueFrom="0"
-            app:thumbColor="#00D2D3"
-            app:trackColorActive="#00D2D3"
+            app:thumbColor="@color/brand_accent"
+            app:trackColorActive="@color/brand_accent"
             android:valueTo="20"
             android:value="5"
             app:layout_constraintTop_toBottomOf="@id/lblShadow" />

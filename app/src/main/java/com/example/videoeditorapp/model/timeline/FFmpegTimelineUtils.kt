@@ -174,6 +174,12 @@ object FFmpegTimelineUtils {
                                                 "%g",
                                                 videoClip.sourceStartTimeMs / 1000.0
                                         )
+val sourceEndSec =
+	String.format(
+		java.util.Locale.US,
+		"%g",
+		(videoClip.sourceStartTimeMs + videoClip.durationMs) / 1000.0
+	)
                                 val endSec =
                                         String.format(
                                                 java.util.Locale.US,
@@ -193,8 +199,12 @@ object FFmpegTimelineUtils {
                                                 else -> ""
                                         }
 
+                                val trimFilter = if (!isImg) {
+                                        "trim=start=$sourceStartSec:end=$sourceEndSec,setpts=PTS-STARTPTS,"
+                                } else ""
+
                                 var videoFilters =
-                                        "${transposeFilter}fps=30,scale=$targetW:$targetH:force_original_aspect_ratio=decrease,pad=$targetW:$targetH:(ow-iw)/2:(oh-ih)/2,setsar=1"
+                                        "$trimFilter${transposeFilter}fps=30,scale=$targetW:$targetH:force_original_aspect_ratio=decrease,pad=$targetW:$targetH:(ow-iw)/2:(oh-ih)/2,setsar=1"
 
                                 // 2. Apply Custom Effects
                                 videoClip.effects.forEach { videoEffect ->
@@ -290,6 +300,12 @@ object FFmpegTimelineUtils {
                                                         videoFilters +=
                                                                 ",noise=alls=30:allf=t+u,vignette=angle=PI/4,colorchannelmixer=.393:.769:.189:0:.349:.686:.168:0:.272:.534:.131"
                                                 }
+                                                "CHROMA_KEY" -> {
+                                                        val color = videoEffect.parameters["color"] ?: "0x00FF00"
+                                                        val similarity = videoEffect.parameters["similarity"] ?: "0.1"
+                                                        val blend = videoEffect.parameters["blend"] ?: "0.1"
+                                                        videoFilters += ",colorkey=$color:$similarity:$blend"
+                                                }
                                         }
                                 }
 
@@ -299,31 +315,23 @@ object FFmpegTimelineUtils {
                                 val vfFadeOut =
                                         videoClip.metadata["VIDEO_FADE_OUT"]?.toLongOrNull() ?: 0L
                                 if (vfFadeIn > 0) {
-                                        val durS =
-                                                String.format(
-                                                        java.util.Locale.US,
-                                                        "%g",
-                                                        vfFadeIn / 1000.0
-                                                )
+                                        val durS = String.format(java.util.Locale.US, "%g", vfFadeIn / 1000.0)
                                         videoFilters += ",fade=t=in:st=0:d=$durS"
                                 }
                                 if (vfFadeOut > 0) {
-                                        val durS =
-                                                String.format(
-                                                        java.util.Locale.US,
-                                                        "%g",
-                                                        vfFadeOut / 1000.0
-                                                )
-                                        val startS =
-                                                String.format(
-                                                        java.util.Locale.US,
-                                                        "%g",
-                                                        (videoClip.durationMs - vfFadeOut) / 1000.0
-                                                )
+                                        val durS = String.format(java.util.Locale.US, "%g", vfFadeOut / 1000.0)
+                                        val startS = String.format(java.util.Locale.US, "%g", (videoClip.durationMs - vfFadeOut) / 1000.0)
                                         videoFilters += ",fade=t=out:st=$startS:d=$durS"
                                 }
 
-                                // 2.6 Reverse & Crop
+                                // 2.6 Speed Ramping & LUT & Reverse & Crop
+                                val speed = videoClip.playbackSpeed.toDouble()
+                                if (speed != 1.0) {
+                                    val speedValue = 1.0 / speed
+                                    videoFilters += String.format(java.util.Locale.US, ",setpts=%g*PTS", speedValue)
+                                }
+
+
                                 if (videoClip.metadata["REVERSED"] == "true") {
                                         videoFilters += ",reverse"
                                 }
@@ -349,7 +357,7 @@ object FFmpegTimelineUtils {
 
                                 val nextLabel = "v_m_${curIdx}_${videoClip.id.take(4)}"
                                 filterParts.add(
-                                        "[$videoLabel][$vOut]overlay=enable='between(t,$startSec,$endSec)':x=0:y=0[$nextLabel]"
+                                        "[$videoLabel][$vOut]overlay=enable='between(t,$startSec,$endSec)':x=0:y=0:eof_action=pass[$nextLabel]"
                                 )
                                 videoLabel = nextLabel
 
@@ -369,6 +377,18 @@ object FFmpegTimelineUtils {
                                                 )
                                         var audioFilters =
                                                 "atrim=$sourceStartSec:$trimEndSec,asetpts=PTS-STARTPTS,volume=$vol"
+
+                                        val speed = videoClip.playbackSpeed.toDouble()
+                                        if (speed != 1.0) {
+                                            // atempo supports 0.5 to 2.0. For extremes, we chain them.
+                                            if (speed in 0.5..2.0) {
+                                                audioFilters += ",atempo=$speed"
+                                            } else if (speed > 2.0) {
+                                                audioFilters += ",atempo=2.0,atempo=${speed/2.0}"
+                                            } else {
+                                                audioFilters += ",atempo=0.5,atempo=${speed/0.5}"
+                                            }
+                                        }
 
                                         if (videoClip.metadata["REVERSED"] == "true") {
                                                 audioFilters += ",areverse"
@@ -495,12 +515,27 @@ object FFmpegTimelineUtils {
                                 ) {
                                         // Treat GIFs as videos for potential animation support
                                         val vIn = getVLabel(curIdx)
+                                        val trimFilter = if (overlayClip.type == ClipType.VIDEO) {
+                                                val overlaySourceStartSec = String.format(java.util.Locale.US, "%g", overlayClip.sourceStartTimeMs / 1000.0)
+                                                val overlaySourceEndSec = String.format(java.util.Locale.US, "%g", (overlayClip.sourceStartTimeMs + overlayClip.durationMs) / 1000.0)
+                                                "trim=start=$overlaySourceStartSec:end=$overlaySourceEndSec,setpts=PTS-STARTPTS,"
+                                        } else ""
+                                        
                                         val ptsPart =
                                                 if (overlayClip.startTimeMs > 0)
                                                         ",setpts=PTS-STARTPTS+${startSec}/TB"
                                                 else ",setpts=PTS-STARTPTS"
+
+                                        val orientation = getOrientation(resolvedPath ?: "")
+                                        val transposeFilter = when (orientation) {
+                                                90 -> "transpose=1,"
+                                                180 -> "transpose=2,transpose=2,"
+                                                270 -> "transpose=2,"
+                                                else -> ""
+                                        }
+
                                         filterParts.add(
-                                                "${vIn}fps=30,scale=$sw:$sh,format=rgba$ptsPart[$label]"
+                                                "$vIn${trimFilter}${transposeFilter}fps=30,scale=$sw:$sh,format=rgba$ptsPart[$label]"
                                         )
                                 } else if (overlayClip.type == ClipType.TEXT) {
                                         // Improved Text Overlay with Animation support
@@ -546,8 +581,12 @@ object FFmpegTimelineUtils {
                                                         ":alpha='if(lt(t,$startSec+$animFade),(t-$startSec)/$animFade,if(gt(t,$endSec-$animFade),($endSec-t)/$animFade,1))'"
                                                 } else ""
 
+                                        val shadowColor = overlayClip.textSettings["shadow_color"] ?: "black@0.5"
+                                        val borderWidth = overlayClip.textSettings["border_width"] ?: "2"
+                                        val borderColor = overlayClip.textSettings["border_color"] ?: "black"
+
                                         filterParts.add(
-                                                "color=c=black@0:s=${targetW}x${targetH}:d=$totalDurationSec,drawtext=fontfile=$fontPath:text='${text.replace("'", "\\'")}':fontcolor=$color:fontsize=$size:x='$xExpr':y='$yExpr'$alphaExpr,fps=30,format=rgba[$label]"
+                                                "color=c=black@0:s=${targetW}x${targetH}:d=$totalDurationSec,drawtext=fontfile=$fontPath:text='${text.replace("'", "\\'")}':fontcolor=$color:fontsize=$size:x='$xExpr':y='$yExpr':borderw=$borderWidth:bordercolor=$borderColor:shadowcolor=$shadowColor:shadowx=2:shadowy=2,fps=30,format=rgba[$label]"
                                         )
                                 } else {
                                         return@step2OverlayLoop // Skip if no file and not text
@@ -618,89 +657,136 @@ object FFmpegTimelineUtils {
                                                 "TEAL_ORANGE" ->
                                                         overlayFilters +=
                                                                 ",colorbalance=rs=-.2:gs=.1:bs=.3:rm=.2:gm=-.1:bm=-.2:rh=.2:gh=.1:bh=-.2"
+                                                "CHROMA_KEY" -> {
+                                                        val color = overlayEffect.parameters["color"] ?: "0x00FF00"
+                                                        val similarity = overlayEffect.parameters["similarity"] ?: "0.1"
+                                                        val blend = overlayEffect.parameters["blend"] ?: "0.1"
+                                                        overlayFilters += ",colorkey=$color:$similarity:$blend"
+                                                }
                                         }
                                 }
 
-                                if (overlayClip.overlayRotation != 0f) {
-                                        overlayFilters +=
-                                                ",rotate=${overlayClip.overlayRotation}*PI/180:ow=max(iw,ih):oh=max(iw,ih):c=none"
-                                }
+                                 // 💎 PRO: Keyframe Interpolation & Auto-Transitions
+                                 val xKeyframes = overlayClip.xKeyframes.toMutableList()
+                                 val yKeyframes = overlayClip.yKeyframes.toMutableList()
+                                 val alphaKeyframes = overlayClip.opacityKeyframes.toMutableList()
+                                 val scaleKeyframes = overlayClip.scaleKeyframes.toMutableList()
 
-                                filterParts.add("[$label]$overlayFilters[${label}_rot]")
+                                 // Inject Auto-Transitions if they exist in metadata
+                                 val transInType = overlayClip.metadata["TRANSITION_IN_TYPE"] ?: "NONE"
+                                 val transInDur = (overlayClip.metadata["TRANSITION_IN_DURATION"]?.toLongOrNull() ?: 0L).coerceAtMost(overlayClip.durationMs / 2)
+                                 
+                                 if (transInDur > 0) {
+                                     when (transInType.uppercase()) {
+                                         "DISSOLVE" -> {
+                                             alphaKeyframes.add(0, Keyframe(0, 0f))
+                                             alphaKeyframes.add(1, Keyframe(transInDur, opacity))
+                                         }
+                                         "SLIDE_LEFT" -> {
+                                             xKeyframes.add(0, Keyframe(0, overlayClip.overlayX + 1f))
+                                             xKeyframes.add(1, Keyframe(transInDur, overlayClip.overlayX))
+                                         }
+                                         "ZOOM_IN" -> {
+                                             scaleKeyframes.add(0, Keyframe(0, 0f))
+                                             scaleKeyframes.add(1, Keyframe(transInDur, overlayClip.overlayScale))
+                                         }
+                                     }
+                                 }
 
-                                filterParts.add(
-                                        "[$videoLabel][${label}_rot]overlay=x='$x-w/2':y='$y-h/2':alpha=$opacity:enable='between(t,$startSec,$endSec)'[$nextLabel]"
-                                )
-                                android.util.Log.v(
-                                        "FFmpegTimelineUtils",
-                                        "Overlay Chain: [$videoLabel] -> [$nextLabel] with filters: $overlayFilters"
-                                )
-                                videoLabel = nextLabel
-                        }
-                }
+                                 val xExpr = generateKeyframeExpression(xKeyframes, overlayClip.overlayX, "x")
+                                     .replace("w", targetW.toString())
+                                 val yExpr = generateKeyframeExpression(yKeyframes, overlayClip.overlayY, "y")
+                                     .replace("h", targetH.toString())
+                                 val alphaExpr = generateKeyframeExpression(alphaKeyframes, opacity, "alpha")
+                                 
+                                 val scaleExpr = generateKeyframeExpression(scaleKeyframes, overlayClip.overlayScale, "scale")
+                                 val rotExpr = generateKeyframeExpression(overlayClip.rotationKeyframes, overlayClip.overlayRotation, "rotate")
 
-                // ---------- STEP 3: AUDIO TRACKS ----------
-                audioTracks.forEach { audioTrack ->
-                        audioTrack.clips.sortedBy { it.startTimeMs }.forEach step3AudioLoop@{
-                                audioClip ->
-                                android.util.Log.d(
-                                        "FFmpegTimelineUtils",
-                                        "Processing Audio Clip: ${audioClip.id} (path=${audioClip.filePath})"
-                                )
-                                val resolvedPath = resolvePath(context, audioClip.filePath)
-                                if (resolvedPath == null) return@step3AudioLoop
-                                val curIdx = getOrAddInput(resolvedPath, false)
-                                if (!hasAudioStream(resolvedPath)) return@step3AudioLoop
+                                 // Apply Dynamic Scale and Rotation directly in the filter chain
+                                 overlayFilters += ",scale=iw*($scaleExpr):ih*($scaleExpr),rotate='($rotExpr)*PI/180':ow=max(iw,ih):oh=max(iw,ih):c=none"
 
-                                val sourceStartSec =
-                                        String.format(
-                                                java.util.Locale.US,
-                                                "%g",
-                                                audioClip.sourceStartTimeMs / 1000.0
-                                        )
-                                val trimEndSec =
-                                        String.format(
-                                                java.util.Locale.US,
-                                                "%g",
-                                                (audioClip.sourceStartTimeMs +
-                                                        audioClip.durationMs) / 1000.0
-                                        )
-                                val vol =
-                                        String.format(
-                                                java.util.Locale.US,
-                                                "%g",
-                                                audioClip.audioVolume
-                                        )
-                                val delayPart =
-                                        if (audioClip.startTimeMs > 0)
-                                                ",adelay=${audioClip.startTimeMs}:all=1"
-                                        else ""
+                                 filterParts.add("[$label]$overlayFilters[${label}_rot]")
 
-                                val aIn = getALabel(curIdx)
-                                val aOut = "a_${curIdx}_${audioClip.id.take(4)}"
-                                filterParts.add(
-                                        "$aIn" +
-                                                "atrim=$sourceStartSec:$trimEndSec,asetpts=PTS-STARTPTS,volume=$vol" +
-                                                "${if (audioClip.metadata["REVERSED"] == "true") ",areverse" else ""}" +
-                                                "${if (audioClip.metadata["PITCH"] != null) ",rubberband=pitch=${audioClip.metadata["PITCH"]}" else ""}" +
-                                                "$delayPart[$aOut]"
-                                )
-                                audioInputs.add("[$aOut]")
-                        }
-                }
+                                 // Final Overlay Command with Full Animation Support (eof_action=pass prevents short static overlays from ending the video)
+                                 filterParts.add(
+                                         "[$videoLabel][${label}_rot]overlay=x='($xExpr)*W-w/2':y='($yExpr)*H-h/2':alpha='$alphaExpr':enable='between(t,$startSec,$endSec)':eof_action=pass[$nextLabel]"
+                                 )
 
-                val audioMixLabel =
-                        if (audioInputs.isNotEmpty()) {
-                                filterParts.add(
-                                        "${audioInputs.joinToString("")}amix=inputs=${audioInputs.size}:duration=longest:dropout_transition=2[aout]"
-                                )
-                                "aout"
-                        } else {
-                                filterParts.add(
-                                        "anullsrc=channel_layout=stereo:sample_rate=44100[aout]"
-                                )
-                                "aout"
-                        }
+                                 android.util.Log.v(
+                                         "FFmpegTimelineUtils",
+                                         "Overlay Chain: [$videoLabel] -> [$nextLabel] with filters: $overlayFilters"
+                                 )
+                                 videoLabel = nextLabel
+                         }
+                 }
+
+                 // ---------- STEP 3: AUDIO TRACKS ----------
+                 audioTracks.forEach { audioTrack ->
+                         audioTrack.clips.sortedBy { it.startTimeMs }.forEach step3AudioLoop@{
+                                 audioClip ->
+                                 android.util.Log.d(
+                                         "FFmpegTimelineUtils",
+                                         "Processing Audio Clip: ${audioClip.id} (path=${audioClip.filePath})"
+                                 )
+                                 val resolvedPath = resolvePath(context, audioClip.filePath)
+                                 if (resolvedPath == null) return@step3AudioLoop
+                                 val curIdx = getOrAddInput(resolvedPath, false)
+                                 if (!hasAudioStream(resolvedPath)) return@step3AudioLoop
+                                 val sourceStartSec =
+                                         String.format(
+                                                 java.util.Locale.US,
+                                                 "%g",
+                                                 audioClip.sourceStartTimeMs / 1000.0
+                                         )
+                                 val sourceEndSec =
+                                         String.format(
+                                                 java.util.Locale.US,
+                                                 "%g",
+                                                 (audioClip.sourceStartTimeMs + audioClip.durationMs) / 1000.0
+                                         )
+                                 val trimEndSec =
+                                         String.format(
+                                                 java.util.Locale.US,
+                                                 "%g",
+                                                 (audioClip.sourceStartTimeMs +
+                                                         audioClip.durationMs) / 1000.0
+                                         )
+                                 val vol =
+                                         String.format(
+                                                 java.util.Locale.US,
+                                                 "%g",
+                                                 audioClip.audioVolume
+                                         )
+                                 val delayPart =
+                                         if (audioClip.startTimeMs > 0)
+                                                 ",adelay=${audioClip.startTimeMs}:all=1"
+                                         else ""
+
+                                 val aIn = getALabel(curIdx)
+                                 val aOut = "a_${curIdx}_${audioClip.id.take(4)}"
+                                 filterParts.add(
+                                         "$aIn" +
+                                                 "atrim=$sourceStartSec:$trimEndSec,asetpts=PTS-STARTPTS,volume=$vol" +
+                                                 "${if (audioClip.metadata["REVERSED"] == "true") ",areverse" else ""}" +
+                                                 "${if (audioClip.metadata["PITCH"] != null) ",rubberband=pitch=${audioClip.metadata["PITCH"]}" else ""}" +
+                                                 "$delayPart[$aOut]"
+                                 )
+                                 audioInputs.add("[$aOut]")
+                         }
+                 }
+
+                 val audioMixLabel =
+                         if (audioInputs.isNotEmpty()) {
+                                 filterParts.add(
+                                         "${audioInputs.joinToString("")}amix=inputs=${audioInputs.size}:duration=longest:dropout_transition=2:normalize=0[aout]"
+                                 )
+                                 "aout"
+                         } else {
+                                 filterParts.add(
+                                         "anullsrc=channel_layout=stereo:sample_rate=44100[aout]"
+                                 )
+                                 "aout"
+                         }
 
                 val args = mutableListOf<String>()
                 args.add("-y")
@@ -748,25 +834,33 @@ object FFmpegTimelineUtils {
                 args.add("-map")
                 args.add("[$audioMixLabel]")
                 args.add("-c:v")
-                val codec = project.metadata["CODEC"] ?: "libx264"
+                // 🚀 PRO UPGRADE: Use Hardware Acceleration (MediaCodec) for CapCut-level speed
+                val codec = project.metadata["CODEC"] ?: "h264_mediacodec"
                 args.add(codec)
-                if (codec == "libx264") {
-                        args.add("-preset")
-                        args.add("ultrafast")
-                        args.add("-pix_fmt")
-                        args.add("yuv420p")
+                
+                if (codec == "h264_mediacodec") {
+                    args.add("-b:v")
+                    val bitrate = when (project.renderQuality) {
+                        "Low" -> "3M"
+                        "Medium" -> "8M"
+                        "High" -> "25M" // Boosted for 4K/Pro results
+                        else -> "8M"
+                    }
+                    args.add(bitrate)
+                } else if (codec == "libx264") {
+                    args.add("-preset")
+                    args.add("ultrafast")
+                    args.add("-pix_fmt")
+                    args.add("yuv420p")
+                    args.add("-b:v")
+                    val bitrate = when (project.renderQuality) {
+                        "Low" -> "1.5M"
+                        "Medium" -> "5M"
+                        "High" -> "12M"
+                        else -> "5M"
+                    }
+                    args.add(bitrate)
                 }
-
-                // Dynamic bitrate based on quality
-                val bitrate =
-                        when (project.renderQuality) {
-                                "Low" -> "1.5M"
-                                "Medium" -> "5M"
-                                "High" -> "12M"
-                                else -> "5M"
-                        }
-                args.add("-b:v")
-                args.add(bitrate)
 
                 args.add("-c:a")
                 args.add("aac")
@@ -907,5 +1001,31 @@ object FFmpegTimelineUtils {
                         low.endsWith(".jpeg") ||
                         low.endsWith(".webp") ||
                         low.endsWith(".gif")
+        }
+
+        /**
+         * 💎 PRO: Generates a nested IF expression for FFmpeg to interpolate between keyframes.
+         */
+        private fun generateKeyframeExpression(keyframes: List<Keyframe>, defaultValue: Float, property: String): String {
+            if (keyframes.isEmpty()) return defaultValue.toString()
+            val sorted = keyframes.sortedBy { it.timeMs }
+            
+            var expr = sorted.last().value.toString()
+            
+            // Build backwards from second to last
+            for (i in sorted.size - 2 downTo 0) {
+                val k1 = sorted[i]
+                val k2 = sorted[i+1]
+                val t1 = k1.timeMs / 1000.0
+                val t2 = k2.timeMs / 1000.0
+                val dur = t2 - t1
+                
+                if (dur > 0) {
+                    val progress = "(t-$t1)/$dur"
+                    val lerp = "${k1.value} + ($progress * (${k2.value} - ${k1.value}))"
+                    expr = "if(lt(t,$t1), ${k1.value}, if(lt(t,$t2), $lerp, $expr))"
+                }
+            }
+            return expr
         }
 }

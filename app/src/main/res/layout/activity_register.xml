@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/bg_deep_black">
+
+    <View
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:background="@drawable/bg_neon_glow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="-200dp"
+        android:layout_marginStart="-200dp"
+        android:alpha="0.1" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="JOIN THE NEXUS"
+                android:textColor="@color/brand_accent"
+                android:textSize="12sp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.4"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Account"
+                android:textColor="@color/text_primary"
+                android:textSize="32sp"
+                android:fontFamily="sans-serif-black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Begin your creative journey today"
+                android:textColor="#66FFFFFF"
+                android:textSize="14sp"
+                android:fontFamily="monospace"
+                android:layout_marginTop="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="48dp">
+
+                <TextView
+                    style="@style/StealthLabel"
+                    android:text="FULL NAME"
+                    android:alpha="0.6" />
+
+                <EditText
+                    android:id="@+id/etName"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_glass_input"
+                    android:hint="Manpreet Singh"
+                    android:textColorHint="@color/white_20"
+                    android:textColor="@color/text_primary"
+                    android:paddingHorizontal="20dp"
+                    android:inputType="textPersonName"
+                    android:textSize="14sp"
+                    android:fontFamily="monospace" />
+
+                <TextView
+                    style="@style/StealthLabel"
+                    android:text="EMAIL ADDRESS"
+                    android:alpha="0.6"
+                    android:layout_marginTop="20dp" />
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_glass_input"
+                    android:hint="manu@studiov4.com"
+                    android:textColorHint="@color/white_20"
+                    android:textColor="@color/text_primary"
+                    android:paddingHorizontal="20dp"
+                    android:inputType="textEmailAddress"
+                    android:textSize="14sp"
+                    android:fontFamily="monospace" />
+
+                <TextView
+                    style="@style/StealthLabel"
+                    android:text="SECURE PASSWORD"
+                    android:alpha="0.6"
+                    android:layout_marginTop="20dp" />
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_glass_input"
+                    android:hint="••••••••"
+                    android:textColorHint="@color/white_20"
+                    android:textColor="@color/text_primary"
+                    android:paddingHorizontal="20dp"
+                    android:inputType="textPassword"
+                    android:textSize="14sp"
+                    android:fontFamily="monospace" />
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="INITIALIZE ACCOUNT"
+                android:backgroundTint="@color/brand_accent"
+                android:textColor="#000000"
+                android:fontFamily="sans-serif-black"
+                android:letterSpacing="0.1"
+                app:cornerRadius="12dp"
+                android:layout_marginTop="40dp" />
+
+            <TextView
+                android:id="@+id/tvLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ALREADY REGISTERED? LOG IN"
+                android:textColor="@color/white_50"
+                android:textSize="11sp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.1"
+                android:layout_marginTop="32dp"
+                android:padding="16dp" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

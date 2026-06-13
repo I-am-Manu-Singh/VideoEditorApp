@@ -11,113 +11,115 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/bg_deep_black"
+        >
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="10">
+            android:layout_height="match_parent">
 
-            <!-- LEFT PANE: Hero & Quick Actions (38%) -->
-            <androidx.core.widget.NestedScrollView
+            <!-- Hero Section (Left Panel) -->
+            <FrameLayout
+                android:id="@+id/heroPreviewContainer"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3.8"
                 android:background="@color/bg_deep_black"
-                android:fillViewport="true">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintWidth_percent="0.3">
 
-                <LinearLayout
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_hero_gradient_final"
+                    android:alpha="1.0"/>
 
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="280dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:alpha="0.4"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/temp_cinematic_hero" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/bg_hero_gradient_final" />
-
-                         <View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:alpha="0.05"
-                            android:background="@drawable/bg_grid_pattern" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:paddingHorizontal="24dp"
-                            android:gravity="bottom"
-                            android:paddingBottom="32dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="sans-serif-black"
-                                android:text="STUDIO V4"
-                                android:textColor="#00D2D3"
-                                android:textSize="9sp"
-                                android:letterSpacing="0.3"
-                                android:layout_marginBottom="8dp"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="sans-serif-black"
-                                android:text="UNLEASH YOUR\nCREATIVITY"
-                                android:textColor="#FFFFFF"
-                                android:lineHeight="32sp"
-                                android:textSize="28sp" />
-                        </LinearLayout>
-                    </FrameLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="42dp"
+                    android:paddingTop="100dp"
+                    android:paddingBottom="24dp">
 
                     <LinearLayout
+                        android:id="@+id/brandingSection"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:paddingHorizontal="24dp"
-                        android:paddingTop="24dp"
-                        android:paddingBottom="40dp">
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/studio_v4"
+                            android:fontFamily="sans-serif-black"
+                            android:textColor="#00D2D3"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/creative_suite"
+                            android:textColor="#66FFFFFF"
+                            android:textSize="8sp"
+                            android:letterSpacing="0.3"
+                            android:fontFamily="monospace"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/heroHeadline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
+                        android:text="@string/hero_headline"
+                        android:textAllCaps="true"
+                        android:textColor="#FFFFFF"
+                        android:textSize="26sp"
+                        android:lineHeight="30sp"
+                        android:letterSpacing="0.1"
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintTop_toBottomOf="@id/brandingSection" />
+
+                    <!-- Favorites and Projects Stacked Vertically -->
+                    <LinearLayout
+                        android:id="@+id/quickActionsLand"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="90dp">
 
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/btnNavFavorites"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
                             app:cardCornerRadius="12dp"
-                            app:cardBackgroundColor="@color/white_05"
+                            app:cardBackgroundColor="#CC0D0D0D"
                             app:strokeWidth="1dp"
                             app:strokeColor="@color/white_10">
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="16dp"
+                                android:padding="14dp"
                                 android:gravity="center_vertical">
                                 <ImageView
-                                    android:layout_width="18dp"
-                                    android:layout_height="18dp"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
                                     android:src="@drawable/ic_heart"
+                                    android:contentDescription="@null"
                                     app:tint="#00D2D3"/>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="FAVORITES"
+                                    android:text="@string/nav_favorites"
                                     android:textColor="#FFFFFF"
                                     android:textSize="11sp"
+                                    android:letterSpacing="0.05"
                                     android:fontFamily="sans-serif-black"
-                                    android:layout_marginStart="14dp"
-                                    android:letterSpacing="0.1"/>
+                                    android:layout_marginStart="12dp"/>
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
 
@@ -125,381 +127,288 @@
                             android:id="@+id/btnNavMyProjects"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
                             app:cardCornerRadius="12dp"
-                            app:cardBackgroundColor="@color/white_05"
+                            app:cardBackgroundColor="#CC0D0D0D"
                             app:strokeWidth="1dp"
                             app:strokeColor="@color/white_10">
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="16dp"
+                                android:padding="14dp"
                                 android:gravity="center_vertical">
                                 <ImageView
-                                    android:layout_width="18dp"
-                                    android:layout_height="18dp"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
                                     android:src="@drawable/ic_folder"
+                                    android:contentDescription="@null"
                                     app:tint="#00D2D3"/>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="MY PROJECTS"
+                                    android:text="@string/nav_projects"
                                     android:textColor="#FFFFFF"
                                     android:textSize="11sp"
+                                    android:letterSpacing="0.05"
                                     android:fontFamily="sans-serif-black"
-                                    android:layout_marginStart="14dp"
-                                    android:letterSpacing="0.1"/>
+                                    android:layout_marginStart="12dp"/>
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/btnMenuHome"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="24dp"
-                            app:cardCornerRadius="8dp"
-                            app:cardBackgroundColor="#1A00D2D3"
-                            app:strokeWidth="1dp"
-                            app:strokeColor="#4D00D2D3">
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="OPEN NAVIGATION"
-                                android:textColor="#00D2D3"
-                                android:textSize="10sp"
-                                android:gravity="center"
-                                android:padding="10dp"
-                                android:letterSpacing="0.2"
-                                android:fontFamily="sans-serif-black"/>
-                        </com.google.android.material.card.MaterialCardView>
                     </LinearLayout>
-                </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/white_10"/>
-
-            <!-- RIGHT PANE: Content Feed (62%) -->
+            <!-- Scrollable Content Area (Right Panel) -->
             <androidx.core.widget.NestedScrollView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="6.2"
-                android:background="@color/bg_deep_black"
-                android:paddingBottom="80dp"
                 android:clipToPadding="false"
-                android:overScrollMode="never">
+                android:paddingBottom="80dp"
+                android:fillViewport="true"
+                android:overScrollMode="never"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/heroPreviewContainer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.7">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="24dp"
-                    android:paddingHorizontal="24dp">
+                    android:layout_height="wrap_content">
 
-                    <!-- Recent Works -->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Recent Projects"
-                            android:textColor="#FFFFFF"
-                            android:textSize="18sp"
-                            android:fontFamily="sans-serif-black"/>
-                        <TextView
-                            android:id="@+id/btnResumeProject"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="RESUME LATEST"
-                            android:textColor="#00D2D3"
-                            android:textSize="10sp"
-                            android:fontFamily="monospace"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:paddingHorizontal="4dp"
-                            android:paddingVertical="2dp"
-                            android:background="@drawable/bg_tag_glass"/>
-                    </RelativeLayout>
+                    <TextView
+                        android:id="@+id/labelRecentProjects"
+                        style="@style/StealthLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="100dp"
+                        android:layout_marginStart="24dp"
+                        android:letterSpacing="0.2"
+                        android:text="@string/recent_projects"
+                        android:textSize="10sp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/btnResumeProject"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="24dp"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_chevron_right"
+                        android:contentDescription="@null"
+                        app:tint="#00D2D3"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        app:layout_constraintTop_toTopOf="@id/labelRecentProjects"
+                        app:layout_constraintBottom_toBottomOf="@id/labelRecentProjects"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvRecentProjects"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:paddingHorizontal="16dp"
+                        android:clipToPadding="false"
+                        android:layout_marginTop="12dp"
                         android:overScrollMode="never"
-                        android:nestedScrollingEnabled="false"/>
+                        android:nestedScrollingEnabled="false"
+                        app:layout_constraintTop_toBottomOf="@id/labelRecentProjects"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
-                     <!-- Empty State Card -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cardEmptyRecent"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="100dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:layout_marginTop="12dp"
                         app:cardCornerRadius="16dp"
                         app:cardBackgroundColor="@color/white_05"
                         app:strokeWidth="1dp"
                         app:strokeColor="@color/white_10"
-                        android:visibility="gone">
-                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="No active sequences found."
-                            android:textColor="@color/white_30"
-                            android:fontFamily="monospace"
-                            android:textSize="11sp"
-                            android:layout_gravity="center"/>
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/labelRecentProjects"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="16dp">
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_video_camera"
+                                android:contentDescription="@null"
+                                app:tint="#00D2D3"
+                                android:alpha="0.2"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/no_active_sequences"
+                                android:textColor="@color/white_30"
+                                android:fontFamily="monospace"
+                                android:textSize="10sp"
+                                android:layout_marginStart="12dp"/>
+                        </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
-
-                    <!-- Tutorials -->
-                    <TextView
+                    <androidx.constraintlayout.widget.Barrier
+                        android:id="@+id/recentProjectsBarrier"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Learning Center"
-                        android:textColor="#FFFFFF"
-                        android:textSize="16sp"
-                        android:fontFamily="sans-serif-black"
-                        android:layout_marginTop="32dp"/>
+                        app:barrierDirection="bottom"
+                        app:constraint_referenced_ids="rvRecentProjects,cardEmptyRecent"/>
+                    <TextView
+                        android:id="@+id/labelLearningCenter"
+                        style="@style/StealthLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="24dp"
+                        android:text="@string/learning_center"
+                        android:letterSpacing="0.2"
+                        android:textSize="10sp"
+                        app:layout_constraintTop_toBottomOf="@id/recentProjectsBarrier"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/btnViewAllTutorials"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="24dp"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_chevron_right"
+                        android:contentDescription="@null"
+                        app:tint="#00D2D3"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        app:layout_constraintTop_toTopOf="@id/labelLearningCenter"
+                        app:layout_constraintBottom_toBottomOf="@id/labelLearningCenter"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvTutorials"
-                        android:layout_width="match_parent"
-                        android:layout_height="120dp"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
                         android:layout_marginTop="16dp"
+                        android:paddingHorizontal="16dp"
                         android:clipToPadding="false"
                         android:overScrollMode="never"
-                        android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                        android:nestedScrollingEnabled="false"
+                        app:layout_constraintTop_toBottomOf="@id/labelLearningCenter"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
 
-                    <!-- Trending -->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/labelTrendingAssets"
+                        style="@style/StealthLabel"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Trending Assets"
-                            android:textColor="#FFFFFF"
-                            android:textSize="16sp"
-                            android:fontFamily="sans-serif-black"/>
-                        <TextView
-                            android:id="@+id/btnViewAllAssets"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="MARKETPLACE"
-                            android:textColor="#00D2D3"
-                            android:textSize="10sp"
-                            android:fontFamily="monospace"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:paddingHorizontal="4dp"
-                            android:paddingVertical="2dp"
-                            android:background="@drawable/bg_tag_glass"/>
-                    </RelativeLayout>
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="24dp"
+                        android:text="@string/trending_assets"
+                        android:textSize="10sp"
+                        android:letterSpacing="0.2"
+                        app:layout_constraintTop_toBottomOf="@id/rvTutorials"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/btnViewAllAssets"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="24dp"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_chevron_right"
+                        android:contentDescription="@null"
+                        app:tint="#00D2D3"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        app:layout_constraintTop_toTopOf="@id/labelTrendingAssets"
+                        app:layout_constraintBottom_toBottomOf="@id/labelTrendingAssets"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvTrendingAssets"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:nestedScrollingEnabled="false"
+                        android:layout_marginTop="12dp"
+                        android:paddingHorizontal="16dp"
+                        android:clipToPadding="false"
                         android:overScrollMode="never"
-                        tools:listitem="@layout/item_asset_card"/>
+                        android:nestedScrollingEnabled="false"
+                        app:layout_constraintTop_toBottomOf="@id/labelTrendingAssets"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </LinearLayout>
+        <!-- Floating UI Overlays -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btnMenuHome"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="36dp"
+            android:layout_gravity="top|start"
+            app:cardBackgroundColor="@color/white_05"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/white_10">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="12dp"
+                android:src="@drawable/ic_menu"
+                android:contentDescription="@null"
+                app:tint="#00D2D3"/>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btnProfile"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="36dp"
+            android:layout_gravity="top|end"
+            app:cardBackgroundColor="@color/white_05"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/white_10">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:src="@drawable/ic_person"
+                android:contentDescription="@null"
+                app:tint="#00D2D3"/>
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fabNewProject"
             style="@style/FabNeonStyle"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="24dp"
-            android:text="CREATE"
+            app:cornerRadius="8dp"
+            android:layout_gravity="end|bottom"
+            android:text="@string/btn_create"
+            android:textColor="@color/white"
             android:textSize="13sp"
             android:letterSpacing="0.1"
             android:fontFamily="sans-serif-black"
             app:icon="@drawable/ic_add_bold"
             app:iconPadding="10dp"
-            app:cornerRadius="12dp"
-            app:elevation="12dp"/>
+            app:elevation="22dp"
+            app:rippleColor="#3300D2D3"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-     <com.google.android.material.card.MaterialCardView
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:cardBackgroundColor="#F2000000"
-        app:cardElevation="0dp"
-        app:strokeWidth="1dp"
-        app:strokeColor="@color/white_10">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <include layout="@layout/nav_header_main" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/bg_line_glow_cyan"
-                android:alpha="0.3"/>
-
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:fillViewport="true"
-                android:background="@color/bg_deep_black">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingVertical="24dp"
-                    android:paddingHorizontal="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="WORKSPACE"
-                        android:textColor="#00D2D3"
-                        android:textSize="11sp"
-                        android:letterSpacing="0.2"
-                        android:fontFamily="monospace"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginStart="12dp"/>
-
-                    <LinearLayout
-                        android:id="@+id/navBtnNewProject"
-                        style="@style/NavDrawerItemStealth">
-                        <ImageView
-                            style="@style/NavIconStealth"
-                            android:src="@drawable/ic_add" />
-                        <TextView
-                            style="@style/NavTextStealth"
-                            android:text="Create Project" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/navBtnFavorites"
-                        style="@style/NavDrawerItemStealth">
-                        <ImageView
-                            style="@style/NavIconStealth"
-                            android:src="@drawable/ic_heart" />
-                        <TextView
-                            style="@style/NavTextStealth"
-                            android:text="Favorites" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/navBtnProjects"
-                        style="@style/NavDrawerItemStealth">
-                        <ImageView
-                            style="@style/NavIconStealth"
-                            android:src="@drawable/ic_folder" />
-                        <TextView
-                            style="@style/NavTextStealth"
-                            android:text="Project Manager" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="32dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ARCHIVE"
-                        android:textColor="#00D2D3"
-                        android:textSize="11sp"
-                        android:letterSpacing="0.2"
-                        android:fontFamily="monospace"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginStart="12dp"/>
-
-                    <LinearLayout
-                        android:id="@+id/navBtnMarketplace"
-                        style="@style/NavDrawerItemStealth">
-                        <ImageView
-                            style="@style/NavIconStealth"
-                            android:src="@drawable/ic_hub" />
-                        <TextView
-                            style="@style/NavTextStealth"
-                            android:text="Assets Hub" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/navBtnTutorials"
-                        style="@style/NavDrawerItemStealth">
-                        <ImageView
-                            style="@style/NavIconStealth"
-                            android:src="@drawable/ic_play" />
-                        <TextView
-                            style="@style/NavTextStealth"
-                            android:text="Documentation" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/navBtnHelp"
-                        style="@style/NavDrawerItemStealth">
-                        <ImageView
-                            style="@style/NavIconStealth"
-                            android:src="@drawable/ic_help" />
-                        <TextView
-                            style="@style/NavTextStealth"
-                            android:text="Help &amp; Support" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/white_05"
-                        android:layout_marginVertical="12dp"/>
-
-                    <LinearLayout
-                        android:id="@+id/layoutNavSettings"
-                        style="@style/NavDrawerItemStealth">
-                        <ImageView
-                            style="@style/NavIconStealth"
-                            android:src="@drawable/ic_settings"
-                            app:tint="@color/red_400"/>
-                        <TextView
-                            style="@style/NavTextStealth"
-                            android:textColor="@color/red_400"
-                            android:text="System Settings" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/navBtnUpgrade"
-                        style="@style/NavDrawerItemStealth">
-                        <ImageView
-                            style="@style/NavIconStealth"
-                            android:src="@drawable/ic_crown"
-                            app:tint="#00D2D3"/>
-                        <TextView
-                            style="@style/NavTextStealth"
-                            android:textColor="#00D2D3"
-                            android:alpha="0.6"
-                            android:text="Premium Upgrade" />
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+    <include
+        android:id="@+id/navDrawer"
+        layout="@layout/layout_main_nav_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

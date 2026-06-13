@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/white_05"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/white_10">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/thumbWrapper"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/white_10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <ImageView
+                android:id="@+id/ivThumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/ic_video_camera"/>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tvMediaName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:ellipsize="middle"
+            android:fontFamily="sans-serif-medium"
+            android:singleLine="true"
+            android:textColor="@color/text_primary"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toStartOf="@id/ivType"
+            app:layout_constraintStart_toEndOf="@id/thumbWrapper"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="cinematic_intro_01.mp4" />
+
+        <TextView
+            android:id="@+id/tvMediaMeta"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="monospace"
+            android:textColor="@color/white_50"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@id/tvMediaName"
+            app:layout_constraintStart_toStartOf="@id/tvMediaName"
+            app:layout_constraintTop_toBottomOf="@id/tvMediaName"
+            tools:text="12.4 MB • 00:45" />
+
+        <ImageView
+            android:id="@+id/ivType"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvMediaName"
+            app:layout_constraintBottom_toBottomOf="@id/tvMediaName"
+            app:tint="@color/white_30"
+            tools:src="@drawable/ic_movie_filter"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnImport"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            android:text="IMPORT"
+            android:textColor="@color/brand_accent"
+            android:textSize="11sp"
+            android:fontFamily="sans-serif-black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

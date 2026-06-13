@@ -73,7 +73,50 @@ object FavoriteManager {
     fun getFavoriteTimelineProjects(context: Context): Set<String> {
         return getPrefs(context).getStringSet(KEY_TIMELINE_PROJECT_FAVORITES, emptySet())
                 ?: emptySet()
-    }
+    }   
+    fun removeTimelineProjectFavorite(
+    context: Context,
+    projectId: String
+) {
+    val prefs = getPrefs(context)
+
+    val favorites =
+        prefs.getStringSet(
+            KEY_TIMELINE_PROJECT_FAVORITES,
+            emptySet()
+        )?.toMutableSet() ?: mutableSetOf()
+
+    favorites.remove(projectId)
+
+    prefs.edit()
+        .putStringSet(
+            KEY_TIMELINE_PROJECT_FAVORITES,
+            favorites
+        )
+        .apply()
+}
+
+fun removeExportFavorite(
+    context: Context,
+    exportPath: String
+) {
+    val prefs = getPrefs(context)
+
+    val favorites =
+        prefs.getStringSet(
+            KEY_EXPORT_FAVORITES,
+            emptySet()
+        )?.toMutableSet() ?: mutableSetOf()
+
+    favorites.remove(exportPath)
+
+    prefs.edit()
+        .putStringSet(
+            KEY_EXPORT_FAVORITES,
+            favorites
+        )
+        .apply()
+}
 
     @Deprecated("Use isExportFavorite", ReplaceWith("isExportFavorite(context, projectPath)"))
     fun isProjectFavorite(context: Context, projectPath: String) =
@@ -88,4 +131,6 @@ object FavoriteManager {
 
     @Deprecated("Use getFavoriteExports", ReplaceWith("getFavoriteExports(context)"))
     fun getFavoriteProjects(context: Context) = getFavoriteExports(context)
+    
+   
 }

@@ -10,7 +10,47 @@ import androidx.core.content.ContextCompat
 import java.io.File
 import java.io.FileOutputStream
 import androidx.core.graphics.drawable.toBitmap
+import android.webkit.MimeTypeMap
+import android.media.MediaMetadataRetriever
+
 object AssetUtils {
+
+    /**
+     * Helper to robustly detect if a URI is audio, video, or image.
+     */
+    fun getUriMediaType(context: Context, uri: android.net.Uri): String {
+        val mime = context.contentResolver.getType(uri)
+        if (mime != null) {
+            if (mime.startsWith("audio/")) return "audio"
+            if (mime.startsWith("image/")) return "image"
+            if (mime.startsWith("video/")) return "video"
+        }
+        val ext = MimeTypeMap.getFileExtensionFromUrl(uri.toString())?.lowercase()
+        if (ext != null) {
+            val mimeFromExt = MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext)
+            if (mimeFromExt != null) {
+                if (mimeFromExt.startsWith("audio/")) return "audio"
+                if (mimeFromExt.startsWith("image/")) return "image"
+                if (mimeFromExt.startsWith("video/")) return "video"
+            }
+            val audioExts = listOf("mp3", "wav", "m4a", "ogg", "aac", "flac")
+            val imageExts = listOf("jpg", "jpeg", "png", "webp", "gif")
+            val videoExts = listOf("mp4", "mkv", "mov", "avi", "webm", "3gp")
+            if (ext in audioExts) return "audio"
+            if (ext in imageExts) return "image"
+            if (ext in videoExts) return "video"
+        }
+        try {
+            val mmr = MediaMetadataRetriever()
+            mmr.setDataSource(context, uri)
+            val hasVideo = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_HAS_VIDEO) == "yes"
+            val hasAudio = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_HAS_AUDIO) == "yes"
+            mmr.release()
+            if (hasVideo) return "video"
+            if (hasAudio) return "audio"
+        } catch (e: Exception) {}
+        return "video"
+    }
 
     /**
      * Resolves a virtual path (e.g. emoji:// or res://) to a physical cached file path. If the path

@@ -56,13 +56,15 @@ class SplashActivity : AppCompatActivity() {
     private fun navigateNext() {
         val prefs = getSharedPreferences("VideoEditorPrefs", Context.MODE_PRIVATE)
         val isFirstRun = prefs.getBoolean("FIRST_RUN", true)
+        val isLoggedIn = prefs.getBoolean("IS_LOGGED_IN", false)
 
-        startActivity(
-                Intent(
-                        this,
-                        if (isFirstRun) IntroActivity::class.java else MainActivity::class.java
-                )
-        )
+        val destination = when {
+            isFirstRun -> IntroActivity::class.java
+            !isLoggedIn -> LoginActivity::class.java
+            else -> MainActivity::class.java
+        }
+
+        startActivity(Intent(this, destination))
         finish()
     }
 }

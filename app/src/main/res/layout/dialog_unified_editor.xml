@@ -1,164 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="24dp"
-    app:cardBackgroundColor="#0A0A0A"
-    app:cardCornerRadius="24dp"
-    app:cardElevation="0dp"
-    app:strokeWidth="1dp"
-    app:strokeColor="#1AFFFFFF">
+    android:padding="16dp"
+    android:background="@drawable/bg_sheet_dark">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- 🚀 NEW: Modern Glassmorphic Header -->
+    <View
+        android:id="@+id/dragHandle"
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:background="@color/white_20"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/tvDialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CONTROL_PANEL"
+        android:textColor="@color/text_primary"
+        android:fontFamily="monospace"
+        android:textSize="12sp"
+        android:layout_marginTop="16dp"
+        android:letterSpacing="0.2"
+        app:layout_constraintTop_toBottomOf="@id/dragHandle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/btnClose"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_close"
+        app:tint="@color/white_50"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- 💎 PRO: Value Display Chip -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/valueChip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:cardBackgroundColor="@color/white_10"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/white_20"
+        app:layout_constraintTop_toBottomOf="@id/tvDialogTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <TextView
+            android:id="@+id/tvSliderValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp"
+            android:text="1.0"
+            android:textColor="@color/brand_accent"
+            android:textSize="24sp"
+            android:fontFamily="sans-serif-black"/>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvSliderLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="ADJUST_PARAMETER"
+        android:textColor="@color/white_50"
+        android:textSize="10sp"
+        android:fontFamily="monospace"
+        app:layout_constraintTop_toBottomOf="@id/valueChip"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/sliderControl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="32dp">
+        android:layout_marginTop="24dp"
+        app:thumbColor="@color/brand_accent"
+        app:thumbRadius="16dp"
+        app:thumbStrokeWidth="2dp"
+        app:thumbStrokeColor="#FFFFFF"
+        app:trackColorInactive="@color/white_10"
+        app:trackColorActive="@color/brand_accent"
+        app:layout_constraintTop_toBottomOf="@id/tvSliderLabel"/>
 
-        <!-- Bottom Sheet Handle -->
-        <View
-            android:id="@+id/sheetHandle"
-            android:layout_width="32dp"
-            android:layout_height="4dp"
-            android:layout_marginTop="12dp"
-            android:background="#33FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <!-- 💎 Secondary Options horizontal list -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/sliderControl"/>
 
-        <View
-            android:id="@+id/headerIndicator"
-            android:layout_width="3dp"
-            android:layout_height="16dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="28dp"
-            android:background="#00D2D3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDone"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
+        android:text="APPLY CHANGES"
+        android:textColor="#000000"
+        app:cornerRadius="16dp"
+        app:backgroundTint="@color/brand_accent"
+        android:fontFamily="sans-serif-black"
+        app:layout_constraintTop_toBottomOf="@id/rvOptions"
+        android:layout_marginBottom="16dp"/>
 
-        <TextView
-            android:id="@+id/tvDialogTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:fontFamily="monospace"
-            android:letterSpacing="0.1"
-            android:text="Edit Parameters"
-            android:textColor="#FFFFFF"
-            android:textSize="13sp"
-            android:textAllCaps="true"
-            app:layout_constraintBottom_toBottomOf="@id/headerIndicator"
-            app:layout_constraintEnd_toStartOf="@id/btnClose"
-            app:layout_constraintStart_toEndOf="@id/headerIndicator"
-            app:layout_constraintTop_toTopOf="@id/headerIndicator" />
-
-        <ImageView
-            android:id="@+id/btnClose"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="20dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/ic_close"
-            app:layout_constraintBottom_toBottomOf="@id/headerIndicator"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/headerIndicator"
-            app:tint="#4DFFFFFF" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvOptions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:clipToPadding="false"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            app:layout_constraintTop_toBottomOf="@id/headerIndicator" />
-
-        <LinearLayout
-            android:id="@+id/containerSlider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:orientation="vertical"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp"
-            app:layout_constraintTop_toBottomOf="@id/rvOptions">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:layout_marginBottom="12dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvSliderLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="monospace"
-                    android:text="Adjustment Intensity"
-                    android:textColor="#80FFFFFF"
-                    android:textSize="9sp"
-                    android:textAllCaps="true"
-                    android:letterSpacing="0.05"/>
-
-                <TextView
-                    android:id="@+id/tvSliderValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="monospace"
-                    android:text="0.0%"
-                    android:textColor="#00D2D3"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <!-- Only Slider remains as per user request for precision -->
-            <com.google.android.material.slider.Slider
-                android:id="@+id/sliderControl"
-                style="@style/StealthSlider"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:value="0.5"
-                android:valueFrom="0.0"
-                android:valueTo="1.0"
-                app:thumbRadius="10dp"
-                app:trackHeight="4dp" />
-
-            <!-- Hidden legacy controls -->
-            <com.example.videoeditorapp.ui.editor.controls.WheelControlView
-                android:id="@+id/wheelControl"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:visibility="gone" />
-
-            <com.example.videoeditorapp.ui.editor.controls.CircularSliderView
-                android:id="@+id/circularControl"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:visibility="gone" />
-        </LinearLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnDone"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
-            android:backgroundTint="#00D2D3"
-            android:fontFamily="sans-serif-black"
-            android:text="Apply Changes"
-            android:textColor="#121212"
-            android:textSize="13sp"
-            android:letterSpacing="0.05"
-            app:cornerRadius="12dp"
-            app:elevation="4dp"
-            app:layout_constraintTop_toBottomOf="@id/containerSlider" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,7 +53,7 @@ object ProjectManager {
     /** Returns a list of all saved projects for the "My Projects" screen. */
     fun listProjects(context: Context): List<TimelineProject> {
         val dir = getProjectsDir(context)
-        val files = dir.listFiles { _, name -> name.endsWith(".json") } ?: return emptyList()
+        val files = dir.listFiles { _, name -> name.endsWith(".json") && name != "autosave_project.json" } ?: return emptyList()
 
         return files
                 .mapNotNull { file ->
@@ -67,13 +67,47 @@ object ProjectManager {
                 .sortedByDescending { it.lastModified }
     }
 
-    fun deleteProject(context: Context, projectId: String): Boolean {
-        val dir = getProjectsDir(context)
-        val file = File(dir, "$projectId.json")
-        return if (file.exists()) {
-            file.delete()
-        } else {
-            false
+    private fun deleteRecursive(file: File) {
+        if (file.isDirectory) {
+            file.listFiles()?.forEach { deleteRecursive(it) }
         }
+        file.delete()
+    }
+
+    fun deleteProject(
+        context: Context,
+        projectId: String
+    ): Boolean {
+        // 1. Delete imported media folder
+        val mediaDir = File(StorageManager.getImportedMediaDir(context), projectId)
+        if (mediaDir.exists()) {
+            deleteRecursive(mediaDir)
+        }
+
+        // 2. Delete thumbnail file
+        val thumbFile = File(context.filesDir, "project_thumb_$projectId.jpg")
+        if (thumbFile.exists()) {
+            thumbFile.delete()
+        }
+
+        // 3. Delete project JSON
+        val dir = File(context.filesDir, "projects")
+        val file = File(dir, "$projectId.json")
+        val result = file.delete()
+
+        // 4. Delete corresponding autosave file if its content matches this project ID
+        try {
+            val autoSaveFile = File(dir, "autosave_project.json")
+            if (autoSaveFile.exists()) {
+                val autoSaveProj = gson.fromJson(autoSaveFile.readText(), TimelineProject::class.java)
+                if (autoSaveProj.id == projectId) {
+                    autoSaveFile.delete()
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return result
     }
 }

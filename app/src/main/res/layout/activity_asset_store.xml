@@ -35,7 +35,7 @@
                     android:layout_height="match_parent"
                     android:padding="10dp"
                     android:src="@drawable/ic_back"
-                    app:tint="#00D2D3" />
+                    app:tint="@color/brand_accent" />
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="ASSETS HUB"
-                android:textColor="#00D2D3"
+                android:textColor="@color/brand_accent"
                 android:fontFamily="monospace"
                 android:textSize="13sp"
                 android:textAllCaps="true"
@@ -54,7 +54,13 @@
                 app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
-
+    <FrameLayout
+        android:id="@+id/bannerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout">
+        <include layout="@layout/item_asset_banner" />
+    </FrameLayout>
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/searchCard"
         android:layout_width="match_parent"
@@ -66,7 +72,7 @@
         app:cardElevation="0dp"
         app:strokeWidth="1dp"
         app:strokeColor="@color/white_10"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout">
+        app:layout_constraintTop_toBottomOf="@id/bannerContainer">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,7 +85,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:src="@drawable/ic_search"
-                app:tint="#00D2D3" />
+                app:tint="@color/brand_accent" />
 
             <EditText
                 android:id="@+id/etSearch"
@@ -88,8 +94,8 @@
                 android:layout_weight="1"
                 android:layout_marginStart="16dp"
                 android:hint="SEARCH..."
-                android:textColorHint="@color/white_30"
-                android:textColor="#FFFFFF"
+                android:textColorHint="@color/text_medium_emphasis"
+                android:textColor="@color/text_primary"
                 android:background="@android:color/transparent"
                 android:textSize="12sp"
                 android:fontFamily="monospace"
@@ -107,13 +113,15 @@
         android:background="@android:color/transparent"
         app:tabMode="scrollable"
         app:tabIndicatorHeight="2dp"
-        app:tabIndicatorColor="#00D2D3"
+        app:tabIndicatorColor="@color/brand_accent"
         app:tabIndicatorFullWidth="false"
-        app:tabSelectedTextColor="#00D2D3"
-        app:tabTextColor="@color/white_30"
+        app:tabSelectedTextColor="@color/brand_accent"
+        app:tabTextColor="@color/text_medium_emphasis"
         app:tabRippleColor="@android:color/transparent"
         app:tabTextAppearance="@style/StealthTabText"
         app:layout_constraintTop_toBottomOf="@id/searchCard" />
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAssets"

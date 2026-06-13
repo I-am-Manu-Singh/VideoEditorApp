@@ -35,7 +35,7 @@
                 android:layout_height="match_parent"
                 android:padding="12dp"
                 android:src="@drawable/ic_video_camera"
-                app:tint="#00D2D3"
+                app:tint="@color/brand_accent"
                 android:scaleType="centerInside"
                 android:background="?attr/selectableItemBackground"/>
         </com.google.android.material.card.MaterialCardView>
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Video Export 001"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:fontFamily="sans-serif-black"
                 android:textAllCaps="true"
                 android:letterSpacing="0.03"
@@ -73,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1080P"
-                    android:textColor="#00D2D3"
+                    android:textColor="@color/brand_accent"
                     android:textSize="9sp"
                     android:fontFamily="monospace"/>
                 <TextView
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:text="Cinema Stream 1080p High"
-                    android:textColor="#80FFFFFF"
+                    android:textColor="@color/white_50"
                     android:textSize="9sp"
                     android:fontFamily="monospace"/>
             </LinearLayout>
@@ -102,7 +102,7 @@
                     android:background="@drawable/bg_tag_glass"
                     android:paddingHorizontal="6dp"
                     android:paddingVertical="2dp"
-                    android:textColor="#00D2D3"
+                    android:textColor="@color/brand_accent"
                     android:textSize="10sp"
                     android:fontFamily="monospace" />
 

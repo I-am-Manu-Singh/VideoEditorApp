@@ -37,7 +37,7 @@
                     android:layout_height="match_parent"
                     android:padding="10dp"
                     android:src="@drawable/ic_back"
-                    app:tint="#00D2D3" />
+                    app:tint="@color/brand_accent" />
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Export Details"
-                android:textColor="#00D2D3"
+                android:textColor="@color/brand_accent"
                 android:fontFamily="sans-serif-black"
                 android:textSize="13sp"
                 android:textAllCaps="true"
@@ -78,6 +78,7 @@
 
             <!-- 🍏 SUCCESS BADGE -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardSuccessBadge"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 app:cardBackgroundColor="@color/bg_dark_elevated"
@@ -98,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Project Masterpiece"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -114,6 +115,21 @@
                 android:textStyle="bold"
                 android:textSize="14sp"
                 android:fontFamily="monospace"/>
+
+            <!-- 🍏 SHARING ROW -->
+            <LinearLayout
+                android:id="@+id/shareContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="12dp"
+                android:visibility="gone">
+                <include layout="@layout/item_share_icon" android:id="@+id/shareTikTok"/>
+                <include layout="@layout/item_share_icon" android:id="@+id/shareInstagram"/>
+                <include layout="@layout/item_share_icon" android:id="@+id/shareWhatsApp"/>
+                <include layout="@layout/item_share_icon" android:id="@+id/shareYouTube"/>
+            </LinearLayout>
 
             <!-- 🍏 THE GLASS PLAYER CARD -->
             <com.google.android.material.card.MaterialCardView
@@ -138,6 +154,15 @@
                         app:resize_mode="fit"
                         android:background="@android:color/black" />
 
+                    <ImageView
+                        android:id="@+id/ivExportPreview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:visibility="gone"
+                        android:alpha="1.0"
+                        android:background="@android:color/black"/>
+
                     <!-- Play Overlay -->
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/imgPlayOverlay"
@@ -147,7 +172,7 @@
                         android:padding="20dp"
                         android:background="@color/white_20"
                         app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
-                        app:tint="@color/white"
+                        app:tint="@color/text_primary"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -177,7 +202,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="00:00"
-                            android:textColor="@color/white"
+                            android:textColor="@color/text_primary"
                             android:textSize="12sp"
                             android:layout_marginStart="8dp"
                             android:fontFamily="monospace"/>
@@ -185,8 +210,106 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- 🍏 EXPORTING PROGRESS PANEL -->
+            <LinearLayout
+                android:id="@+id/layoutExportingProgress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RENDERING_ENGINE_ACTIVE"
+                    android:textColor="@color/brand_accent"
+                    android:fontFamily="monospace"
+                    android:letterSpacing="0.4"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="16dp"/>
+
+                <FrameLayout
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginBottom="16dp">
+
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        android:id="@+id/progressCircular"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        app:indicatorSize="120dp"
+                        app:trackThickness="12dp"
+                        app:indicatorColor="@color/brand_accent"
+                        app:trackColor="@color/white_10"
+                        android:progress="0"
+                        app:trackCornerRadius="6dp"/>
+
+                    <TextView
+                        android:id="@+id/tvProgressPercent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="0%"
+                        android:textColor="@color/text_primary"
+                        android:textSize="28sp"
+                        android:fontFamily="sans-serif-black"/>
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tvTimeRemaining"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ESTIMATING_TIME..."
+                    android:textColor="@color/white_50"
+                    android:textSize="11sp"
+                    android:fontFamily="monospace"
+                    android:letterSpacing="0.1"
+                    android:layout_marginBottom="16dp"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/logContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardBackgroundColor="@color/bg_dark_surface"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/white_05"
+                    android:layout_marginBottom="16dp">
+
+                    <ScrollView
+                        android:id="@+id/logScrollView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="12dp">
+                        <TextView
+                            android:id="@+id/tvEngineLogs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white_50"
+                            android:textSize="10sp"
+                            android:fontFamily="monospace"
+                            android:text="[SYSTEM] Initializing render engine..."/>
+                    </ScrollView>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCancelExport"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="CANCEL_EXPORT"
+                    android:textColor="@color/status_error"
+                    android:fontFamily="sans-serif-black"
+                    app:cornerRadius="16dp"
+                    android:backgroundTint="@color/white_10" />
+            </LinearLayout>
+
             <!-- 🍏 TECHNICAL SPECS PANEL -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardTechSpecs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -239,7 +362,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="H.264 / AVC"
-                                android:textColor="@color/white"
+                                android:textColor="@color/text_primary"
                                 android:textSize="13sp"
                                 android:textStyle="bold"
                                 android:fontFamily="serif-monospace"/>
@@ -261,7 +384,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="4500 kbps"
-                                android:textColor="@color/white"
+                                android:textColor="@color/text_primary"
                                 android:textSize="13sp"
                                 android:textStyle="bold"
                                 android:fontFamily="serif-monospace"/>
@@ -284,7 +407,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="3840 x 2160"
-                                android:textColor="@color/white"
+                                android:textColor="@color/text_primary"
                                 android:textSize="13sp"
                                 android:textStyle="bold"
                                 android:fontFamily="serif-monospace"/>
@@ -307,7 +430,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="45.8 MB"
-                                android:textColor="@color/white"
+                                android:textColor="@color/text_primary"
                                 android:textSize="13sp"
                                 android:textStyle="bold"
                                 android:fontFamily="serif-monospace"/>
@@ -318,6 +441,7 @@
 
             <!-- 🍏 QUICK ACTIONS -->
             <LinearLayout
+                android:id="@+id/layoutQuickActions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -334,7 +458,7 @@
                     android:text="SHARE"
                     android:textStyle="bold"
                     app:icon="@android:drawable/ic_menu_share"
-                    app:iconTint="@color/white"
+                    app:iconTint="@color/text_primary"
                     app:cornerRadius="20dp"
                     android:textColor="@color/white"
                     android:backgroundTint="@color/white_10" />
@@ -349,7 +473,7 @@
                     android:text="GALLERY"
                     android:textStyle="bold"
                     app:icon="@drawable/ic_play"
-                    app:iconTint="@color/white"
+                    app:iconTint="@color/text_primary"
                     app:cornerRadius="20dp"
                     android:textColor="@color/white"
                     android:backgroundTint="@color/white_10" />

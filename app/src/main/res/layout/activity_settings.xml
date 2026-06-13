@@ -33,7 +33,7 @@
                     android:layout_height="match_parent"
                     android:padding="10dp"
                     android:src="@drawable/ic_back"
-                    app:tint="#00D2D3" />
+                    app:tint="@color/brand_accent" />
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="SYSTEM SETTINGS"
-                android:textColor="#00D2D3"
+                android:textColor="@color/brand_accent"
                 android:fontFamily="monospace"
                 android:textSize="13sp"
                 android:textAllCaps="true"
@@ -75,7 +75,6 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:alpha="0.5"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
                 app:cardBackgroundColor="@color/white_05"
@@ -92,7 +91,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="INTERFACE THEME"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/text_primary"
                         android:textSize="12sp"
                         android:textAllCaps="true"
                         android:letterSpacing="0.05"
@@ -103,7 +102,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:enabled="false"
                         app:singleSelection="true"
                         app:selectionRequired="true">
 
@@ -113,7 +111,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:enabled="false"
                             android:text="LIGHT" />
 
                         <com.google.android.material.button.MaterialButton
@@ -122,7 +119,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:enabled="false"
                             android:text="DARK" />
                     </com.google.android.material.button.MaterialButtonToggleGroup>
                 </LinearLayout>
@@ -149,21 +145,12 @@
                     android:orientation="vertical"
                     android:padding="20dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="MASTER RESOLUTION"
-                        android:textColor="#FFFFFF"
-                        android:textSize="12sp"
-                        android:textAllCaps="true"
-                        android:letterSpacing="0.05"
-                        android:fontFamily="sans-serif-black"/>
+
 
                     <com.google.android.material.button.MaterialButtonToggleGroup
                         android:id="@+id/rgDefaultResolution"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         app:singleSelection="true">
 
                         <com.google.android.material.button.MaterialButton
@@ -195,8 +182,53 @@
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:text="4K" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnDefaultOriginal"
+                            style="@style/StealthToggleBtn"
+                            android:layout_height="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="ORIG" />
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/rgDefaultAspect"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAspectOriginal"
+                            style="@style/StealthToggleBtn"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="ORIG" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAspect11"
+                            style="@style/StealthToggleBtn"
+                            android:layout_height="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="1:1" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAspect169"
+                            style="@style/StealthToggleBtn"
+                            android:layout_height="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="16:9" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAspect916"
+                            style="@style/StealthToggleBtn"
+                            android:layout_height="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="9:16" />
                     </com.google.android.material.button.MaterialButtonToggleGroup>
                 </LinearLayout>
+
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -225,7 +257,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="AUTOSAVE INTERVAL"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/text_primary"
                         android:textSize="11sp"
                         android:textAllCaps="true"
                         android:fontFamily="monospace"/>
@@ -276,7 +308,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="VIDEO ENCODING QUALITY"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/text_primary"
                         android:textSize="11sp"
                         android:textAllCaps="true"
                         android:fontFamily="monospace"/>
@@ -324,7 +356,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="VIDEO CODEC"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/text_primary"
                         android:textSize="11sp"
                         android:textAllCaps="true"
                         android:fontFamily="monospace"/>
@@ -351,7 +383,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="H.265 provides better quality at smaller size but may not be supported on all devices."
-                        android:textColor="@color/white_30"
+                        android:textColor="@color/text_medium_emphasis"
                         android:textSize="9sp"
                         android:fontFamily="monospace"
                         android:visibility="gone"/>
@@ -378,7 +410,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="AUDIO ENCODING QUALITY"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/text_primary"
                         android:textSize="11sp"
                         android:textAllCaps="true"
                         android:fontFamily="monospace"/>
@@ -434,7 +466,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="HW ACCELERATION"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/text_primary"
                             android:textSize="12sp"
                             android:textAllCaps="true"
                             android:fontFamily="sans-serif-black"/>
@@ -443,7 +475,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="FORCE GPU RENDER ENGINE"
-                            android:textColor="@color/white_30"
+                            android:textColor="@color/text_medium_emphasis"
                             android:textSize="9sp"
                             android:layout_marginTop="4dp"
                             android:fontFamily="monospace"/>
@@ -454,7 +486,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        app:thumbTint="#00D2D3"
+                        app:thumbTint="@color/brand_accent"
                         app:trackTint="@color/white_10"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -485,7 +517,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="ADD WATERMARK"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/text_primary"
                             android:textSize="12sp"
                             android:textAllCaps="true"
                             android:fontFamily="sans-serif-black"/>
@@ -494,7 +526,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="OVERLAY APP SIGNATURE"
-                            android:textColor="@color/white_30"
+                            android:textColor="@color/text_medium_emphasis"
                             android:textSize="9sp"
                             android:layout_marginTop="4dp"
                             android:fontFamily="monospace"/>
@@ -504,7 +536,7 @@
                         android:id="@+id/switchWatermark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:thumbTint="#00D2D3"
+                        app:thumbTint="@color/brand_accent"
                         app:trackTint="@color/white_10"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -535,11 +567,11 @@
                         android:id="@+id/btnStorage"
                         style="@style/StealthActionRow"
                         android:text="  Storage Management"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/text_primary"
                         android:textSize="12sp"
                         android:fontFamily="sans-serif-black"
                         app:icon="@drawable/ic_folder"
-                        app:iconTint="#00D2D3"/>
+                        app:iconTint="@color/brand_accent"/>
 
                     <View style="@style/StealthDivider" android:layout_marginHorizontal="16dp"/>
 
@@ -559,11 +591,11 @@
                         android:id="@+id/btnAppInfo"
                         style="@style/StealthActionRow"
                         android:text="  System Info"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/text_primary"
                         android:textSize="12sp"
                         android:fontFamily="sans-serif-black"
                         app:icon="@android:drawable/ic_menu_info_details"
-                        app:iconTint="#00D2D3"/>
+                        app:iconTint="@color/brand_accent"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>

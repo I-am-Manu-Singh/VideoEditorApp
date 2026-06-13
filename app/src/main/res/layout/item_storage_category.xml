@@ -30,7 +30,7 @@
                 android:layout_height="match_parent"
                 android:padding="12dp"
                 android:src="@drawable/ic_folder"
-                app:tint="#00D2D3" />
+                app:tint="@color/brand_accent" />
         </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CACHE_REPOSITORY"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="13sp"
                 android:textAllCaps="true"
                 android:fontFamily="sans-serif-black"
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="12.4 MB"
-            android:textColor="#00D2D3"
+            android:textColor="@color/brand_accent"
             android:fontFamily="monospace"
             android:textSize="12sp"
             android:layout_marginEnd="12dp"

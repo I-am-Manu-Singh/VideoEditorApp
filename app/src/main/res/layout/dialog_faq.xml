@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    app:cardBackgroundColor="#0D0D0D"
+    app:cardBackgroundColor="@color/dialog_background"
     app:cardCornerRadius="16dp"
     app:cardElevation="0dp"
     android:background="@color/dialog_background"
     app:strokeWidth="1dp"
-    app:strokeColor="#1AFFFFFF">
+    app:strokeColor="@color/white_10">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             <View
                 android:layout_width="4dp"
                 android:layout_height="18dp"
-                android:background="#00D2D3" />
+                android:background="@color/brand_accent" />
 
             <TextView
                 android:id="@+id/tvFaqTitle"
@@ -42,7 +42,7 @@
                 android:layout_marginStart="12dp"
                 android:fontFamily="monospace"
                 android:text="FAQs"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 android:letterSpacing="0.1" />
         </LinearLayout>
@@ -74,7 +74,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="monospace"
             android:text="Close"
-            android:textColor="#00D2D3"
+            android:textColor="@color/brand_accent"
             android:textSize="11sp"
             android:letterSpacing="0.1"
             app:layout_constraintEnd_toEndOf="parent"

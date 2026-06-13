@@ -35,7 +35,7 @@
                     android:layout_height="match_parent"
                     android:padding="10dp"
                     android:src="@drawable/ic_back"
-                    app:tint="#00D2D3" />
+                    app:tint="@color/brand_accent" />
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="PROJECT MANAGER"
-                android:textColor="#00D2D3"
+                android:textColor="@color/brand_accent"
                 android:fontFamily="monospace"
                 android:textSize="13sp"
                 android:textAllCaps="true"
@@ -70,10 +70,10 @@
             android:layout_height="48dp"
             android:background="@android:color/transparent"
             app:tabIndicatorHeight="2dp"
-            app:tabIndicatorColor="#00D2D3"
+            app:tabIndicatorColor="@color/brand_accent"
             app:tabIndicatorFullWidth="false"
             app:tabIndicatorGravity="bottom"
-            app:tabSelectedTextColor="#00D2D3"
+            app:tabSelectedTextColor="@color/brand_accent"
             app:tabTextColor="@color/white_30"
             app:tabRippleColor="@android:color/transparent"
             app:tabMode="fixed"
@@ -115,7 +115,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:src="@drawable/ic_search"
-                app:tint="#00D2D3" />
+                app:tint="@color/brand_accent" />
 
             <EditText
                 android:id="@+id/searchEditText"
@@ -126,7 +126,7 @@
                 android:layout_marginStart="16dp"
                 android:hint="SEARCH..."
                 android:textColorHint="@color/white_30"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:background="@android:color/transparent"
                 android:textSize="12sp"
                 android:fontFamily="monospace"

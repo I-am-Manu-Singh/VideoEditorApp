@@ -15,6 +15,7 @@ ffmpegkit = "6.0-2"
 media3Ui = "1.9.0"
 lottie = "6.4.0"
 foundation = "1.10.1"
+uiGraphics = "1.11.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,6 +39,7 @@ material = { module = "com.google.android.material:material", version.ref = "mat
 androidx-media3-ui = { group = "androidx.media3", name = "media3-ui", version.ref = "media3Ui" }
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "foundation" }
+androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version.ref = "uiGraphics" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

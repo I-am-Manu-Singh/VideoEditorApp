@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.videoeditorapp.databinding.ActivityTutorialBinding
-import com.example.videoeditorapp.model.HighlightItem
+import com.example.videoeditorapp.data.TutorialRepository
 import com.example.videoeditorapp.utils.setupEditorEdgeToEdge
 
 class TutorialActivity : AppCompatActivity() {
@@ -43,38 +43,7 @@ class TutorialActivity : AppCompatActivity() {
 
     private fun setupArticleList() {
         val articles =
-                listOf(
-                        HighlightItem(
-                                "a1",
-                                "Cinematic Depth of Field",
-                                "FX • LENS",
-                                R.drawable.temp_cinematic
-                        ),
-                        HighlightItem(
-                                "a2",
-                                "Mastering the L-Cut",
-                                "AUDIO • FLOW",
-                                R.drawable.temp_news
-                        ),
-                        HighlightItem(
-                                "a3",
-                                "Color Theory Basics",
-                                "LUTS • MOOD",
-                                R.drawable.temp_lofi
-                        ),
-                        HighlightItem(
-                                "a4",
-                                "Speed Ramping Pro",
-                                "TIMING • FX",
-                                R.drawable.temp_text
-                        ),
-                        HighlightItem(
-                                "a5",
-                                "Advanced Multi-Layering",
-                                "LAYOUT • PRO",
-                                R.drawable.temp_glitch
-                        )
-                )
+            TutorialRepository.getArticles()
 
         binding.rvMasterArticles?.layoutManager =
                 androidx.recyclerview.widget.LinearLayoutManager(this)

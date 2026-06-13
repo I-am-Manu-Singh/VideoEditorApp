@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels // IMPORTANT
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.videoeditorapp.ExportActivity
@@ -17,7 +17,7 @@ import com.example.videoeditorapp.model.FavoriteManager
 import com.example.videoeditorapp.service.ExportService
 import com.example.videoeditorapp.ui.ExportsAdapter
 import com.example.videoeditorapp.utils.SearchViewModel
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.example.videoeditorapp.utils.AppDialog
 import java.io.File
 
 class ExportsFragment : Fragment() {
@@ -74,24 +74,27 @@ class ExportsFragment : Fragment() {
                                 onPlay = { playVideo(it) },
                                 onShare = { shareVideo(it) },
                                 onRename = { /* Handle Rename */},
-                                onDelete = { file ->
-                                        MaterialAlertDialogBuilder(requireContext())
-                                                .setTitle("Delete Video")
-                                                .setMessage("Delete '${file.name}' permanently?")
-                                                .setPositiveButton("Delete") { _, _ ->
-                                                        if (file.exists() && file.delete()) {
-                                                                refreshList()
-                                                                Toast.makeText(
-                                                                                requireContext(),
-                                                                                "Deleted",
-                                                                                Toast.LENGTH_SHORT
-                                                                        )
-                                                                        .show()
-                                                        }
-                                                }
-                                                .setNegativeButton("Cancel", null)
-                                                .show()
-                                },
+                               onDelete = { file ->
+
+    AppDialog.showDelete(
+        context = requireContext(),
+        title = "Delete Video",
+        message = "Delete '${file.name}'?\n\nThis action cannot be undone.",
+        onDelete = {
+            val deleted = com.example.videoeditorapp.utils.StorageManager.deleteFile(requireContext(), file)
+            FavoriteManager.removeExportFavorite(
+                requireContext(),
+                file.absolutePath
+            )
+            refreshList()
+            Toast.makeText(
+                requireContext(),
+                if (deleted) "Deleted" else "Delete Failed",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    )
+},
                                 onFavoriteClick = { file ->
                                         FavoriteManager.toggleExportFavorite(
                                                 requireContext(),
@@ -207,30 +210,45 @@ class ExportsFragment : Fragment() {
         }
 
         private fun updateSelectionUI(count: Int) {
+                searchViewModel.selectedCount.postValue(count)
                 if (count > 0) {
                         val view = view ?: return
                         com.google.android.material.snackbar.Snackbar.make(
-                                        view,
-                                        "$count videos selected",
-                                        com.google.android.material.snackbar.Snackbar
-                                                .LENGTH_INDEFINITE
-                                )
-                                .setAction("Delete") { deleteSelectedVideos() }
-                                .show()
+                                         view,
+                                         "$count videos selected",
+                                         com.google.android.material.snackbar.Snackbar
+                                                 .LENGTH_INDEFINITE
+                                 )
+                                 .setAction("Delete") { deleteSelectedVideos() }
+                                 .show()
                 }
         }
 
-        private fun deleteSelectedVideos() {
-                val selected = adapter.getSelectedFiles()
-                MaterialAlertDialogBuilder(requireContext())
-                        .setTitle("Delete Multiple Videos")
-                        .setMessage("Are you sure you want to delete ${selected.size} videos?")
-                        .setPositiveButton("Delete") { _, _ ->
-                                selected.forEach { it.delete() }
-                                adapter.clearSelection()
-                                refreshList()
-                        }
-                        .setNegativeButton("Cancel") { _, _ -> adapter.clearSelection() }
-                        .show()
-        }
+       private fun deleteSelectedVideos() {
+
+    val selected = adapter.getSelectedFiles()
+
+    if (selected.isEmpty()) return
+
+    AppDialog.showDelete(
+    context = requireContext(),
+    title = "Delete Multiple Videos",
+    message = "Are you sure you want to delete ${selected.size} videos?",
+    onDelete = {
+         selected.forEach { file ->
+             if (com.example.videoeditorapp.utils.StorageManager.deleteFile(requireContext(), file)) {
+                 FavoriteManager.removeExportFavorite(
+                     requireContext(),
+                     file.absolutePath
+                 )
+             }
+         }
+        adapter.clearSelection()
+        refreshList()
+    },
+    onCancel = {
+        adapter.clearSelection()
+    }
+)
+}
 }

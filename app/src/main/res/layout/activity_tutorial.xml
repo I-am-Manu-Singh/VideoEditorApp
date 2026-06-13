@@ -35,7 +35,7 @@
                     android:layout_height="match_parent"
                     android:padding="10dp"
                     android:src="@drawable/ic_back"
-                    app:tint="#00D2D3" />
+                    app:tint="@color/brand_accent" />
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Documentation"
-                android:textColor="#00D2D3"
+                android:textColor="@color/brand_accent"
                 android:fontFamily="monospace"
                 android:textSize="13sp"
                 android:textAllCaps="true"
@@ -77,7 +77,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="24dp"
                 android:text="Editor Masterclass"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="26sp"
                 android:letterSpacing="0.05"
                 android:fontFamily="sans-serif-black" />
@@ -105,7 +105,7 @@
                         <TextView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:background="#00D2D3"
+                            android:background="@color/brand_accent"
                             android:gravity="center"
                             android:text="01"
                             android:fontFamily="monospace"
@@ -115,7 +115,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Import &amp; Index"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/text_primary"
                             android:layout_marginStart="12dp"
                             android:textSize="13sp"
                             android:letterSpacing="0.05"
@@ -154,7 +154,7 @@
                         <TextView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:background="#00D2D3"
+                            android:background="@color/brand_accent"
                             android:gravity="center"
                             android:text="02"
                             android:fontFamily="monospace"
@@ -164,7 +164,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Precision Timeline"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/text_primary"
                             android:layout_marginStart="12dp"
                             android:textSize="13sp"
                             android:letterSpacing="0.05"
@@ -202,7 +202,7 @@
                         <TextView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:background="#00D2D3"
+                            android:background="@color/brand_accent"
                             android:gravity="center"
                             android:text="03"
                             android:fontFamily="monospace"
@@ -212,7 +212,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Visual FX Pipeline"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/text_primary"
                             android:layout_marginStart="12dp"
                             android:textSize="13sp"
                             android:letterSpacing="0.05"
@@ -239,7 +239,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Academy Lectures"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     android:letterSpacing="0.05"
                     android:fontFamily="sans-serif-black"/>
@@ -249,7 +249,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Browse Library"
-                    android:textColor="#00D2D3"
+                    android:textColor="@color/brand_accent"
                     android:textSize="12sp"
                     android:fontFamily="monospace"
                     android:layout_alignParentEnd="true"
@@ -290,7 +290,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="1. Hold clips for sequence re-allocation."
-                        android:textColor="#80FFFFFF"
+                        android:textColor="@color/white_50"
                         android:textSize="12sp"
                         android:fontFamily="monospace"
                         android:layout_marginBottom="8dp"/>
@@ -298,7 +298,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="2. Split at playhead for transition injection."
-                        android:textColor="#80FFFFFF"
+                        android:textColor="@color/white_50"
                         android:textSize="12sp"
                         android:fontFamily="monospace"
                         android:layout_marginBottom="8dp"/>
@@ -306,7 +306,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="3. Force 4K export via Master Registry."
-                        android:textColor="#80FFFFFF"
+                        android:textColor="@color/white_50"
                         android:textSize="12sp"
                         android:fontFamily="monospace"/>
                 </LinearLayout>
@@ -319,7 +319,7 @@
                 android:layout_marginTop="24dp"
                 android:text="Start Editing"
                 android:textColor="@color/bg_deep_black"
-                android:backgroundTint="#00D2D3"
+                android:backgroundTint="@color/brand_accent"
                 app:cornerRadius="8dp"
                 android:fontFamily="sans-serif-black"
                 android:letterSpacing="0.05"/>

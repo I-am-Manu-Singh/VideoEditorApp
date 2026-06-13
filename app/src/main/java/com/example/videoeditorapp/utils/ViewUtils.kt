@@ -26,4 +26,14 @@ object ViewUtils {
             String.format("%02d:%02d", m, s)
         }
     }
+
+    fun getRealPathFromURI(context: Context, contentUri: android.net.Uri): String? {
+        val proj = arrayOf(android.provider.MediaStore.Images.Media.DATA)
+        context.contentResolver.query(contentUri, proj, null, null, null)?.use { cursor ->
+            val columnIndex = cursor.getColumnIndexOrThrow(android.provider.MediaStore.Images.Media.DATA)
+            cursor.moveToFirst()
+            return cursor.getString(columnIndex)
+        }
+        return contentUri.path
+    }
 }

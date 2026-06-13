@@ -91,41 +91,82 @@ class ExportsAdapter(
                 }
             }
 
-            val isSelected = selectedPaths.contains(file.absolutePath)
-            (binding.root as? com.google.android.material.card.MaterialCardView)?.apply {
-                isChecked = isSelected
-                isCheckable = isSelectionMode
-            }
+        val isSelected = selectedPaths.contains(file.absolutePath)
 
-            binding.root.setOnClickListener {
-                if (isSelectionMode) {
-                    toggleSelection(item)
-                } else {
-                    onPlay(file)
-                }
-            }
-            binding.root.setOnLongClickListener {
-                if (!isSelectionMode) {
-                    setSelectionMode(true)
-                    toggleSelection(item)
-                }
-                true
-            }
+(binding.root as? com.google.android.material.card.MaterialCardView)?.let { card ->
+
+    card.isCheckable = false
+
+    card.strokeColor =
+        if (isSelected) {
+            android.graphics.Color.parseColor("#00D2D3")
+        } else {
+            android.graphics.Color.parseColor("#1AFFFFFF")
         }
 
-        private fun toggleSelection(item: ExportItem) {
-            val pos = bindingAdapterPosition
-            if (pos == RecyclerView.NO_POSITION) return
-
-            val path = item.file.absolutePath
-            if (selectedPaths.contains(path)) {
-                selectedPaths.remove(path)
-            } else {
-                selectedPaths.add(path)
-            }
-            notifyItemChanged(pos)
-            onSelectionChanged(selectedPaths.size)
+    card.strokeWidth =
+        if (isSelected) {
+            4
+        } else {
+            2
         }
+
+    card.cardElevation =
+        if (isSelected) {
+            12f
+        } else {
+            0f
+        }
+
+    card.setCardBackgroundColor(
+        if (isSelected) {
+            android.graphics.Color.parseColor("#3300D2D3")
+        } else {
+            android.graphics.Color.parseColor("#0DFFFFFF")
+        }
+    )
+}
+
+          binding.root.setOnClickListener {
+    if (isSelectionMode) {
+        toggleSelection(item)
+    } else {
+        onPlay(file)
+    }
+}
+
+binding.root.setOnLongClickListener {
+
+    if (!isSelectionMode) {
+        setSelectionMode(true)
+    }
+
+    toggleSelection(item)
+    true
+}
+        }
+
+private fun toggleSelection(item: ExportItem) {
+
+    val pos = bindingAdapterPosition
+    if (pos == RecyclerView.NO_POSITION) return
+
+    val path = item.file.absolutePath
+
+    if (selectedPaths.contains(path)) {
+        selectedPaths.remove(path)
+    } else {
+        selectedPaths.add(path)
+    }
+
+    notifyItemChanged(pos)
+    onSelectionChanged(selectedPaths.size)
+
+    if (selectedPaths.isEmpty()) {
+        isSelectionMode = false
+        notifyDataSetChanged()
+    }
+}
 
         private fun resolveColor(context: android.content.Context, attr: Int): Int {
             val typedValue = android.util.TypedValue()

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.example.videoeditorapp.utils.AppDialog
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,13 +29,14 @@ class StorageDetailActivity : AppCompatActivity() {
     private var currentTypeFilter: String = "ALL"
     private var currentSortMode: SortMode = SortMode.DATE_DESC
 
-    enum class SortMode {
-        SIZE_ASC,
-        SIZE_DESC,
-        DATE_DESC,
-        DATE_ASC
-    }
-
+ enum class SortMode {
+    NAME_ASC,
+    NAME_DESC,
+    SIZE_ASC,
+    SIZE_DESC,
+    DATE_DESC,
+    DATE_ASC
+}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStorageDetailBinding.inflate(layoutInflater)
@@ -117,6 +119,16 @@ class StorageDetailActivity : AppCompatActivity() {
 
     private fun showSortMenu() {
         val popup = androidx.appcompat.widget.PopupMenu(this, binding.btnSort)
+    popup.menu.add("Name: A-Z").setOnMenuItemClickListener {
+    currentSortMode = SortMode.NAME_ASC
+    applyFiltersAndSort()
+    true
+}
+        popup.menu.add("Name: Z-A").setOnMenuItemClickListener {
+            currentSortMode = SortMode.NAME_DESC
+            applyFiltersAndSort()
+            true
+        }
         popup.menu.add("Size: Low to High").setOnMenuItemClickListener {
             currentSortMode = SortMode.SIZE_ASC
             applyFiltersAndSort()
@@ -244,6 +256,8 @@ class StorageDetailActivity : AppCompatActivity() {
 
         filtered =
                 when (currentSortMode) {
+                    SortMode.NAME_ASC -> filtered.sortedBy { it.file.name.lowercase() }
+                    SortMode.NAME_DESC -> filtered.sortedByDescending { it.file.name.lowercase() }
                     SortMode.SIZE_ASC -> filtered.sortedBy { it.file.length() }
                     SortMode.SIZE_DESC -> filtered.sortedByDescending { it.file.length() }
                     SortMode.DATE_ASC -> filtered.sortedBy { it.file.lastModified() }
@@ -262,35 +276,39 @@ class StorageDetailActivity : AppCompatActivity() {
             listOf("jpg", "jpeg", "png", "webp", "gif").contains(file.extension.lowercase())
     private fun isGif(file: File) = file.extension.lowercase() == "gif"
 
-    private fun showDeleteDialog(items: List<FileItem>) {
-        val dlg = com.example.videoeditorapp.databinding.DialogBaseBinding.inflate(layoutInflater)
+   private fun showDeleteDialog(items: List<FileItem>) {
 
-        dlg.tvTitle.text = if (items.size == 1) "Delete File?" else "Delete Multiple Files?"
-        dlg.tvMessage.text =
-                if (items.size == 1) "Delete '${items[0].file.name}'? This action cannot be undone."
-                else "Delete ${items.size} files permanently?"
+    val title =
+        if (items.size == 1)
+            "Delete File?"
+        else
+            "Delete Multiple Files?"
 
-        dlg.btnPrimary.text = "Delete"
-        dlg.btnSecondary.text = "Cancel"
+    val message =
+        if (items.size == 1)
+            "Delete '${items[0].file.name}'?\n\nThis action cannot be undone."
+        else
+            "Delete ${items.size} files permanently?\n\nThis action cannot be undone."
 
-        val dialog =
-                com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
-                        .setView(dlg.root)
-                        .create()
-
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
-        dlg.btnPrimary.setOnClickListener {
-            items.forEach { it.file.delete() }
+    AppDialog.showDelete(
+        context = this,
+        title = title,
+        message = message,
+        iconRes = R.drawable.ic_delete,
+        onDelete = {
+            items.forEach { fileItem ->
+                StorageManager.deleteFile(this, fileItem.file)
+            }
             adapter.clearSelection()
             loadFiles()
-            dialog.dismiss()
-            Toast.makeText(this, "Deleted ${items.size} files", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                "Deleted ${items.size} file${if (items.size > 1) "s" else ""}",
+                Toast.LENGTH_SHORT
+            ).show()
         }
-
-        dlg.btnSecondary.setOnClickListener { dialog.dismiss() }
-        dialog.show()
-    }
+    )
+}
 
     data class FileItem(val file: File, val category: String, val groupName: String? = null)
 

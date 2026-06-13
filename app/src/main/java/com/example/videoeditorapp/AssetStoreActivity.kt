@@ -39,8 +39,6 @@ class AssetStoreActivity : AppCompatActivity() {
         setupTabs()
         setupRecyclerView()
 
-        setupRecyclerView()
-
         setupEdgeToEdge()
         setupSearch()
         filterAssets("ALL")
@@ -169,6 +167,15 @@ class AssetStoreActivity : AppCompatActivity() {
 
     private fun downloadAsset(asset: AssetItem) {
         if (asset.isDownloaded) return
+        if (asset.isPremium) {
+            val prefs = getSharedPreferences("VideoEditorPrefs", android.content.Context.MODE_PRIVATE)
+            val isPro = prefs.getBoolean("IS_PRO", false)
+            if (!isPro) {
+                val intent = android.content.Intent(this, UpgradeActivity::class.java)
+                startActivity(intent)
+                return
+            }
+        }
 
         lifecycleScope.launch {
             Toast.makeText(

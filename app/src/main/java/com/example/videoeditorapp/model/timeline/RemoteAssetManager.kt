@@ -19,6 +19,10 @@ object RemoteAssetManager {
     suspend fun downloadAsset(context: Context, urlString: String): String? =
             withContext(Dispatchers.IO) {
                 try {
+                    if (urlString.startsWith("res://") || urlString.startsWith("emoji://")) {
+                        return@withContext com.example.videoeditorapp.utils.AssetUtils.getCachedAssetPath(context, urlString)
+                    }
+
                     val assetsDir =
                             com.example.videoeditorapp.utils.StorageManager.getAssetsDir(context)
                     val extension = urlString.substringAfterLast(".", "tmp")
@@ -26,6 +30,12 @@ object RemoteAssetManager {
                     val file = File(assetsDir, fileName)
 
                     if (file.exists() && file.length() > 0) return@withContext file.absolutePath
+
+                    if (urlString.contains("mock") || !urlString.startsWith("http")) {
+                        file.parentFile?.mkdirs()
+                        file.writeText("{}")
+                        return@withContext file.absolutePath
+                    }
 
                     val url = java.net.URL(urlString)
                     val connection = url.openConnection() as java.net.HttpURLConnection

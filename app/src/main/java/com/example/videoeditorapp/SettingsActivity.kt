@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
 import com.example.videoeditorapp.databinding.ActivitySettingsBinding
 import com.example.videoeditorapp.utils.setupEditorEdgeToEdge
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.example.videoeditorapp.utils.AppDialog
 import java.io.File
 
 class SettingsActivity : AppCompatActivity() {
@@ -46,12 +46,20 @@ class SettingsActivity : AppCompatActivity() {
             AppCompatDelegate.MODE_NIGHT_NO -> binding.rgThemeSelection.check(R.id.btnThemeLight)
             else -> binding.rgThemeSelection.check(R.id.btnThemeDark)
         }
+        val defaultAspect = prefs.getString("default_aspect", "16:9")
 
+        when (defaultAspect) {
+            "9:16" -> binding.rgDefaultAspect?.check(R.id.btnAspect916)
+            "16:9" -> binding.rgDefaultAspect?.check(R.id.btnAspect169)
+            "1:1" -> binding.rgDefaultAspect?.check(R.id.btnAspect11)
+            "Original" -> binding.rgDefaultAspect?.check(R.id.btnAspectOriginal)
+        }
         val defaultRes = prefs.getString("default_res", "1080")
         when (defaultRes) {
             "720" -> binding.rgDefaultResolution.check(R.id.btnDefault720)
             "1080" -> binding.rgDefaultResolution.check(R.id.btnDefault1080)
             "2160" -> binding.rgDefaultResolution.check(R.id.btnDefault4K)
+            "ORIGINAL" -> binding.rgDefaultResolution.check(R.id.btnDefaultOriginal)
             else -> binding.rgDefaultResolution.check(R.id.btnDefault1080)
         }
 
@@ -121,7 +129,7 @@ class SettingsActivity : AppCompatActivity() {
             binding.tvCodecWarning.visibility = android.view.View.VISIBLE
             binding.tvCodecWarning.text =
                     "H.265 provides better quality at smaller size but may not be supported on all playback devices."
-            binding.tvCodecWarning.setTextColor(Color.parseColor("#80FFFFFF"))
+            binding.tvCodecWarning.setTextColor(resources.getColor(R.color.white_50, theme))
         } else {
             binding.tvCodecWarning.visibility = android.view.View.GONE
         }
@@ -139,11 +147,28 @@ class SettingsActivity : AppCompatActivity() {
         return false
     }
     private fun setupListeners() {
+
+        binding.rgDefaultAspect?.addOnButtonCheckedListener { _, checkedId, isChecked ->
+
+            if (!isChecked) return@addOnButtonCheckedListener
+
+            val aspect = when (checkedId) {
+                R.id.btnAspect916 -> "9:16"
+                R.id.btnAspect11 -> "1:1"
+                R.id.btnAspectOriginal -> "Original"
+                else -> "16:9"
+            }
+
+            prefs.edit {
+                putString("default_aspect", aspect)
+            }
+        }
         // Theme selection
         binding.rgThemeSelection.addOnButtonCheckedListener {
                 group: com.google.android.material.button.MaterialButtonToggleGroup,
                 checkedId: Int,
                 isChecked: Boolean ->
+
             if (isChecked) {
                 val mode =
                         if (checkedId == R.id.btnThemeLight) AppCompatDelegate.MODE_NIGHT_NO
@@ -173,6 +198,7 @@ class SettingsActivity : AppCompatActivity() {
                             R.id.btnDefault720 -> "720"
                             R.id.btnDefault1080 -> "1080"
                             R.id.btnDefault4K -> "2160"
+                            R.id.btnDefaultOriginal -> "ORIGINAL"
                             else -> "1080"
                         }
                 prefs.edit { putString("default_res", res) }
@@ -287,47 +313,40 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    private fun showClearHistoryDialog() {
-        val dialogBinding = com.example.videoeditorapp.databinding.DialogBaseBinding.inflate(layoutInflater)
+   private fun showClearHistoryDialog() {
 
-        dialogBinding.tvTitle.text = "Clear History"
-        dialogBinding.tvMessage.text =
-            "Are you sure you want to delete all exported videos and project history?"
+     AppDialog.showDelete(
+         context = this,
+         title = "Clear History",
+         message = "Are you sure you want to delete all exported videos and project history?",
+         iconRes = R.drawable.ic_delete,
+         onDelete = {
+             clearProjectFiles()
+         }
+     )
+}
+private fun clearProjectFiles() {
 
-        dialogBinding.btnPrimary.text = "Clear All"
-        dialogBinding.btnSecondary.text = "Cancel"
+    val exportsDir = File(getExternalFilesDir(null), "Exports")
 
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setView(dialogBinding.root)
-            .create()
-
-        // Clean rounded corners with no background bleed
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
-        dialogBinding.btnPrimary.setOnClickListener {
-            dialog.dismiss()
-            clearProjectFiles()
+    if (exportsDir.exists()) {
+        exportsDir.listFiles()?.forEach {
+            it.delete()
         }
-
-        dialogBinding.btnSecondary.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        dialog.show()
     }
 
-    private fun clearProjectFiles() {
-        val exportsDir = File(getExternalFilesDir(null), "Exports")
-        if (exportsDir.exists()) {
-            exportsDir.listFiles()?.forEach { it.delete() }
-        }
-        getSharedPreferences("favorites", Context.MODE_PRIVATE).edit { clear() }
-
-        MaterialAlertDialogBuilder(this)
-                .setMessage("History cleared successfully.")
-                .setPositiveButton("OK", null)
-                .show()
-                .window
-                ?.setBackgroundDrawableResource(R.drawable.bg_glass_card)
+    getSharedPreferences(
+        "favorites",
+        Context.MODE_PRIVATE
+    ).edit {
+        clear()
     }
+
+    AppDialog.showInfo(
+        context = this,
+        title = "History Cleared",
+        message = "History cleared successfully.",
+        iconRes = R.drawable.ic_info
+    )
+}
 }

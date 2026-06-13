@@ -20,7 +20,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="70dp"
             android:background="@color/bg_deep_black">
 
             <ImageView
@@ -29,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@color/bg_dark_elevated"
-                android:alpha="0.6"/>
+                android:alpha="1.0"/>
 
             <View
                 android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_video_camera"
-                app:tint="#00D2D3"
+                app:tint="@color/brand_accent"
                 android:layout_margin="12dp"
                 android:layout_gravity="top|end"
                 android:alpha="0.9"/>
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@color/white_05"
-            android:padding="14dp">
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/tvProjectName"
@@ -63,7 +63,7 @@
                 android:fontFamily="sans-serif-black"
                 android:textAllCaps="true"
                 android:letterSpacing="0.05"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:maxLines="1"
                 android:ellipsize="end"/>
 
@@ -78,7 +78,7 @@
                     android:layout_width="14dp"
                     android:layout_height="14dp"
                     android:src="@drawable/ic_clock"
-                    app:tint="#00D2D3"
+                    app:tint="@color/brand_accent"
                     android:layout_marginEnd="6dp"
                     android:alpha="0.7"/>
 

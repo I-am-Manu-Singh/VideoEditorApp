@@ -8,7 +8,7 @@
 
             <stroke
                 android:width="5dp"
-                android:color="#403E42"/>
+                android:color="@color/dialog_stroke"/>
 
             <corners
                 android:topLeftRadius="24dp"

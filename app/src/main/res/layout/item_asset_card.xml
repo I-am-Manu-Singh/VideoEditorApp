@@ -2,90 +2,73 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="260dp"
-    android:layout_height="150dp"
-    android:layout_marginEnd="16dp"
-    app:cardBackgroundColor="@color/white_05"
-    app:cardCornerRadius="20dp"
+    android:layout_width="160dp"
+    android:layout_height="140dp"
+    android:layout_marginEnd="12dp"
+    app:cardCornerRadius="16dp"
+    android:padding="10dp"
     app:cardElevation="0dp"
+    app:cardUseCompatPadding="false"
+    app:cardPreventCornerOverlap="false"
+    app:cardBackgroundColor="@color/white_05"
     app:strokeWidth="1dp"
-    app:strokeColor="@color/white_10">
+    app:strokeColor="?attr/colorOutline">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/ivTutorialThumb"
+            android:id="@+id/imgHighlight"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:alpha="0.4"
-            android:src="@drawable/temp_tutorial_bg"/>
+            android:layout_height="120dp"
+            android:layout_alignParentTop="true"
+            android:adjustViewBounds="false"
+            android:scaleType="fitXY"
+            android:alpha="1.0" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_hero_gradient" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            app:cardBackgroundColor="#2600D2D3"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="#4D00D2D3">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp"
-                android:src="@drawable/ic_play"
-                app:tint="#00D2D3" />
-        </com.google.android.material.card.MaterialCardView>
+            android:layout_height="120dp"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_glass_white"
+            android:alpha="0.08" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_alignParentBottom="true"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="8dp">
 
             <TextView
+                android:id="@+id/tvTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MASTERCLASS // 04"
-                android:textColor="#00D2D3"
-                android:textSize="9sp"
-                android:fontFamily="monospace"
-                android:letterSpacing="0.2"/>
+                android:text="PRO"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:includeFontPadding="false"
+                android:background="@drawable/bg_glass_card"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="2dp"
+                android:layout_marginBottom="4dp" />
 
             <TextView
-                android:id="@+id/tvTutorialTitle"
+                android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="COLOR GRADING MASTERY"
-                android:textColor="#FFFFFF"
-                android:textSize="15sp"
-                android:textAllCaps="true"
-                android:fontFamily="sans-serif-black"
-                android:letterSpacing="0.05"/>
+                android:text="Glitch FX"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:includeFontPadding="false"
+                android:maxLines="2"
+                android:ellipsize="end" />
+
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|end"
-            android:layout_margin="12dp"
-            android:background="@drawable/bg_tag_glass"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="4dp"
-            android:text="12:45"
-            android:textColor="#FFFFFF"
-            android:textSize="10sp"
-            android:fontFamily="monospace"/>
+    </RelativeLayout>
 
-    </FrameLayout>
 </com.google.android.material.card.MaterialCardView>

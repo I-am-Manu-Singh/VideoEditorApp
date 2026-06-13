@@ -27,7 +27,7 @@
     <path
         android:pathData="M15,10 h10 M15,10 v10 M215,10 h10 M225,10 v10 M15,130 h10 M15,120 v10 M215,130 h10 M225,120 v10"
         android:strokeWidth="1"
-        android:strokeColor="#4D00D2D3" />
+        android:strokeColor="@color/white_30" />
 
     <path android:pathData="M80,40 h80 v60 h-80z">
         <aapt:attr name="android:fillColor">
@@ -36,8 +36,8 @@
                 android:centerY="70"
                 android:gradientRadius="60"
                 android:type="radial">
-                <item android:color="#1A00D2D3" android:offset="0" />
-                <item android:color="#0000D2D3" android:offset="1" />
+                <item android:color="@color/white_10" android:offset="0" />
+                <item android:color="@android:color/transparent" android:offset="1" />
             </gradient>
         </aapt:attr>
     </path>

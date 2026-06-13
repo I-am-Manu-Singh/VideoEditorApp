@@ -13,7 +13,8 @@ enum class ClipType : Parcelable {
         STICKER,
         EMOJI,
         GIF,
-        GAP
+        GAP,
+        VOICEOVER
 }
 
 @Parcelize
@@ -21,7 +22,8 @@ enum class TrackType : Parcelable {
         VIDEO,
         AUDIO,
         OVERLAY,
-        VIDEO_AUDIO
+        VIDEO_AUDIO,
+        VOICEOVER
 }
 
 @Parcelize
@@ -85,10 +87,19 @@ data class TimelineClip(
         var overlayOpacity: Float = 1.0f,
         var audioVolume: Float = 1.0f,
         var playbackSpeed: Float = 1.0f,
+        
+        // 💎 PRO: Property Keyframes for Animation
+        val xKeyframes: MutableList<Keyframe> = mutableListOf(),
+        val yKeyframes: MutableList<Keyframe> = mutableListOf(),
+        val scaleKeyframes: MutableList<Keyframe> = mutableListOf(),
+        val rotationKeyframes: MutableList<Keyframe> = mutableListOf(),
+        val opacityKeyframes: MutableList<Keyframe> = mutableListOf(),
+
         val textSettings: MutableMap<String, String> = mutableMapOf(),
         val audioSettings: MutableMap<String, String> = mutableMapOf(),
         val metadata: MutableMap<String, String> = mutableMapOf(),
-        val effects: MutableList<TimelineEffect> = mutableListOf()
+        val effects: MutableList<TimelineEffect> = mutableListOf(),
+        var isUnlinked: Boolean = false
 ) : Parcelable {
         val endTimeMs: Long
                 get() = startTimeMs + durationMs
@@ -109,10 +120,16 @@ data class TimelineClip(
                         overlayOpacity = overlayOpacity,
                         audioVolume = audioVolume,
                         playbackSpeed = playbackSpeed,
+                        xKeyframes = xKeyframes.map { it.copy() }.toMutableList(),
+                        yKeyframes = yKeyframes.map { it.copy() }.toMutableList(),
+                        scaleKeyframes = scaleKeyframes.map { it.copy() }.toMutableList(),
+                        rotationKeyframes = rotationKeyframes.map { it.copy() }.toMutableList(),
+                        opacityKeyframes = opacityKeyframes.map { it.copy() }.toMutableList(),
                         textSettings = textSettings.toMutableMap(),
                         audioSettings = audioSettings.toMutableMap(),
                         metadata = metadata.toMutableMap(),
-                        effects = effects.map { it.deepCopy() }.toMutableList()
+                        effects = effects.map { it.deepCopy() }.toMutableList(),
+                        isUnlinked = isUnlinked
                 )
 }
 

@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="24dp"
-    app:cardBackgroundColor="#F20D0D0D"
+    app:cardBackgroundColor="@color/dialog_background"
     app:shapeAppearanceOverlay="@style/DialogRoundedCorners"
     app:strokeWidth="1dp"
-    app:strokeColor="#4000D2D3"
+    app:strokeColor="@color/brand_accent_25"
     app:cardElevation="0dp"
     android:clipToOutline="true">
 
@@ -31,13 +31,13 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_info"
-                app:tint="#00D2D3"
+                app:tint="@color/brand_accent"
                 android:visibility="gone"/>
 
             <View
                 android:layout_width="4dp"
                 android:layout_height="18dp"
-                android:background="#00D2D3"
+                android:background="@color/brand_accent"
                 android:layout_marginEnd="12dp"/>
 
             <TextView
@@ -50,14 +50,14 @@
                 android:letterSpacing="0.1"
                 android:textAllCaps="true"
                 android:fontFamily="monospace"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/text_primary" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/tvMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#80FFFFFF"
+            android:textColor="@color/white_50"
             android:textSize="13sp"
             android:fontFamily="monospace"
             android:lineSpacingMultiplier="1.4"
@@ -80,7 +80,7 @@
                 android:textSize="11sp"
                 android:fontFamily="monospace"
                 android:letterSpacing="0.05"
-                app:strokeColor="#33FFFFFF"
+                app:strokeColor="@color/white_20"
                 app:strokeWidth="1dp"
                 android:backgroundTint="@android:color/transparent"
                 app:cornerRadius="6dp"/>
@@ -93,7 +93,7 @@
                 android:textColor="#000000"
                 android:textSize="11sp"
                 android:fontFamily="sans-serif-black"
-                android:backgroundTint="#00D2D3"
+                android:backgroundTint="@color/brand_accent"
                 android:layout_marginStart="12dp"
                 app:cornerRadius="6dp"
                 app:rippleColor="#40000000"/>

@@ -60,14 +60,12 @@ class AssetDetailActivity : AppCompatActivity() {
         asset?.let { item ->
             if (item.isDownloaded) {
                 binding.btnDownloadUse.text = "USE ASSET"
-                // 🍏 Cinematic Accent: Cyan
-                binding.btnDownloadUse.setBackgroundColor(android.graphics.Color.parseColor("#00D2D3"))
-                binding.btnDownloadUse.setTextColor(android.graphics.Color.BLACK)
+                binding.btnDownloadUse.setBackgroundColor(resources.getColor(R.color.brand_accent, theme))
+                binding.btnDownloadUse.setTextColor(resources.getColor(R.color.bg_deep_black, theme))
             } else {
                 binding.btnDownloadUse.text = if (item.isPremium) "UNLOCK & DOWNLOAD" else "DOWNLOAD"
-                // 🍏 Cinematic Base: Stealth White/Grey
-                binding.btnDownloadUse.setBackgroundColor(android.graphics.Color.WHITE)
-                binding.btnDownloadUse.setTextColor(android.graphics.Color.BLACK)
+                binding.btnDownloadUse.setBackgroundColor(resources.getColor(R.color.bg_dark_surface, theme))
+                binding.btnDownloadUse.setTextColor(resources.getColor(R.color.text_primary, theme))
             }
         }
     }
@@ -88,7 +86,13 @@ class AssetDetailActivity : AppCompatActivity() {
                 finish()
             } else {
                 if (item.isPremium) {
-                    startActivity(Intent(this, UpgradeActivity::class.java))
+                    val prefs = getSharedPreferences("VideoEditorPrefs", android.content.Context.MODE_PRIVATE)
+                    val isPro = prefs.getBoolean("IS_PRO", false)
+                    if (isPro) {
+                        downloadAsset(item)
+                    } else {
+                        startActivity(Intent(this, UpgradeActivity::class.java))
+                    }
                 } else {
                     downloadAsset(item)
                 }

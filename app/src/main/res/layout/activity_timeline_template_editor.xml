@@ -147,6 +147,7 @@
                         android:layout_width="38dp"
                         android:layout_height="38dp"
                         android:layout_marginEnd="16dp"
+                        android:visibility="gone"
                         app:cardBackgroundColor="?attr/colorSecondaryContainer"
                         app:cardCornerRadius="10dp"
                         app:strokeWidth="1dp"
@@ -171,168 +172,11 @@
                 android:background="?attr/colorOutlineVariant" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- Main content area for timeline preview -->
-        <include
+        <com.example.videoeditorapp.ui.editor.EditorPreviewLayout
             android:id="@+id/editorPreview"
-            layout="@layout/view_editor_preview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_plus"
-            app:tint="?attr/colorOnPrimary"
-            app:backgroundTint="@color/brand_accent" />
-
-        <LinearLayout
-            android:id="@+id/fabActionPanel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="12dp"
-            android:background="@drawable/bg_fab_panel"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="84dp"
-            android:visibility="gone"
-            android:elevation="10dp"
-            android:clipChildren="false"
-            android:clipToPadding="false">
-
-                <LinearLayout
-                    android:id="@+id/fabTier1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                    android:id="@+id/fabAddOverlay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Overlay"
-                    app:icon="@drawable/ic_plus"
-                    app:iconTint="#00D2D3"
-                    android:textColor="#FFFFFF"
-                    app:backgroundTint="#CC121212"
-                    app:strokeColor="#3300D2D3"/>
-
-                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                    android:id="@+id/fabAddAppend"
-                    android:layout_marginTop="6dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Append"
-                    app:icon="@drawable/ic_plus"
-                    app:iconTint="#00D2D3"
-                    android:textColor="#FFFFFF"
-                    app:backgroundTint="#CC121212"
-                    app:strokeColor="#3300D2D3"/>
-                </LinearLayout>
-            <View
-                android:id="@+id/fabDivider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#22FFFFFF"
-                android:layout_marginVertical="10dp"
-                android:visibility="gone"/>
-
-            <GridLayout
-                android:id="@+id/fabTier2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:alignmentMode="alignMargins"
-                android:useDefaultMargins="true"
-                android:visibility="gone">
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/btnFabBack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_back"
-                    app:fabSize="mini"
-                    app:tint="#00D2D3"
-                    app:backgroundTint="#CC121212"
-                    android:layout_margin="4dp"/>
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/btnTypeGif"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_gif"
-                    app:fabSize="mini"
-                    app:tint="#00D2D3"
-                    app:backgroundTint="#CC121212"
-                    android:layout_margin="4dp"/>
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/btnTypeEmoji"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_emoji"
-                    app:fabSize="mini"
-                    app:tint="#00D2D3"
-                    app:backgroundTint="#CC121212"
-                    android:layout_margin="4dp"/>
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/btnTypeSticker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_sticker"
-                    app:fabSize="mini"
-                    app:tint="#00D2D3"
-                    app:backgroundTint="#CC121212"
-                    android:layout_margin="4dp"/>
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/btnTypeText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_text"
-                    app:fabSize="mini"
-                    app:tint="#00D2D3"
-                    app:backgroundTint="#CC121212"
-                    android:layout_margin="4dp"/>
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/btnTypeAudio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_music"
-                    app:fabSize="mini"
-                    app:tint="#00D2D3"
-                    app:backgroundTint="#CC121212"
-                    android:layout_margin="4dp"/>
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/btnTypeImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_image"
-                    app:fabSize="mini"
-                    app:tint="#00D2D3"
-                    app:backgroundTint="#CC121212"
-                    android:layout_margin="4dp"/>
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/btnTypeMedia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_video_camera"
-                    app:fabSize="mini"
-                    app:tint="#00D2D3"
-                    app:backgroundTint="#CC121212"
-                    android:layout_margin="4dp"/>
-            </GridLayout>
-
-        </LinearLayout>
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <!-- SIDEBAR DRAWER -->
 
 </androidx.drawerlayout.widget.DrawerLayout>

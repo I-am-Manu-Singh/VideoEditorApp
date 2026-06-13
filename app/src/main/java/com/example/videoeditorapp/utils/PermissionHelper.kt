@@ -3,7 +3,7 @@ package com.example.videoeditorapp.utils
 import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.appcompat.app.AlertDialog
+import com.example.videoeditorapp.utils.AppDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.videoeditorapp.R
@@ -71,65 +71,46 @@ object PermissionHelper {
         }
     }
 
-    private fun showPermissionRationale(
-            activity: Activity,
-            title: String,
-            message: String,
-            permission: String,
-            requestCode: Int
+  private fun showPermissionRationale(
+    activity: Activity,
+    title: String,
+    message: String,
+    permission: String,
+    requestCode: Int
+) {
+    AppDialog.showPermission(
+        context = activity,
+        title = title,
+        message = message,
+        iconRes = R.drawable.ic_lock
     ) {
-        val dlg =
-                com.example.videoeditorapp.databinding.DialogBaseBinding.inflate(
-                        activity.layoutInflater
-                )
-        dlg.tvTitle.text = title
-        dlg.tvMessage.text = message
-        dlg.btnPrimary.text = "Grant"
-        dlg.btnSecondary.text = "Not Now"
-        dlg.ivDialogIcon.setImageResource(R.drawable.ic_lock) // Generic permission icon
-
-        val dialog = androidx.appcompat.app.AlertDialog.Builder(activity).setView(dlg.root).create()
-
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
-        dlg.btnPrimary.setOnClickListener {
-            dialog.dismiss()
-            ActivityCompat.requestPermissions(activity, arrayOf(permission), requestCode)
-        }
-        dlg.btnSecondary.setOnClickListener { dialog.dismiss() }
-
-        dialog.show()
+        ActivityCompat.requestPermissions(
+            activity,
+            arrayOf(permission),
+            requestCode
+        )
     }
-
-    private fun showPermissionRationale(
-            activity: Activity,
-            title: String,
-            message: String,
-            permissions: Array<String>,
-            requestCode: Int
+}
+private fun showPermissionRationale(
+    activity: Activity,
+    title: String,
+    message: String,
+    permissions: Array<String>,
+    requestCode: Int
+) {
+    AppDialog.showPermission(
+        context = activity,
+        title = title,
+        message = message,
+        iconRes = R.drawable.ic_lock
     ) {
-        val dlg =
-                com.example.videoeditorapp.databinding.DialogBaseBinding.inflate(
-                        activity.layoutInflater
-                )
-        dlg.tvTitle.text = title
-        dlg.tvMessage.text = message
-        dlg.btnPrimary.text = "Grant"
-        dlg.btnSecondary.text = "Not Now"
-        dlg.ivDialogIcon.setImageResource(R.drawable.ic_lock)
-
-        val dialog = androidx.appcompat.app.AlertDialog.Builder(activity).setView(dlg.root).create()
-
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
-        dlg.btnPrimary.setOnClickListener {
-            dialog.dismiss()
-            ActivityCompat.requestPermissions(activity, permissions, requestCode)
-        }
-        dlg.btnSecondary.setOnClickListener { dialog.dismiss() }
-
-        dialog.show()
+        ActivityCompat.requestPermissions(
+            activity,
+            permissions,
+            requestCode
+        )
     }
+}
 
     /**
      * Handles permission request results. Call this from onRequestPermissionsResult in your

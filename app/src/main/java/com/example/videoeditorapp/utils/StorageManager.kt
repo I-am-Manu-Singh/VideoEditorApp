@@ -110,6 +110,53 @@ object StorageManager {
         deleteRecursive(getImportedMediaDir(context))
     }
 
+    /** Deletes a file robustly from both disk and MediaStore if applicable. */
+    fun deleteFile(context: Context, file: File): Boolean {
+        var deleted = false
+        try {
+            if (file.exists()) {
+                deleted = file.delete()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        // Try deleting via MediaStore content resolver for scoped storage on Android 10+
+        try {
+            val resolver = context.contentResolver
+            val uri = android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+            val numDeleted = resolver.delete(
+                uri,
+                "${android.provider.MediaStore.Video.Media.DATA} = ?",
+                arrayOf(file.absolutePath)
+            )
+            if (numDeleted > 0) {
+                deleted = true
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        // Also check if the file is an image or audio
+        try {
+            val resolver = context.contentResolver
+            resolver.delete(
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                "${android.provider.MediaStore.Images.Media.DATA} = ?",
+                arrayOf(file.absolutePath)
+            )
+            resolver.delete(
+                android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                "${android.provider.MediaStore.Audio.Media.DATA} = ?",
+                arrayOf(file.absolutePath)
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return deleted || !file.exists()
+    }
+
     // Helper to delete recursively
     private fun deleteRecursive(file: File?) {
         if (file == null || !file.exists()) return

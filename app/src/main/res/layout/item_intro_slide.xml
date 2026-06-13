@@ -1,107 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg_deep_black">
+<?xml version='1.0' encoding='utf-8'?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/bg_deep_black">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_hero_gradient"
-        android:alpha="0.25"/>
+    <View android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/bg_hero_gradient" android:alpha="0.25" />
 
-    <FrameLayout
-        android:id="@+id/imageContainer"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/textContainer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintVertical_bias="0.4">
+    <FrameLayout android:id="@+id/imageContainer" android:layout_width="300dp" android:layout_height="300dp" app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@id/textContainer" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintVertical_chainStyle="packed" app:layout_constraintVertical_bias="0.4">
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="240dp"
-            android:layout_height="240dp"
-            android:layout_gravity="center"
-            app:cardBackgroundColor="@color/white_05"
-            app:cardCornerRadius="120dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/white_10" />
+        <com.google.android.material.card.MaterialCardView android:layout_width="240dp" android:layout_height="240dp" android:layout_gravity="center" app:cardBackgroundColor="@color/white_05" app:cardCornerRadius="120dp" app:cardElevation="0dp" app:strokeWidth="1dp" app:strokeColor="@color/white_10" />
 
-        <View
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_gravity="center"
-            android:background="@drawable/bg_circle_soft"
-            android:backgroundTint="#00D2D3"
-            android:alpha="0.12"/>
+        <View android:layout_width="180dp" android:layout_height="180dp" android:layout_gravity="center" android:background="@drawable/bg_circle_soft" android:backgroundTint="@color/brand_accent" android:alpha="0.12" />
 
-        <ImageView
-            android:id="@+id/imgSlide"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_gravity="center"
-            android:scaleType="fitCenter"
-            android:alpha="0.95"
-            app:tint="#FFFFFF"/>
+        <ImageView android:id="@+id/imgSlide" android:layout_width="160dp" android:layout_height="160dp" android:layout_gravity="center" android:scaleType="fitCenter" android:alpha="0.95" app:tint="@color/text_primary" />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottieSlide"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true" />
+        <com.airbnb.lottie.LottieAnimationView android:id="@+id/lottieSlide" android:layout_width="match_parent" android:layout_height="match_parent" android:visibility="gone" app:lottie_autoPlay="true" app:lottie_loop="true" />
     </FrameLayout>
 
-    <LinearLayout
-        android:id="@+id/textContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:paddingHorizontal="44dp"
-        app:layout_constraintTop_toBottomOf="@id/imageContainer"
-        app:layout_constraintBottom_toBottomOf="parent">
+    <LinearLayout android:id="@+id/textContainer" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center" android:paddingHorizontal="44dp" app:layout_constraintTop_toBottomOf="@id/imageContainer" app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SYSTEM_INIT // 01"
-            android:textColor="#00D2D3"
-            android:textSize="10sp"
-            android:fontFamily="monospace"
-            android:letterSpacing="0.3"
-            android:layout_marginBottom="12dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SYSTEM_INIT // 01" android:textColor="@color/brand_accent" android:textSize="10sp" android:fontFamily="monospace" android:letterSpacing="0.3" android:layout_marginBottom="12dp" />
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Studio Power"
-            android:textColor="#FFFFFF"
-            android:textSize="36sp"
-            android:fontFamily="sans-serif-black"
-            android:textAllCaps="true"
-            android:letterSpacing="0.02"
-            android:gravity="center"
-            android:lineHeight="42sp"
-            android:layout_marginBottom="20dp"/>
+        <TextView android:id="@+id/tvTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Studio Power" android:textColor="@color/text_primary" android:textSize="36sp" android:fontFamily="sans-serif-black" android:textAllCaps="true" android:letterSpacing="0.02" android:gravity="center" android:lineHeight="42sp" android:layout_marginBottom="20dp" />
 
-        <TextView
-            android:id="@+id/tvDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Harness the full potential of Studio V4 with professional-grade timeline tools."
-            android:textColor="@color/white_50"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:lineSpacingMultiplier="1.4"
-            android:fontFamily="monospace" />
+        <TextView android:id="@+id/tvDescription" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Harness the full potential of Studio V4 with professional-grade timeline tools." android:textColor="@color/white_50" android:textSize="16sp" android:gravity="center" android:lineSpacingMultiplier="1.4" android:fontFamily="monospace" />
 
     </LinearLayout>
 

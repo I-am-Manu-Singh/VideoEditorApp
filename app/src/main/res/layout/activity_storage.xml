@@ -34,7 +34,7 @@
                     android:layout_height="match_parent"
                     android:padding="10dp"
                     android:src="@drawable/ic_back"
-                    app:tint="#00D2D3" />
+                    app:tint="@color/brand_accent" />
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Resource Monitor"
-                android:textColor="#00D2D3"
+                android:textColor="@color/brand_accent"
                 android:fontFamily="sans-serif-black"
                 android:textSize="13sp"
                 android:textAllCaps="true"
@@ -86,7 +86,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="TOTAL APP FOOTPRINT"
-                        android:textColor="#00D2D3"
+                        android:textColor="@color/brand_accent"
                         android:textSize="10sp"
                         android:fontFamily="sans-serif-black"
                         android:letterSpacing="0.2" />
@@ -97,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="145.2 MB"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/text_primary"
                         android:textSize="38sp"
                         android:fontFamily="monospace"
                         android:textStyle="bold" />

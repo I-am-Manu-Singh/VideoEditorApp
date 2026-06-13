@@ -1,7 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Semantic Layout Backgrounds (Dark Mode) -->
+    <color name="bg_deep_black">#000000</color>
+    <color name="bg_dark_surface">#050505</color>
+    <color name="bg_dark_elevated">#0D0D0D</color>
+    <color name="background_primary">#000000</color>
+
+    <!-- Dialogs & Panels (Dark Mode) -->
     <color name="dialog_background">#0D0D0D</color>
     <color name="dialog_stroke">#1AFFFFFF</color>
     <color name="glass_panel_color">#E60D0D0D</color>
+
+    <!-- Semantic Text Colors (Dark Mode) -->
+    <color name="text_high_emphasis">#FFFFFF</color>
+    <color name="text_medium_emphasis">#80FFFFFF</color>
+    <color name="text_primary">#FFFFFF</color>
+
+    <!-- Transparency Overlays (Dark Mode) -->
+    <color name="white_70">#B3FFFFFF</color>
+    <color name="white_60">#99FFFFFF</color>
+    <color name="white_50">#80FFFFFF</color>
+    <color name="white_30">#4DFFFFFF</color>
+    <color name="white_20">#33FFFFFF</color>
+    <color name="white_10">#1AFFFFFF</color>
+    <!-- Accent Colors (Dark Mode) -->
+    <color name="stealth_cyan">#00D2D3</color>
     <color name="color_cyan_accent">#00D2D3</color>
+    <color name="brand_primary">#00D2D3</color>
+    <color name="brand_accent">#00D2D3</color>
+    <color name="brand_accent_05">#0D00D2D3</color>
+    <color name="brand_accent_10">#1A00D2D3</color>
+    <color name="brand_accent_15">#2600D2D3</color>
+    <color name="brand_accent_20">#3300D2D3</color>
+    <color name="brand_accent_25">#4000D2D3</color>
+    <color name="brand_accent_30">#4D00D2D3</color>
+    <color name="brand_secondary">#00D2D3</color>
+    <color name="status_success">#00D2D3</color>
+    <color name="brand_gradient_end">#00D2D3</color>
+    <color name="color_on_accent">#000000</color>
+    <color name="white_05">#0DFFFFFF</color>
 </resources>

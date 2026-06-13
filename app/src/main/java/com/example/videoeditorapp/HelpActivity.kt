@@ -6,8 +6,11 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.videoeditorapp.utils.AppDialog
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
+import com.example.videoeditorapp.databinding.DialogFaqBinding
+import com.example.videoeditorapp.databinding.ItemFaqBinding
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.example.videoeditorapp.databinding.ActivityHelpBinding
@@ -68,47 +71,55 @@ class HelpActivity : AppCompatActivity() {
             Toast.makeText(this, "No email client found", Toast.LENGTH_SHORT).show()
         }
     }
+private fun showFaqDialog() {
 
-    private fun showFaqDialog() {
-        val faqItems =
-                listOf(
-                        "How do I remove the watermark?" to
-                                "Upgrade to Studio Pro Premium to remove watermarks and unlock 4K export.",
-                        "Can I add my own music?" to
-                                "Yes! Tap the 'Audio' tab in the editor, then select 'My Music' to import mp3 files.",
-                        "Why is export slow?" to
-                                "Export speed depends on your device and resolution. Try exporting in 1080p instead of 4K for faster results.",
-                        "How do I split a clip?" to
-                                "Select the clip on the timeline, position the playhead, and tap the 'Split' scissors icon.",
-                        "Where are my projects saved?" to
-                                "All projects are saved locally on your device in the 'StudioPro' folder.",
-                        "App crashes on export?" to
-                                "Ensure you have enough storage space and try restarting the app. If the issue persists, use 'Report an Issue'."
-                )
+    val faqItems =
+        listOf(
+            "How do I remove the watermark?" to
+                "Upgrade to Studio Pro Premium to remove watermarks and unlock 4K export.",
 
-        val dialogBinding =
-                com.example.videoeditorapp.databinding.DialogFaqBinding.inflate(layoutInflater)
-        val dialog =
-                com.google.android.material.dialog.MaterialAlertDialogBuilder(
-                                this,
-                                R.style.Theme_VideoEditorApp_Dialog
-                        )
-                        .setView(dialogBinding.root)
-                        .create()
+            "Can I add my own music?" to
+                "Yes! Tap the Audio tab in the editor, then select My Music to import mp3 files.",
 
-        faqItems.forEach { (q, a) ->
-            val itemBinding =
-                    com.example.videoeditorapp.databinding.ItemFaqBinding.inflate(
-                            layoutInflater,
-                            dialogBinding.llFaqContainer,
-                            false
-                    )
-            itemBinding.tvFaqQuestion.text = q
-            itemBinding.tvFaqAnswer.text = a
-            dialogBinding.llFaqContainer.addView(itemBinding.root)
-        }
+            "Why is export slow?" to
+                "Export speed depends on your device and resolution. Try exporting in 1080p instead of 4K.",
 
-        dialogBinding.btnFaqClose.setOnClickListener { dialog.dismiss() }
-        dialog.show()
+            "How do I split a clip?" to
+                "Select the clip on the timeline, position the playhead, and tap the Split icon.",
+
+            "Where are my projects saved?" to
+                "Projects are saved locally on your device.",
+
+            "App crashes on export?" to
+                "Ensure enough free storage and restart the app. If the issue persists, report it."
+        )
+
+    val dialogBinding =
+        DialogFaqBinding.inflate(layoutInflater)
+
+    val dialog =
+        AppDialog.showCustomView(
+            this,
+            dialogBinding.root
+        )
+
+    faqItems.forEach { (question, answer) ->
+
+        val itemBinding =
+            ItemFaqBinding.inflate(
+                layoutInflater,
+                dialogBinding.llFaqContainer,
+                false
+            )
+
+        itemBinding.tvFaqQuestion.text = question
+        itemBinding.tvFaqAnswer.text = answer
+
+        dialogBinding.llFaqContainer.addView(itemBinding.root)
     }
+
+    dialogBinding.btnFaqClose.setOnClickListener {
+        dialog.dismiss()
+    }
+}
 }

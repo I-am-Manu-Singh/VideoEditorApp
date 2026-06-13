@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center" android:layout_marginHorizontal="12dp">
+
+    <com.google.android.material.card.MaterialCardView android:layout_width="56dp" android:layout_height="56dp" app:cardCornerRadius="28dp" app:cardBackgroundColor="@color/white_05" app:strokeWidth="1dp" app:strokeColor="@color/white_10">
+        <ImageView android:id="@+id/ivIcon" android:layout_width="match_parent" android:layout_height="match_parent" android:padding="16dp" android:src="@drawable/ic_intro_share" app:tint="@color/text_primary" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView android:id="@+id/tvLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SHARE" android:textColor="@color/white_30" android:textSize="8sp" android:fontFamily="monospace" android:layout_marginTop="8dp" />
+</LinearLayout>

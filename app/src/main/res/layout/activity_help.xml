@@ -35,7 +35,7 @@
                     android:layout_height="match_parent"
                     android:padding="10dp"
                     android:src="@drawable/ic_back"
-                    app:tint="#00D2D3" />
+                    app:tint="@color/brand_accent" />
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Help &amp; Support"
-                android:textColor="#00D2D3"
+                android:textColor="@color/brand_accent"
                 android:fontFamily="monospace"
                 android:textSize="13sp"
                 android:textAllCaps="true"
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="System Assistance"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="30sp"
                 android:fontFamily="sans-serif-black"
                 android:letterSpacing="0.03" />
@@ -109,7 +109,7 @@
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:src="@drawable/ic_content_cut"
-                            app:tint="#00D2D3"
+                            app:tint="@color/brand_accent"
                             android:layout_marginBottom="14dp"/>
 
                         <TextView style="@style/StealthFeatureTitle"
@@ -127,7 +127,7 @@
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:src="@drawable/ic_speed"
-                            app:tint="#00D2D3"
+                            app:tint="@color/brand_accent"
                             android:layout_marginBottom="14dp"/>
                         <TextView style="@style/StealthFeatureTitle" android:text="SPEED" />
                         <TextView style="@style/StealthFeatureDesc" android:text="TIME WARP" />
@@ -141,7 +141,7 @@
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:src="@drawable/ic_movie_filter"
-                            app:tint="#00D2D3"
+                            app:tint="@color/brand_accent"
                             android:layout_marginBottom="14dp"/>
                         <TextView style="@style/StealthFeatureTitle" android:text="FILTER FX" />
                         <TextView style="@style/StealthFeatureDesc" android:text="LUTS ENGINE" />
@@ -155,7 +155,7 @@
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:src="@drawable/ic_cloud_download"
-                            app:tint="#00D2D3"
+                            app:tint="@color/brand_accent"
                             android:layout_marginBottom="14dp"/>
                         <TextView style="@style/StealthFeatureTitle" android:text="ASSET HUB" />
                         <TextView style="@style/StealthFeatureDesc" android:text="CLOUD FETCH" />
@@ -168,7 +168,7 @@
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:src="@drawable/ic_audio_label"
-                            app:tint="#00D2D3"
+                            app:tint="@color/brand_accent"
                             android:layout_marginBottom="14dp"/>
 
                         <TextView style="@style/StealthFeatureTitle"
@@ -186,7 +186,7 @@
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:src="@drawable/ic_layers"
-                            app:tint="#00D2D3"
+                            app:tint="@color/brand_accent"
                             android:layout_marginBottom="14dp"/>
 
                         <TextView style="@style/StealthFeatureTitle"
@@ -204,7 +204,7 @@
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:src="@drawable/ic_color_lens"
-                            app:tint="#00D2D3"
+                            app:tint="@color/brand_accent"
                             android:layout_marginBottom="14dp"/>
 
                         <TextView style="@style/StealthFeatureTitle"
@@ -222,7 +222,7 @@
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:src="@drawable/ic_help"
-                            app:tint="#00D2D3"
+                            app:tint="@color/brand_accent"
                             android:layout_marginBottom="14dp"/>
 
                         <TextView style="@style/StealthFeatureTitle"
@@ -265,7 +265,7 @@
                         android:text="  Priority Email"
                         android:textColor="@color/white_70"
                         app:icon="@android:drawable/stat_sys_headset"
-                        app:iconTint="#00D2D3"/>
+                        app:iconTint="@color/brand_accent"/>
 
                     <View style="@style/StealthDivider"/>
 
@@ -276,7 +276,7 @@
                         android:text="  FAQs"
                         android:textColor="@color/white_70"
                         app:icon="@drawable/ic_info"
-                        app:iconTint="#00D2D3"/>
+                        app:iconTint="@color/brand_accent"/>
 
                     <View style="@style/StealthDivider"/>
 

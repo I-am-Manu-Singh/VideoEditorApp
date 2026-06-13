@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/white_10">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivBannerImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/temp_cinematic_hero"
+            android:alpha="0.8"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_hero_gradient_final"
+            android:alpha="0.5"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/tvBannerTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FEATURED"
+                android:textColor="@color/brand_accent"
+                android:textSize="10sp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.2"
+                android:background="@drawable/bg_tag_glass"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="2dp"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tvBannerTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CINEMATIC LUT PACK V2"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-black"
+                android:letterSpacing="0.05"/>
+
+            <TextView
+                android:id="@+id/tvBannerSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pro color grading for your next project"
+                android:textColor="@color/white_50"
+                android:textSize="11sp"/>
+        </LinearLayout>
+    </FrameLayout>
+</com.google.android.material.card.MaterialCardView>
