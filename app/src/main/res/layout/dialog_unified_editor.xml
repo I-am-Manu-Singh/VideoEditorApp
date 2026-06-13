@@ -108,7 +108,7 @@
         android:layout_height="56dp"
         android:layout_marginTop="24dp"
         android:text="APPLY CHANGES"
-        android:textColor="#000000"
+        android:textColor="@color/text_primary"
         app:cornerRadius="16dp"
         app:backgroundTint="@color/brand_accent"
         android:fontFamily="sans-serif-black"

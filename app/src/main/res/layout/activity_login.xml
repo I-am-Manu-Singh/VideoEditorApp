@@ -133,7 +133,7 @@
                 android:layout_height="60dp"
                 android:text="AUTHENTICATE"
                 android:backgroundTint="@color/brand_accent"
-                android:textColor="#000000"
+                android:textColor="@color/text_primary"
                 android:fontFamily="sans-serif-black"
                 android:letterSpacing="0.2"
                 app:cornerRadius="12dp"

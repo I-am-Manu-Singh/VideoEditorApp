@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Master Studio V4"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="32sp"
                 android:fontFamily="sans-serif-black" />
                 
@@ -124,7 +124,7 @@
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="8dp">
                             <TextView android:layout_width="24dp" android:layout_height="24dp" android:background="@drawable/bg_round_dark" android:backgroundTint="#00D2D3" android:gravity="center" android:text="1" android:textColor="@color/bg_deep_black" android:textSize="12sp" android:textStyle="bold"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Import &amp; Organize" android:textColor="#FFFFFF" android:layout_marginStart="12dp" android:textSize="16sp" android:fontFamily="sans-serif-medium"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Import &amp; Organize" android:textColor="@color/text_primary" android:layout_marginStart="12dp" android:textSize="16sp" android:fontFamily="sans-serif-medium"/>
                         </LinearLayout>
                         <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Bring your story to life. Start by adding clips from your gallery. Studio V4 supports 4K Video automatically." android:textColor="@color/white_70" android:textSize="13sp"/>
                     </LinearLayout>
@@ -141,7 +141,7 @@
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="8dp">
                             <TextView android:layout_width="24dp" android:layout_height="24dp" android:background="@drawable/bg_round_dark" android:backgroundTint="#00D2D3" android:gravity="center" android:text="2" android:textColor="@color/bg_deep_black" android:textSize="12sp" android:textStyle="bold"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Precision Editing" android:textColor="#FFFFFF" android:layout_marginStart="12dp" android:textSize="16sp" android:fontFamily="sans-serif-medium"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Precision Editing" android:textColor="@color/text_primary" android:layout_marginStart="12dp" android:textSize="16sp" android:fontFamily="sans-serif-medium"/>
                         </LinearLayout>
                         <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Use the multi-layer timeline to scrub, split, and trim with frame-by-frame precision." android:textColor="@color/white_70" android:textSize="13sp"/>
                     </LinearLayout>
@@ -158,7 +158,7 @@
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="8dp">
                             <TextView android:layout_width="24dp" android:layout_height="24dp" android:background="@drawable/bg_round_dark" android:backgroundTint="#00D2D3" android:gravity="center" android:text="3" android:textColor="@color/bg_deep_black" android:textSize="12sp" android:textStyle="bold"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="FX &amp; Audio" android:textColor="#FFFFFF" android:layout_marginStart="12dp" android:textSize="16sp" android:fontFamily="sans-serif-medium"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="FX &amp; Audio" android:textColor="@color/text_primary" android:layout_marginStart="12dp" android:textSize="16sp" android:fontFamily="sans-serif-medium"/>
                         </LinearLayout>
                         <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Apply cinematic LUTs, glitch effects, and professional soundtracks for real-time mixing." android:textColor="@color/white_70" android:textSize="13sp"/>
                     </LinearLayout>

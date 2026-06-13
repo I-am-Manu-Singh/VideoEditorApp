@@ -2,7 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="160dp"
-    android:layout_height="wrap_content"
+    android:layout_height="160dp"
     android:layout_marginEnd="16dp"
     android:layout_marginBottom="8dp"
     android:clickable="true"
@@ -20,7 +20,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="100dp"
             android:background="@color/bg_deep_black">
 
             <ImageView

@@ -4,7 +4,7 @@
     xmlns:tools="http://android.com"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bg_deep_black">
+    android:background="@android:color/transparent">
 
 <View
 android:id="@+id/bgHeroGradient"
@@ -12,7 +12,7 @@ android:layout_width="match_parent"
 android:layout_height="0dp"
 app:layout_constraintTop_toTopOf="parent"
 app:layout_constraintBottom_toBottomOf="parent"
-android:background="@drawable/bg_hero_gradient"
+android:background="@android:color/transparent"
 android:alpha="0.5" />
 
 <View
@@ -29,7 +29,7 @@ android:id="@+id/logoCard"
 android:layout_width="60dp"
 android:layout_height="60dp"
 android:layout_marginStart="32dp"
-android:layout_marginTop="24dp"
+android:layout_marginTop="48dp"
 app:cardBackgroundColor="@color/white_05"
 app:cardCornerRadius="12dp"
 app:cardElevation="0dp"
@@ -45,8 +45,7 @@ app:layout_constraintStart_toStartOf="parent">
     android:padding="2dp"
     android:src="@drawable/app_logo"
     android:scaleType="fitXY"
-    android:contentDescription="@null"
-    app:tint="@color/brand_accent" />
+    android:contentDescription="@null"/>
 </com.google.android.material.card.MaterialCardView>
 
 <TextView

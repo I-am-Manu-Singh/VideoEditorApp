@@ -17,7 +17,7 @@ class HighlightAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HighlightViewHolder {
         val view =
-                LayoutInflater.from(parent.context).inflate(R.layout.item_highlight, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.item_recent_project_mini, parent, false)
         return HighlightViewHolder(view)
     }
 
@@ -28,9 +28,9 @@ class HighlightAdapter(
     override fun getItemCount(): Int = items.size
 
     inner class HighlightViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val imgHighlight: ImageView = view.findViewById(R.id.imgHighlight)
-        private val tvTag: TextView = view.findViewById(R.id.tvTag)
-        private val tvTitle: TextView = view.findViewById(R.id.tvTitle)
+        private val imgHighlight: ImageView = view.findViewById(R.id.ivProjectThumb)
+        private val tvTag: TextView = view.findViewById(R.id.tvLastEdited)
+        private val tvTitle: TextView = view.findViewById(R.id.tvProjectName)
 
         fun bind(item: HighlightItem) {
             imgHighlight.setImageResource(item.imageRes)

@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="License Center"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="22sp"
                 android:fontFamily="sans-serif-black"/>
             
@@ -98,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
                         android:text="Essentials"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp" />
                     <TextView
                         android:layout_width="wrap_content"

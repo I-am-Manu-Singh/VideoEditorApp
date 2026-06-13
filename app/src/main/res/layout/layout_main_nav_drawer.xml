@@ -7,7 +7,7 @@
 
         <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@drawable/bg_line_glow_cyan" android:alpha="0.3" />
 
-        <androidx.core.widget.NestedScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true" android:background="@color/bg_deep_black">
+        <androidx.core.widget.NestedScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true" android:background="@color/bg_deep_black" android:paddingLeft="12dp">
 
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingVertical="24dp" android:paddingHorizontal="16dp">
 

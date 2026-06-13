@@ -97,7 +97,7 @@
                     android:layout_marginStart="12dp"
                     android:hint="Search..."
                     android:textColorHint="@color/white_50"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary"
                     android:background="@android:color/transparent"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium"
